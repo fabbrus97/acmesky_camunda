@@ -12,7 +12,12 @@ public class ThinkAboutOffer implements JavaDelegate{
 	
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		execution.setVariable("ignoreOffer", true);
+		
+		//c'è una probabilità del 20% di rifiutare l'offerta
+		boolean refuse = (int)(Math.random() * 10) >= 8; 
+		System.out.println("Rifiutiamo l'offerta");
+		
+		execution.setVariable("ignoreOffer", refuse);
 	}
 
 }
