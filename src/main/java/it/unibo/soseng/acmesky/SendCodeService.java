@@ -10,6 +10,10 @@ import it.unibo.soseng.acmesky.Json.Codes;
 import prontogramprovider.prontogram_client.DefaultApi;
 import prontogramprovider.prontogram_client.RisorseApi;
 
+import prontogramprovider.ApiClient;
+import prontogramprovider.ApiException;
+import prontogramprovider.Configuration;
+
 public class SendCodeService {
 	
 	
@@ -44,12 +48,17 @@ public class SendCodeService {
 	
 	private static InlineResponse2003 login() {
 		
-		RisorseApi apiInstance = new RisorseApi();
-        MapsV1Credentials body = new MapsV1Credentials(); // MapsV1Credentials | 
-        body.setUsername(StaticValues.prontogram_username);
-        body.setPassword(StaticValues.prontogram_password);
+		ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+		defaultClient.setBasePath(""); //TODO url dove sarà hostato il server
+		
+        HttpBasicAuth basicAuth = (HttpBasicAuth) defaultClient.getAuthentication("basicAuth");
+        basicAuth.setUsername(StaticValues.prontogram_username);
+        basicAuth.setPassword(StaticValues.prontogram_password);
+        RisorseApi apiInstance = new RisorseApi();
         try {
-            InlineResponse2003 result = apiInstance.postLogin(body);
+        	
+            InlineResponse2003 result = apiInstance.postLogin();
             System.out.println(result);
             return result;
         } catch (ApiException e) {

@@ -23,8 +23,8 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent&gt;
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *                 &lt;sequence&gt;
- *                   &lt;element name="arrivo" type="{null.xsd}indirizzo"/&gt;
- *                   &lt;element name="partenza" type="{null.xsd}indirizzo"/&gt;
+ *                   &lt;element name="arrivo" type="{it.unibo.soseng.acmesky.xsd}indirizzo"/&gt;
+ *                   &lt;element name="partenza" type="{it.unibo.soseng.acmesky.xsd}indirizzo"/&gt;
  *                 &lt;/sequence&gt;
  *               &lt;/restriction&gt;
  *             &lt;/complexContent&gt;
@@ -55,6 +55,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;/complexContent&gt;
  *           &lt;/complexType&gt;
  *         &lt;/element&gt;
+ *         &lt;element name="sid" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -67,7 +68,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "luoghi",
     "data",
-    "ora"
+    "ora",
+    "sid"
 })
 @XmlRootElement(name = "richiesta")
 public class Richiesta {
@@ -78,6 +80,8 @@ public class Richiesta {
     protected Richiesta.Data data;
     @XmlElement(required = true)
     protected Richiesta.Ora ora;
+    @XmlElement(required = true)
+    protected String sid;
 
     /**
      * Recupera il valore della proprietà luoghi.
@@ -149,6 +153,30 @@ public class Richiesta {
      */
     public void setOra(Richiesta.Ora value) {
         this.ora = value;
+    }
+
+    /**
+     * Recupera il valore della proprietà sid.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getSid() {
+        return sid;
+    }
+
+    /**
+     * Imposta il valore della proprietà sid.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSid(String value) {
+        this.sid = value;
     }
 
 
@@ -246,8 +274,8 @@ public class Richiesta {
      *   &lt;complexContent&gt;
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
      *       &lt;sequence&gt;
-     *         &lt;element name="arrivo" type="{null.xsd}indirizzo"/&gt;
-     *         &lt;element name="partenza" type="{null.xsd}indirizzo"/&gt;
+     *         &lt;element name="arrivo" type="{it.unibo.soseng.acmesky.xsd}indirizzo"/&gt;
+     *         &lt;element name="partenza" type="{it.unibo.soseng.acmesky.xsd}indirizzo"/&gt;
      *       &lt;/sequence&gt;
      *     &lt;/restriction&gt;
      *   &lt;/complexContent&gt;

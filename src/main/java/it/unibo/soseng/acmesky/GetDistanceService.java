@@ -14,7 +14,8 @@ public class GetDistanceService {
     }
 
     public static void service(){
-
+    	
+    	/*
         if (StaticValues.geoprovToken == null) {
             RisorseApi apiInstance = new RisorseApi();
             Credentials body = new Credentials();
@@ -45,7 +46,7 @@ public class GetDistanceService {
         }catch (ApiException e) {
             System.err.println("Exception when calling RisorseApi#postAllmessage");
             e.printStackTrace();
-        }
+        }*/
     }
 }
 

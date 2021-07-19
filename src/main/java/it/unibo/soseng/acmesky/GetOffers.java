@@ -16,9 +16,6 @@ public class GetOffers implements JavaDelegate {
 	
 	@Override
     public void execute(DelegateExecution execution) throws Exception {
-		
-		//TODO roba di gian
-		
         ApiClient defaultClient = Configuration.getDefaultApiClient();
         
         String airline = (String) execution.getVariable("airline");

@@ -62,6 +62,38 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Login }
+     * 
+     */
+    public Login createLogin() {
+        return new Login();
+    }
+
+    /**
+     * Create an instance of {@link LoginResponse }
+     * 
+     */
+    public LoginResponse createLoginResponse() {
+        return new LoginResponse();
+    }
+
+    /**
+     * Create an instance of {@link Registrazione }
+     * 
+     */
+    public Registrazione createRegistrazione() {
+        return new Registrazione();
+    }
+
+    /**
+     * Create an instance of {@link RegistrazioneResponse }
+     * 
+     */
+    public RegistrazioneResponse createRegistrazioneResponse() {
+        return new RegistrazioneResponse();
+    }
+
+    /**
      * Create an instance of {@link Indirizzo }
      * 
      */

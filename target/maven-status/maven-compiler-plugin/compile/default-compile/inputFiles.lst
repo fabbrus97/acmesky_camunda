@@ -9,9 +9,11 @@
 /media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/Json/Client.java
 /media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/SaveOffers.java
 /media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/SaveCodes.java
+/media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/gen/Login.java
 /media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/GenerateCodes.java
 /media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/gen/NoleggioPortService.java
 /media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/gen/package-info.java
+/media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/gen/Registrazione.java
 /media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/ForwardLink.java
 /media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/cliente/SendInterests.java
 /media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/LoggerDelegate.java
@@ -32,6 +34,7 @@
 /media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/CheckCode.java
 /media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/Json/Interest.java
 /media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/cliente/StaticValues.java
+/media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/gen/LoginResponse.java
 /media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/cliente/SendInterestService.java
 /media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/StaticValues.java
 /media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/SendCodeService.java
@@ -44,6 +47,7 @@
 /media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/InitListener.java
 /media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/Json/Codes.java
 /media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/FindMatch.java
+/media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/gen/RegistrazioneResponse.java
 /media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/cliente/ManageTransportOffer.java
 /media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/gen/NoleggioPort.java
 /media/simone/Volume/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/GetOffers.java

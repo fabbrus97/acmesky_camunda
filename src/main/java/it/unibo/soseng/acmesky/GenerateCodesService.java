@@ -43,18 +43,21 @@ public class GenerateCodesService {
 		for (String volo: voli) {
 			ArrayList<String> interested_users = new ArrayList<String>();
 			clients.getClients().forEach( (name, client) -> {
+				interested_users.add(name); //TODO
 				client.getInterests().forEach(interest -> {
 					LocalDateTime arrival_min = LocalDateTime.parse(interest.getArrival_time_min(), dtf);
 					LocalDateTime arrival_max = LocalDateTime.parse(interest.getArrival_time_max(), dtf);
 					
-					boolean valid = within(arrival_min, arrival_max, null); //TODO
+					//boolean valid = within(arrival_min, arrival_max, null); //TODO
 					
 				});
 			});
+			
+			save_new_code(interested_users, "1234"); //TODO
 		}
 		
 		
-		save_new_code(users, fly_code); //TODO
+		
 		
 	}
 	
@@ -90,8 +93,6 @@ public class GenerateCodesService {
 			
 			if (habemus_codex)
 				break; 
-			
-			
 		}
 		//salva la lista
 		Code new_code = new Code();
