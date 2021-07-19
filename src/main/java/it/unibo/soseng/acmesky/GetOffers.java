@@ -16,6 +16,9 @@ public class GetOffers implements JavaDelegate {
 	
 	@Override
     public void execute(DelegateExecution execution) throws Exception {
+		
+		//TODO roba di gian
+		
         ApiClient defaultClient = Configuration.getDefaultApiClient();
         
         String airline = (String) execution.getVariable("airline");
@@ -25,13 +28,13 @@ public class GetOffers implements JavaDelegate {
         //registrati presso la compagnia aerea; quest'operazione fornisce una chiave
         //che va salvata per le richieste successive
 
-        if (Static_Values.airline_token == "") {
+        if (StaticValues.airline_token == "") {
         
 	        RisorseApi apiInstance = new RisorseApi();
 	        MapsV1Credentials body = new MapsV1Credentials(); // MapsV1Credentials | 
 	        
 	        body.setUsername("Mario");
-	        Static_Values.airline_username = "Mario";
+	        StaticValues.airline_username = "Mario";
 	        body.setPassword("12345abcd");
 	        
 	        

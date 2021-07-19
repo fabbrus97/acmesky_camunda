@@ -24,12 +24,8 @@ public class GetLink implements JavaDelegate{
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 		
-		getLinkService.service();
-		/*TODO
-		 * Siccome il pagamento è una external task (cioè un utente
-		 * si collega e "paga"), impostiamo qualche variabile per assicurarci
-		 * che l'utente stia pagando  per se stesso e non per altri?
-		 */
+		execution.setVariable("paymentLink", getLinkService.service());
+		
 	}
 
 }

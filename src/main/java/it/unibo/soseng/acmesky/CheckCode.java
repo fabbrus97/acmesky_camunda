@@ -18,6 +18,7 @@ public class CheckCode implements JavaDelegate{
 		
 		if (checkCodeService.service(code)) {
 			execution.setVariable("codeCorrect", true);
+			execution.setVariable("code2delete", code);
 		} else {
 			execution.setVariable("codeCorrect", false);
 		}

@@ -9,6 +9,11 @@ public class SendNotification implements JavaDelegate{
 	public void execute(DelegateExecution execution) throws Exception {
 		// TODO Auto-generated method stub
 		
+		execution.getProcessEngineServices()
+			.getRuntimeService()
+			.createMessageCorrelation("AckInterests")
+			.correlate();
+		
 	}
 
 }

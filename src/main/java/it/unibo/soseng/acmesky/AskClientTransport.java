@@ -9,6 +9,8 @@ public class AskClientTransport implements JavaDelegate{
 	public void execute(DelegateExecution execution) throws Exception {
 		// TODO Auto-generated method stub
 		
+		execution.getProcessEngine().getRuntimeService().correlateMessage("AirportTransport");
+		
 	}
 
 }

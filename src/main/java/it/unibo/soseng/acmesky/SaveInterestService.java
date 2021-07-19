@@ -72,7 +72,7 @@ public class SaveInterestService {
 	protected static Clients deserialize_file() {
 		
 		Clients c = null;
-		File file = new File(Static_Values.client_interests_file_path);
+		File file = new File(StaticValues.client_interests_file_path);
 		
 		try {
 			if (!file.exists()) {
@@ -101,7 +101,7 @@ public class SaveInterestService {
 		
 		try {
 			Writer writer;
-			writer = new FileWriter(new File(Static_Values.client_interests_file_path));
+			writer = new FileWriter(new File(StaticValues.client_interests_file_path));
 			JsonWriter jsonWriter = new JsonWriter(writer);
 			
 			j.toJson(clients, Clients.class, jsonWriter);

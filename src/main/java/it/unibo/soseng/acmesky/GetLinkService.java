@@ -12,6 +12,7 @@ import io.swagger.paymentprovider.ApiException;
 import io.swagger.paymentprovider.Configuration;
 import io.swagger.paymentprovider.auth.ApiKeyAuth;
 import io.swagger.paymentprovider.payment_client.RisorseApi;
+import it.unibo.soseng.acmesky.StaticValues;
 
 public class GetLinkService {
 
@@ -19,35 +20,13 @@ public class GetLinkService {
 		
 	}
 	
-	public static void service() {
+	public static String service() {
 		//if key
-		if (Static_Values.payment_provider_key != "") {
+		if (StaticValues.payment_provider_key != "") {
 			// chiedi link
 			
-			ApiClient defaultClient = Configuration.getDefaultApiClient();
-
-	        // Configure API key authorization: apikey
-	        ApiKeyAuth apikey = (ApiKeyAuth) defaultClient.getAuthentication("apikey");
-	        apikey.setApiKey("YOUR API KEY");
-	        // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-	        //apikey.setApiKeyPrefix("Token");
-
-	        RisorseApi apiInstance = new RisorseApi();
-	        Body1 body = new Body1(); // Body1 |
-	        body.setAirline(""); //TODO
-	        LinkAmount amount = new LinkAmount();
-	        amount.setCurrency(""); //TODO
-	        amount.setValue(BigDecimal.valueOf(0)); //TODO
-	        body.setAmount(amount);
-	        body.setOfferCode(""); //TODO
-	        try {
-	            InlineResponse200 result = apiInstance.getLink(body);
-	            System.out.println(result);
-	        } catch (ApiException e) {
-	            System.err.println("Exception when calling RisorseApi#getLink");
-	            e.printStackTrace();
-	        }
-			
+			String link = askLink();
+			return link;
 		} 
 		// else register
 		else {
@@ -56,12 +35,46 @@ public class GetLinkService {
 	        try {
 	            InlineResponse2001 result = apiInstance.postRegistration(body);
 	            System.out.println(result);
-	            Static_Values.payment_provider_key = result.getToken() ;
+	            StaticValues.payment_provider_key = result.getToken() ;
+	            
+	            return askLink();
+	            
 	        } catch (ApiException e) {
 	            System.err.println("Exception when calling RisorseApi#postRegistration");
 	            e.printStackTrace();
+	            return null;
 	        }
 		}
+	}
+	
+	private static String askLink() {
+		ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+        // Configure API key authorization: apikey
+        ApiKeyAuth apikey = (ApiKeyAuth) defaultClient.getAuthentication("apikey");
+        apikey.setApiKey(StaticValues.payment_provider_key);
+        // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+        //apikey.setApiKeyPrefix("Token");
+
+        
+        
+        RisorseApi apiInstance = new RisorseApi();
+        Body1 body = new Body1(); // Body1 |
+        body.setAirline(""); //TODO
+        LinkAmount amount = new LinkAmount();
+        amount.setCurrency(""); //TODO
+        amount.setValue(BigDecimal.valueOf(0)); //TODO
+        body.setAmount(amount);
+        body.setOfferCode(""); //TODO
+        try {
+            InlineResponse200 result = apiInstance.getLink(body);
+            System.out.println(result);
+            return result.toString();
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RisorseApi#getLink");
+            e.printStackTrace();
+            return null;
+        }
 	}
 	
 }

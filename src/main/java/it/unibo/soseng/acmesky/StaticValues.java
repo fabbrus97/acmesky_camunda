@@ -1,6 +1,6 @@
 package it.unibo.soseng.acmesky;
 
-public class Static_Values {
+public class StaticValues {
 	
 	public static String airline_username = ""; 
 	public static String airline_token = "";
