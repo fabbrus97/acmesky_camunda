@@ -29,9 +29,10 @@ public class SendPaymentService {
 		
 		//if key
 		if (StaticValues.payment_provider_key != "") {
-			// paga
+			// chiedi url per far pagare cliente
 			
 			ApiClient defaultClient = Configuration.getDefaultApiClient();
+			defaultClient.setBasePath(url);
 
 	        // Configure API key authorization: apikey
 	        ApiKeyAuth apikey = (ApiKeyAuth) defaultClient.getAuthentication("apikey");

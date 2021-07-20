@@ -63,7 +63,7 @@
   </wsdl:binding>
   <wsdl:service name="NoleggioPortService">
     <wsdl:port name="NoleggioPortServicePort" binding="tns:NoleggioPortSOAPBinding">
-      <soap:address location="0.0.0.0:8000"/>
+      <soap:address location="arianna.cs.unibo.it:12312"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

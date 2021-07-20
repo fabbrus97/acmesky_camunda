@@ -11,5 +11,6 @@ public class StaticValues {
 
 	public static String client_interests_file_path = "client_interests.json";
 	public static String codes_file_path = "codes.json";
+	public static String token_compagnia_trasporti = "";
 	
 }

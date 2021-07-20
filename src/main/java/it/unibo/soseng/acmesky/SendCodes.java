@@ -1,5 +1,7 @@
 package it.unibo.soseng.acmesky;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -16,7 +18,7 @@ public class SendCodes implements JavaDelegate{
 	public void execute(DelegateExecution execution) throws Exception {
 		
 		
-		sendCodeService.service();				
+		sendCodeService.service(((ArrayList<String>)execution.getVariable("prontograms")).get(0));				
 		
 	}
 	

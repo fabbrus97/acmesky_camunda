@@ -10,23 +10,23 @@ def sendMessage(messageName, variables=None):
 
 	#cerca il processo che si chiama "acmesky"
 
-	get_url = "http://arianna.cs.unibo.it:8080/engine-rest/deployment"
+	get_url = "http://edgar.cs.unibo.it:8080/engine-rest/deployment"
 
 	response = requests.request("GET", get_url)
 
-	processId = ""
+	id = ""
 
 	response_j = json.loads(response.text)
 
 
-	'''for element in response_j:
-	    if element["name"] == "acmesky":
-		id = element["id"]
-		print(id)
-	'''
+	for element in response_j:
+		if element["name"] == "acmesky":
+			id = element["id"]
+		
+
 	#invia un messaggio
 	
-	post_url = "http://arianna.cs.unibo.it:8080/engine-rest/message"
+	post_url = "http://edgar.cs.unibo.it:8080/engine-rest/message"
 	#myobj = { "processInstanceId": id, "messageName": "Message_0fnc6rd"}
 	myobj = { "processInstanceId": id, "messageName": messageName}
 	if variables != None:
