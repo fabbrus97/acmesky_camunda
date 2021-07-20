@@ -1,5 +1,7 @@
 package it.unibo.soseng.acmesky;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -14,7 +16,7 @@ public class SendPaymentLink implements JavaDelegate {
 	public void execute(DelegateExecution execution) throws Exception {
 		// TODO Auto-generated method stub
 		sendPaymentLinkService.service(execution.getProcessEngine().getRuntimeService(), 
-				execution.getVariable("paymentLink").toString());
+				((ArrayList<String>)execution.getVariable("payments")).get(0));
 	}
 
 }

@@ -16,12 +16,15 @@ import prontogramprovider.Configuration;
 
 public class SendCodeService {
 	
+	private static String url = "";
 	
 	public SendCodeService() {
 		
 	}
 	
-	public static void service() {
+	public static void service(String server) {
+		
+		url = server;
 		
 		if (StaticValues.prontogram_key != "") { 
 			
@@ -42,7 +45,7 @@ public class SendCodeService {
 			//richiesta per registrarsi 
 			register();
 			//richiesta normale
-			service();
+			service(server);
 		}
 	}
 	
@@ -50,7 +53,7 @@ public class SendCodeService {
 		
 		ApiClient defaultClient = Configuration.getDefaultApiClient();
 
-		defaultClient.setBasePath(""); //TODO url dove sarà hostato il server
+		defaultClient.setBasePath(url);
 		
         HttpBasicAuth basicAuth = (HttpBasicAuth) defaultClient.getAuthentication("basicAuth");
         basicAuth.setUsername(StaticValues.prontogram_username);
@@ -72,7 +75,7 @@ public class SendCodeService {
 	private static void sendMessage(String offer_code, String receiver) {
 		InlineResponse2003 token = login();
 		ApiClient defaultClient = Configuration.getDefaultApiClient();
-		
+		defaultClient.setBasePath(url);
         RisorseApi apiInstance = new RisorseApi();
 
         
@@ -97,6 +100,8 @@ public class SendCodeService {
 	private static void register() {
 		
 		DefaultApi defaultInstance = new DefaultApi();
+		defaultInstance.getApiClient().setBasePath(url);
+		
 		RegisterBody body = new RegisterBody(); 
 		
 		body.setUsername(StaticValues.prontogram_username); 

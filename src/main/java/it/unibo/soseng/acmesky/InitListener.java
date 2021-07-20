@@ -31,18 +31,16 @@ public class InitListener implements ExecutionListener {
 	}
 	
 	void setVariable(DelegateExecution execution, String fileName, String varName) throws Exception {
-		ArrayList<String> airlines = new ArrayList<String>();
-		//FIXME questa classe deve leggere diversi file - uno per le compagnie aeree, uno per i servizi bancari...
-		//e inizializzare altrettante variabili
+		ArrayList<String> urlList = new ArrayList<String>();
 		BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(fileName)));
 		
-		String airline = bufferedReader.readLine();
-		while(airline != null) {
-			airlines.add(airline);
-			airline = bufferedReader.readLine();
+		String url = bufferedReader.readLine();
+		while(url != null) {
+			urlList.add(url);
+			url = bufferedReader.readLine();
 		}
         
-        execution.setVariable(varName, airlines);
+        execution.setVariable(varName, urlList);
 	}
 		
 }
