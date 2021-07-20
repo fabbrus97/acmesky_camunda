@@ -2,7 +2,8 @@ package it.unibo.soseng.acmesky;
 
 public class StaticValues {
 	
-	public static String airline_username = ""; 
+	public static String airline_username = "";
+	public static String airline_password = "";
 	public static String airline_token = "";
 	public static String prontogram_key = "";
 	public static String payment_provider_key = "";
