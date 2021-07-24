@@ -1,5 +1,30 @@
 import requests, json
 
+def _startMessage(messageName, processInstance, variables=None):
+	#invia un messaggio
+	post_url = "http://edgar.cs.unibo.it:8080/engine-rest/message"
+	#myobj = { "processInstanceId": id, "messageName": "Message_0fnc6rd"}
+	myobj = { "processInstanceId": processInstance, "messageName": messageName}
+	if variables != None:
+		myobj["processVariables"] = variables
+	x = requests.post(post_url, json = myobj, headers={"Content-Type": "application/json"})
+
+	
+	return x.status_code
+
+def _intermediateMessage(messageName, processInstance, variables=None):
+	print("Invio messaggio a process instance:", processInstance)
+	#invia un messaggio
+	post_url = "http://edgar.cs.unibo.it:8080/engine-rest/message"
+	#myobj = { "processInstanceId": id, "messageName": "Message_0fnc6rd"}
+	myobj = { "processInstanceId": processInstance, "messageName": messageName, "all": True}
+	if variables != None:
+		myobj["processVariables"] = variables
+	x = requests.post(post_url, json = myobj, headers={"Content-Type": "application/json"})
+
+	print(x.text)
+
+
 def sendMessage(messageName, variables=None):
 	"""
 	variables = {	
@@ -14,24 +39,21 @@ def sendMessage(messageName, variables=None):
 
 	response = requests.request("GET", get_url)
 
-	id = ""
-
 	response_j = json.loads(response.text)
 
+	id = ""
 
 	for element in response_j:
-		if element["name"] == "acmesky":
+		if element["name"] == "camunda-test":
 			id = element["id"]
-		
 
-	#invia un messaggio
-	
-	post_url = "http://edgar.cs.unibo.it:8080/engine-rest/message"
-	#myobj = { "processInstanceId": id, "messageName": "Message_0fnc6rd"}
-	myobj = { "processInstanceId": id, "messageName": messageName}
-	if variables != None:
-		myobj = { "processInstanceId": id, "messageName": messageName, "processVariables": variables}
-	x = requests.post(post_url, json = myobj, headers={"Content-Type": "application/json"})
+	get_url = "http://edgar.cs.unibo.it:8080/engine-rest/process-instance?deploymentId={}".format(id)	
+	response = requests.request("GET", get_url)
+	response_j = json.loads(response.text)
 
-	print(x.text)
+	status = _startMessage(messageName, id, variables)
+	if status == 400:
+		for r in response_j:
+			_intermediateMessage(messageName, r["id"], variables)
+
 	
