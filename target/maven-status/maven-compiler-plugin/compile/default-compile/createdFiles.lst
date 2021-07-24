@@ -1,5 +1,5 @@
-it/unibo/soseng/acmesky/RemoveCodeService.class
 it/unibo/soseng/acmesky/SendPaymentLink.class
+it/unibo/soseng/acmesky/RemoveCodeService.class
 it/unibo/soseng/acmesky/BookTransportService.class
 it/unibo/soseng/cliente/SendInterests.class
 it/unibo/soseng/acmesky/SaveCodes.class
@@ -10,8 +10,8 @@ it/unibo/soseng/acmesky/Json/Interest.class
 it/unibo/soseng/acmesky/SendCodes.class
 it/unibo/soseng/acmesky/AskClientTransport.class
 it/unibo/soseng/acmesky/Json/Code.class
-it/unibo/soseng/acmesky/BookTransport.class
 it/unibo/soseng/acmesky/InitListener.class
+it/unibo/soseng/acmesky/BookTransport.class
 it/unibo/soseng/cliente/ManageTransportOffer.class
 it/unibo/soseng/cliente/SendPaymentService.class
 it/unibo/soseng/acmesky/GetDistanceService.class
@@ -24,8 +24,8 @@ it/unibo/soseng/cliente/ThinkAboutOffer.class
 it/unibo/soseng/acmesky/gen/Indirizzo.class
 it/unibo/soseng/acmesky/SendNotification.class
 it/unibo/soseng/acmesky/gen/Richiesta$Ora.class
-it/unibo/soseng/acmesky/CheckCode.class
 it/unibo/soseng/acmesky/gen/RegistrazioneResponse.class
+it/unibo/soseng/acmesky/CheckCode.class
 it/unibo/soseng/acmesky/Distance.class
 it/unibo/soseng/acmesky/SaveOffersLM.class
 it/unibo/soseng/acmesky/LoggerDelegate.class
@@ -36,12 +36,10 @@ it/unibo/soseng/acmesky/SendCodeService.class
 it/unibo/soseng/cliente/SendPayment.class
 it/unibo/soseng/acmesky/GenerateCodesService.class
 it/unibo/soseng/acmesky/gen/Richiesta$Data.class
-it/unibo/soseng/acmesky/SaveOfferService.class
 it/unibo/soseng/acmesky/ForwardLink.class
 it/unibo/soseng/cliente/SendCode.class
 it/unibo/soseng/acmesky/FindMatchService.class
 it/unibo/soseng/acmesky/SaveInterests.class
-it/unibo/soseng/acmesky/SaveOffers.class
 it/unibo/soseng/acmesky/ProcessConstants.class
 it/unibo/soseng/acmesky/GenerateCodes.class
 it/unibo/soseng/cliente/StaticValues.class
@@ -49,8 +47,8 @@ it/unibo/soseng/acmesky/FindMatch.class
 it/unibo/soseng/acmesky/GetOffers.class
 it/unibo/soseng/acmesky/RemoveCode.class
 it/unibo/soseng/acmesky/SendPaymentLinkService.class
-it/unibo/soseng/acmesky/gen/Registrazione.class
 it/unibo/soseng/acmesky/StaticValues.class
+it/unibo/soseng/acmesky/gen/Registrazione.class
 it/unibo/soseng/acmesky/gen/ObjectFactory.class
 it/unibo/soseng/cliente/SendInterestService.class
 it/unibo/soseng/acmesky/gen/package-info.class
@@ -58,5 +56,5 @@ it/unibo/soseng/acmesky/CheckCodeService.class
 it/unibo/soseng/acmesky/GetLinkService.class
 it/unibo/soseng/acmesky/gen/NoleggioPort.class
 it/unibo/soseng/acmesky/Json/Clients.class
-it/unibo/soseng/acmesky/GetDistance.class
 it/unibo/soseng/acmesky/GetLink.class
+it/unibo/soseng/acmesky/GetDistance.class

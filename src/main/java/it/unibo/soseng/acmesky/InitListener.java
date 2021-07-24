@@ -23,6 +23,7 @@ public class InitListener implements ExecutionListener {
 	     /public/simonef/server_list/prontogram.list
 	    */
 		
+		
 		setVariable(execution, "/public/simonef/server_list/airline.list", "airlines");
 		setVariable(execution, "/public/simonef/server_list/geo-distance-provider.list", "geoproviders");
 		setVariable(execution, "/public/simonef/server_list/payment-provider.list", "payments");
@@ -37,7 +38,9 @@ public class InitListener implements ExecutionListener {
 		String url = bufferedReader.readLine();
 		while(url != null) {
 			urlList.add(url);
+			System.out.println("Eseguo init listener per " + varName + ": " + url);
 			url = bufferedReader.readLine();
+			
 		}
         
         execution.setVariable(varName, urlList);
