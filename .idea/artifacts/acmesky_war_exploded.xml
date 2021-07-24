@@ -22,6 +22,7 @@
           <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.1" />
           <element id="library" level="project" name="Maven: io.gsonfire:gson-fire:1.8.3" />
           <element id="library" level="project" name="Maven: org.threeten:threetenbp:1.3.5" />
+          <element id="library" level="project" name="Maven: io.swagger:airlinetest.test:1.0.0" />
           <element id="library" level="project" name="Maven: io.swagger:geoprovider.geo-client:1.0.0" />
           <element id="library" level="project" name="Maven: io.swagger:paymentprovider.payment-client:1.0.0" />
           <element id="library" level="project" name="Maven: io.swagger:prontogramprovider.prontogram-client:1.0.0" />

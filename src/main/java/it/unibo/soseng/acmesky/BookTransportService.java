@@ -16,6 +16,7 @@ public class BookTransportService {
 	
 	public static void service(Luoghi luoghi, Data data, Ora ora) {
 		NoleggioPortService myService = new NoleggioPortService();
+
 		
 	    NoleggioPort noleggioPort = myService.getNoleggioPortServicePort();
 	    

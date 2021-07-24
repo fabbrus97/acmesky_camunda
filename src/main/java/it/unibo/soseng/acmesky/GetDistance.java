@@ -3,12 +3,17 @@ package it.unibo.soseng.acmesky;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
+import javax.inject.Inject;
+
 public class GetDistance implements JavaDelegate{
+
+	@Inject
+	private GetDistanceService getDistanceService;
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		// TODO Auto-generated method stub
-		execution.setVariable("distance", 50); //TODO
+
+		getDistanceService.service(execution);
 		
 	}
 

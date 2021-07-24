@@ -1,13 +1,20 @@
 package it.unibo.soseng.acmesky;
 
-import io.swagger.airline.ApiClient;
-import io.swagger.airline.ApiException;
-import io.swagger.airline.Configuration;
-import io.swagger.airline.airline_client.RisorseApi;
-import io.swagger.client.model.InlineResponse200;
-import io.swagger.client.model.InlineResponse2001;
-import io.swagger.client.model.MapsV1Credentials;
 
+
+import airlinetest.ApiClient;
+import airlinetest.Configuration;
+import airlinetest.test.RisorseApi;
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.client.model.*;
+
+
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -33,7 +40,7 @@ public class GetOffersService {
                 InlineResponse2001 result = apiInstance.postRegistration(body);
                 System.out.println(result);
                 StaticValues.airline_token = result.getToken();
-            } catch (ApiException e) {
+            } catch (airlinetest.ApiException e) {
                 System.err.println("Exception when calling RisorseApi#postRegistration");
                 e.printStackTrace();
             }
@@ -42,16 +49,53 @@ public class GetOffersService {
         RisorseApi apiInstance = new RisorseApi();
         try {
             InlineResponse200 result = apiInstance.getFlights();
+            Offers offers = new Offers();
             System.out.println(result);
-            result.getFlights().get(0).
-        } catch (ApiException e) {
+            ArrayList <InlineResponse200Flights> flights = (ArrayList<InlineResponse200Flights>) result.getFlights();
+            ArrayList<Flight> voli = new ArrayList<Flight>();
+            if(flights != null){
+                offers.setCompanyName(result.getCompanyname());
+                for (InlineResponse200Flights flight : flights) {
+                    Flight f = new Flight();
+                    f.setDepartureFrom(flight.getDepartureFrom());
+                    f.setDestination(flight.getDestination());
+                    f.setDepartureFrom(flight.getDepartureFrom());
+                    f.setTakeoff(flight.getTakeoff());
+                    InlineResponse200Price price = flight.getPrice();
+                    f.setPrice(price.getCurrency(), price.getAmount().intValue());
+                    voli.add(f);
+                }
+            }else{
+                System.out.println("vecchio è stra vuota");
+            }
+            offers.setFlights(voli);
+            saveJSON(offers);
+        } catch (airlinetest.ApiException e) {
             System.err.println("Exception when calling RisorseApi#getFlights");
             e.printStackTrace();
         }
     }
 
-    public static void saveJSON(){
+    public static void saveJSON(Offers offers){
+
+        Gson j = new Gson();
+
+        try {
+            Writer writer;
+            writer = new FileWriter(new File(StaticValues.offers_file_path));
+            JsonWriter jsonWriter = new JsonWriter(writer);
+
+            j.toJson(offers, Offers.class, jsonWriter);
+
+            jsonWriter.flush();
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
+
+    //aggiungere funzione che apre il file e restituisce le offers dal json
 
 }
 
@@ -85,7 +129,7 @@ class Flight{
     String destination;
     String offerCode;
     Price price;
-    Date takeoff;
+    String takeoff;
 
     public Flight() {
     }
@@ -118,19 +162,39 @@ class Flight{
         return price;
     }
 
-    public void setPrice(Price price) {
+    public void setPrice(String currency, int amount) {
+        Price price = new Price();
+        price.setAmount(amount);
+        price.setCurrency(currency);
+
         this.price = price;
     }
 
-    public Date getTakeoff() {
+    public String getTakeoff() {
         return takeoff;
     }
 
-    public void setTakeoff(Date takeoff) {
+    public void setTakeoff(String takeoff) {
         this.takeoff = takeoff;
     }
 }
 class Price{
     int amount;
     String currency;
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 }

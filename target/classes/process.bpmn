@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.5.0" camunda:diagramRelationId="24f5ba53-f1a6-4a06-9aa5-be1aba879c9c">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.8.1" camunda:diagramRelationId="24f5ba53-f1a6-4a06-9aa5-be1aba879c9c">
   <bpmn:collaboration id="soseng-project">
     <bpmn:participant id="Participant_06e7d9m" name="ACMESky" processRef="acmesky" />
     <bpmn:participant id="Participant_1o1fr4k" name="Compagnia trasporti vicina" processRef="Process_07wgrty" />
@@ -525,7 +525,7 @@
   <bpmn:message id="Message_04s4gwh" name="Message_2mr1re4" />
   <bpmn:message id="Message_0zrtge4" name="Message_0fnc6rd" />
   <bpmn:message id="Message_0tzl6w0" name="Message_3nlfue1" />
-  <bpmn:message id="Message_1qyllcq" name="Message_1vcg82o" />
+  <bpmn:message id="Message_1qyllcq" name="getTicket" />
   <bpmn:message id="Message_1liumjv" name="Message_0if9pvu" />
   <bpmn:message id="Message_0j2q6p2" name="Message_0ahfil0" />
   <bpmn:message id="Message_1broa65" name="Message_0evope2" />
