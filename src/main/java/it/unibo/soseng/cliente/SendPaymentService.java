@@ -28,7 +28,7 @@ public class SendPaymentService {
 		
 		
 		//if key
-		if (StaticValues.payment_provider_key != "") {
+		/*if (StaticValues.payment_provider_key != "") {
 			// chiedi url per far pagare cliente
 			
 			ApiClient defaultClient = Configuration.getDefaultApiClient();
@@ -42,6 +42,7 @@ public class SendPaymentService {
 
 	        RisorseApi apiInstance = new RisorseApi();
 	        Body body = new Body();
+	        
 	        body.cardNumber(1234); //TODO
 	        body.CVC(123); //TODO
 	        body.circuit("CreditCardCompany"); //TODO
@@ -75,6 +76,6 @@ public class SendPaymentService {
 	        }
 		}
 		
-		
+		*/
 	}
 }

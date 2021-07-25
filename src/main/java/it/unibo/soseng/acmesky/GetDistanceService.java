@@ -1,15 +1,19 @@
 package it.unibo.soseng.acmesky;
 
-import io.swagger.airline.ApiClient;
-import io.swagger.airline.Configuration;
+//import io.swagger.airline.ApiClient; TODO
+//import io.swagger.airline.Configuration;
 import io.swagger.client.ApiException;
 import io.swagger.client.api.RisorseApi;
 import io.swagger.client.auth.HttpBasicAuth;
 import io.swagger.client.model.*;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 
+import airlinetest.ApiClient;
+import airlinetest.Configuration;
 
 import java.util.ArrayList;
+
+ 
 
 public class GetDistanceService {
 

@@ -6,8 +6,8 @@ public class Codes {
 	
 	//codes.json ha questa forma:
 	/* {codes: [
-	 * 		{"code": "abcd", "creation_date": "01/01/2021", "fly_code": "1234", "users": ["mrossi", "mbianchi"] },
-	 * 		{"code": "wxyz", "creation_date": "01/02/2021", "fly_code": "5678", "users": ["mrossi", "mneri"]},
+	 * 		{"code": "abcd", "creation_date": "01/01/2021", "fly_code": "1234", "user": "mrossi" },
+	 * 		{"code": "wxyz", "creation_date": "01/02/2021", "fly_code": "5678", "user": "mrossi"]},
 	 * 		...
 	 * ]}
 	 * 

@@ -27,19 +27,21 @@ public class Code {
 	public void setFly_code(String fly_code) {
 		this.fly_code = fly_code;
 	}
-
-	public ArrayList<String> getUsers() {
-		return users;
+	
+	public String getUser() {
+		return user;
 	}
 
-	public void setUsers(ArrayList<String> users) {
-		this.users = users;
+	public void setUser(String user) {
+		this.user = user;
 	}
+
 
 	String code;
 	String creation_date;
 	String fly_code;
-	ArrayList<String> users;
+	String user;
+	
 	
 	public Code() {
 		

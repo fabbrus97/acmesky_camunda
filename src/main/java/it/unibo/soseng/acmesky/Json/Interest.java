@@ -5,8 +5,9 @@ public class Interest{
 	String arrival_airport ;
 	String departure_time_min; 
 	String departure_time_max;
-	String arrival_time_min;
-	String arrival_time_max;
+	String returnHome_time_min;
+	String returnHome_time_max;
+	
 	int cost;
 	
 	public String getDeparture_airport() {
@@ -40,22 +41,24 @@ public class Interest{
 	public void setDeparture_time_max(String departure_time_max) {
 		this.departure_time_max = departure_time_max;
 	}
-
-	public String getArrival_time_min() {
-		return arrival_time_min;
+	
+	
+	public String getReturnHome_time_min() {
+		return returnHome_time_min;
 	}
 
-	public void setArrival_time_min(String arrival_time_min) {
-		this.arrival_time_min = arrival_time_min;
+	public void setReturnHome_time_min(String returnHome_time_min) {
+		this.returnHome_time_min = returnHome_time_min;
 	}
 
-	public String getArrival_time_max() {
-		return arrival_time_max;
+	public String getReturnHome_time_max() {
+		return returnHome_time_max;
 	}
 
-	public void setArrival_time_max(String arrival_time_max) {
-		this.arrival_time_max = arrival_time_max;
+	public void setReturnHome_time_max(String returnHome_time_max) {
+		this.returnHome_time_max = returnHome_time_max;
 	}
+
 
 	public int getCost() {
 		return cost;

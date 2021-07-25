@@ -8,15 +8,19 @@ import airlinetest.test.RisorseApi;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.client.model.*;
-
-
+import it.unibo.soseng.acmesky.Json.Clients;
+import it.unibo.soseng.acmesky.Json.Offers;
+import it.unibo.soseng.acmesky.Json.Flight;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Date;
+
+
 
 public class GetOffersService {
 
@@ -54,7 +58,7 @@ public class GetOffersService {
             ArrayList <InlineResponse200Flights> flights = (ArrayList<InlineResponse200Flights>) result.getFlights();
             ArrayList<Flight> voli = new ArrayList<Flight>();
             if(flights != null){
-                offers.setCompanyName(result.getCompanyname());
+            	
                 for (InlineResponse200Flights flight : flights) {
                     Flight f = new Flight();
                     f.setDepartureFrom(flight.getDepartureFrom());
@@ -65,10 +69,13 @@ public class GetOffersService {
                     f.setPrice(price.getCurrency(), price.getAmount().intValue());
                     voli.add(f);
                 }
+                
+        		offers.getOffers().put(result.getCompanyname(), voli);
+
             }else{
                 System.out.println("vecchio è stra vuota");
             }
-            offers.setFlights(voli);
+            //offers.setFlights(voli);
             saveJSON(offers);
         } catch (airlinetest.ApiException e) {
             System.err.println("Exception when calling RisorseApi#getFlights");
@@ -94,107 +101,35 @@ public class GetOffersService {
             e.printStackTrace();
         }
     }
+    
+    public static Offers getJSON() {
+    	
+    	Offers o = null;
+		File file = new File(StaticValues.offers_file_path);
+		
+		try {
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+				
+			Gson j = new Gson();
+			FileReader fileReader = new FileReader(file);
+			o = j.fromJson(fileReader, Offers.class);
+			
+			fileReader.close();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+		return o; 
+    	
+    }
 
     //aggiungere funzione che apre il file e restituisce le offers dal json
 
 }
 
-class Offers{
 
-    String companyName;
-    ArrayList<Flight> flights = new ArrayList<Flight>();
 
-    public Offers() {
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public ArrayList<Flight> getFlights() {
-        return flights;
-    }
-
-    public void setFlights(ArrayList<Flight> flights) {
-        this.flights = flights;
-    }
-}
-class Flight{
-
-    String departureFrom;
-    String destination;
-    String offerCode;
-    Price price;
-    String takeoff;
-
-    public Flight() {
-    }
-
-    public String getDepartureFrom() {
-        return departureFrom;
-    }
-
-    public void setDepartureFrom(String departureFrom) {
-        this.departureFrom = departureFrom;
-    }
-
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
-    public String getOfferCode() {
-        return offerCode;
-    }
-
-    public void setOfferCode(String offerCode) {
-        this.offerCode = offerCode;
-    }
-
-    public Price getPrice() {
-        return price;
-    }
-
-    public void setPrice(String currency, int amount) {
-        Price price = new Price();
-        price.setAmount(amount);
-        price.setCurrency(currency);
-
-        this.price = price;
-    }
-
-    public String getTakeoff() {
-        return takeoff;
-    }
-
-    public void setTakeoff(String takeoff) {
-        this.takeoff = takeoff;
-    }
-}
-class Price{
-    int amount;
-    String currency;
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-}

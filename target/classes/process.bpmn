@@ -245,9 +245,7 @@
         </bpmn:dataOutputAssociation>
       </bpmn:serviceTask>
       <bpmn:dataStoreReference id="DataStoreReference_168uba5" name="DB codici offerta-cliente" />
-      <bpmn:sequenceFlow id="Flow_0v3s70p" sourceRef="Activity_0mu5dlh" targetRef="Gateway_0owpn1b">
-        <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{distance &gt;= 30}</bpmn:conditionExpression>
-      </bpmn:sequenceFlow>
+      <bpmn:sequenceFlow id="Flow_0v3s70p" sourceRef="Activity_0mu5dlh" targetRef="Gateway_0owpn1b" />
       <bpmn:serviceTask id="Activity_1ghck8l" name="Ottieni distanze compagnie trasp. - domicilio utente" camunda:class="it.unibo.soseng.acmesky.GetDistance">
         <bpmn:incoming>Flow_16hwewz</bpmn:incoming>
         <bpmn:outgoing>Flow_1gv1n7r</bpmn:outgoing>
