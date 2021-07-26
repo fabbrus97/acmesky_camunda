@@ -1,12 +1,10 @@
 package it.unibo.soseng.acmesky;
 
-
-
-import airlinetest.ApiClient;
-import airlinetest.Configuration;
-import airlinetest.test.RisorseApi;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonWriter;
+
+import airline.ApiClient;
+import airline.airline_client.RisorseApi;
 import io.swagger.client.model.*;
 import it.unibo.soseng.acmesky.Json.Clients;
 import it.unibo.soseng.acmesky.Json.Offers;
@@ -44,7 +42,7 @@ public class GetOffersService {
                 InlineResponse2001 result = apiInstance.postRegistration(body);
                 System.out.println(result);
                 StaticValues.airline_token = result.getToken();
-            } catch (airlinetest.ApiException e) {
+            } catch (airline.ApiException e) {
                 System.err.println("Exception when calling RisorseApi#postRegistration");
                 e.printStackTrace();
             }

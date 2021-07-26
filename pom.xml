@@ -39,19 +39,19 @@
 
   <dependencies>
   <!-- Dipendenze per i client java generati con openapi -->
-  	<!-- <dependency>
+	<dependency>
 	  <groupId>io.swagger</groupId>
 	  <artifactId>airline.airline-client</artifactId>
 	  <version>1.0.0</version>
 	  <scope>compile</scope>
-	</dependency> -->
+	</dependency>
 
-    <dependency>
+    <!-- <dependency>
       <groupId>io.swagger</groupId>
       <artifactId>airlinetest.test</artifactId>
       <version>1.0.0</version>
       <scope>compile</scope>
-    </dependency>
+    </dependency> -->
 	
 	<dependency>  
 	  <groupId>io.swagger</groupId>
