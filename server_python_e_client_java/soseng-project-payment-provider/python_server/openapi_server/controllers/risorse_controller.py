@@ -1,0 +1,154 @@
+import connexion
+import six
+
+from openapi_server.models.inline_object import InlineObject  # noqa: E501
+from openapi_server.models.inline_object1 import InlineObject1  # noqa: E501
+from openapi_server.models.inline_response200 import InlineResponse200  # noqa: E501
+from openapi_server.models.inline_response2001 import InlineResponse2001  # noqa: E501
+from openapi_server.models.maps_v1_credentials import MapsV1Credentials  # noqa: E501
+from openapi_server import util
+
+import string 
+import random
+import datetime
+import requests
+import json
+
+import simpleCamundaRESTPost
+
+active_payment_links = []
+token_comp_aerea = ""
+
+def get_link(inline_object1=None):  # noqa: E501
+    """Genera link di pagamento
+
+    È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, restituisce un link di pagamento relativo all&#39;offerta specificata. # noqa: E501
+
+    :param authorization_api_key: Il valore deve essere il token che il cliente ha ricevuto durante la registrazione.
+    :type authorization_api_key: str
+    :param inline_object1: 
+    :type inline_object1: dict | bytes
+
+    :rtype: InlineResponse200
+    """
+
+    if connexion.request.is_json:
+        inline_object1 = InlineObject1.from_dict(connexion.request.get_json())  # noqa: E501
+        if inline_object1.amount.value <= 0:
+            return "Error in amount value", 400
+        if inline_object1.amount.currency not in ["eur", "usd"]:
+            return "Currency non found", 400
+    chars = '1234567890'
+    link = ""
+    for _ in range(0, 10):
+        link += chars[random.randint(0, len(chars)-1)] 
+    payment = {"link": link, "data": inline_object1.to_dict()}
+    active_payment_links.append(payment)
+    ret = InlineResponse200(link=link) #{"link": link}
+
+    
+
+    return ret
+
+def pay_people(payment_data_link, payment_data): 
+    '''
+    Il pagamento è andato bene, diamo una percentuale 
+    ad acmesky e una alla compagnia aerea 
+    '''
+    #manda_notifica_pagamento_acmesky(payment_data.data.offer_code) 
+    simpleCamundaRESTPost.sendMessage("PaymentSuccessfull")
+    #notifica pagamento compagnia aerea
+    url = "" #TODO
+
+    global token_comp_aerea
+
+    if len(token_comp_aerea) == 0:
+        r = requests.post(url+"/registration", data={"username": "serv_bancari", "password": "12345abcde"})
+        token_comp_aerea = (json.loads(r.text)).token #TODO non sono sicuro sia così
+    notifica_comp_aerea = {
+        "offer_code": payment_data_link.data.offer_code,
+        "customer": {
+            "name": "", #TODO non sono richiesti nei dati di pagamento, richiedili
+            "email": ""
+        }, 
+        "amount_payed": {
+            "value": payment_data_link.data.amout.value,
+            "currency": payment_data_link.data.amout.currency
+        },
+        "transaction": {
+            "date": datetime.date.today(),
+            "id": int(payment_data_link.link)
+        }    
+    }
+    headers = {"www-authenticate": "Token " + token_comp_aerea} #TODO
+    requests.post(url+"/notifypayment", data=notifica_comp_aerea, headers=headers)
+    
+
+def post_paymentdata(inline_object=None):  # noqa: E501
+    """Ricevi dati di pagamento
+
+    È la risorsa che permette al cliente intenzionato ad acquistare un&#39;offerta di inviare al fornitore dei servizi bancari il pagamento corrispondente. # noqa: E501
+
+    :param authorization_api_key: Il valore deve essere il token che il cliente ha ricevuto durante la registrazione.
+    :type authorization_api_key: str
+    :param inline_object: 
+    :type inline_object: dict | bytes
+
+    :rtype: None
+    """
+
+    if connexion.request.is_json:
+        inline_object = InlineObject.from_dict(connexion.request.get_json())  # noqa: E501
+    for p in active_payment_links:
+        if inline_object.transaction.id == p.link:
+            if len(inline_object.card_number) > 5:
+                #check expiration
+                today = datetime.date.today()
+                year = today.year
+                month = today.month
+                if year <= inline_object.expiration.year and month < inline_object.expiration.month:
+                    if inline_object.circuit in ["visa", "mastercard"]:
+                        simpleCamundaRESTPost.sendMessage("ConfirmPaymentSuccessfull", {"paymCorrect": {"value": "true", "type":"Boolean"}}) #conferma pagamento per cliente - successo
+                        pay_people(p, inline_object)
+                        active_payment_links.remove(p)
+                        return #successo
+    simpleCamundaRESTPost.sendMessage("PaymentFailure")
+    simpleCamundaRESTPost.sendMessage("ConfirmPaymentSuccessfull", {"paymFailed": {"value": "false", "type":"Boolean"}}) #conferma pagamento per cliente - fallimento
+    return 'Error in payment data', 400
+
+
+def post_registration(maps_v1_credentials=None):  # noqa: E501
+    """Registra un nuovo utente
+
+    È la risorsa che permette a chi intende interagire con il fornitore dei servizi bancari di ottenere l&#39;APIKey per poter essere identificato e autorizzato. # noqa: E501
+
+    :param maps_v1_credentials: 
+    :type maps_v1_credentials: dict | bytes
+
+    :rtype: InlineResponse2001
+    """
+    if connexion.request.is_json:
+        maps_v1_credentials = MapsV1Credentials.from_dict(connexion.request.get_json())  # noqa: E501
+    if len(maps_v1_credentials.username) > 0 and len(maps_v1_credentials.password) > 0: #TODO si potrebbe controllare che username/pwd siano univoci
+        chars = string.ascii_letters + '1234567890'
+        token = ""
+        for _ in range(0, 20):
+            token += chars[random.randint(0, len(chars)-1)]
+
+        tokens = []
+        with open("tokens.json") as tokens_file:
+            try:
+                tokens = json.load(tokens_file)
+            except:
+                pass
+            tokens.append({"user_id": maps_v1_credentials.username, "token": token})
+            
+        tokens_file.close()
+        with open("tokens.json", "w") as tokens_file:
+            json.dump(tokens, tokens_file)
+            tokens_file.close()
+        
+        ret = InlineResponse2001(token=token) #{"token": token}
+        return ret
+    else:
+        return "Bad username or password", 400
