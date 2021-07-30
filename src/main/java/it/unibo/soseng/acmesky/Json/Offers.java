@@ -12,6 +12,7 @@ public class Offers{
     
 
     public Offers() {
+    	offers = new HashMap<String, ArrayList<Flight>>();
     }
 
 

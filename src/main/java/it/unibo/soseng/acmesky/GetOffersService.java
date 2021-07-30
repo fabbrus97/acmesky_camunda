@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonWriter;
 
 import airline.ApiClient;
+import airline.Configuration;
 import airline.airline_client.RisorseApi;
 import io.swagger.client.model.*;
 import it.unibo.soseng.acmesky.Json.Clients;
@@ -51,31 +52,32 @@ public class GetOffersService {
         RisorseApi apiInstance = new RisorseApi();
         try {
             InlineResponse200 result = apiInstance.getFlights();
+            
             Offers offers = new Offers();
             System.out.println(result);
-            ArrayList <InlineResponse200Flights> flights = (ArrayList<InlineResponse200Flights>) result.getFlights();
+            ArrayList <LMflightFlight> flights = (ArrayList<LMflightFlight>) result.getFlights();
             ArrayList<Flight> voli = new ArrayList<Flight>();
             if(flights != null){
             	
-                for (InlineResponse200Flights flight : flights) {
+                for (LMflightFlight flight : flights) {
                     Flight f = new Flight();
                     f.setDepartureFrom(flight.getDepartureFrom());
                     f.setDestination(flight.getDestination());
                     f.setDepartureFrom(flight.getDepartureFrom());
                     f.setTakeoff(flight.getTakeoff());
-                    InlineResponse200Price price = flight.getPrice();
+                    LMflightFlightPrice price = flight.getPrice();
                     f.setPrice(price.getCurrency(), price.getAmount().intValue());
                     voli.add(f);
                 }
                 
         		offers.getOffers().put(result.getCompanyname(), voli);
-
+        		System.out.println("Ok, posso salvare i voli su file");
             }else{
                 System.out.println("vecchio è stra vuota");
             }
             //offers.setFlights(voli);
             saveJSON(offers);
-        } catch (airlinetest.ApiException e) {
+        } catch (airline.ApiException e) {
             System.err.println("Exception when calling RisorseApi#getFlights");
             e.printStackTrace();
         }
@@ -93,6 +95,7 @@ public class GetOffersService {
             j.toJson(offers, Offers.class, jsonWriter);
 
             jsonWriter.flush();
+            writer.close();
 
         } catch (IOException e) {
             // TODO Auto-generated catch block

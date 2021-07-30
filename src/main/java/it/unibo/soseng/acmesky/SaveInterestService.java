@@ -43,8 +43,9 @@ public class SaveInterestService {
 			Interest interest = new Interest();
 			interest.setArrival_airport(arrival_airport);
 			interest.setDeparture_airport(departure_airport);
-			interest.setArrival_time_min(arrival_time_min);
-			interest.setArrival_time_max(arrival_time_max);
+			
+			interest.setReturnHome_time_min(arrival_time_min);
+			interest.setReturnHome_time_max(arrival_time_max);
 			interest.setDeparture_time_min(departure_time_min);
 			interest.setDeparture_time_max(departure_time_max);
 			interest.setCost(cost);

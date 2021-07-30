@@ -25,28 +25,27 @@ public class SendCodeService {
 	public static void service(String server) {
 		
 		url = server;
-		
+				
 		if (StaticValues.prontogram_key != "") { 
 			
 			//TODO cosa succede se abbiamo il token ma è scaduto?
-			
-			Codes codes = GenerateCodesService.deserialize_file();
-			codes.getCodes().forEach(code -> {
-				code.getUsers().forEach(user -> {
-					sendMessage(code.getCode(), user);
-				});
-				
-			});
-			
-			
-			
+			sendCodes();
 			
 		} else {
 			//richiesta per registrarsi 
 			register();
 			//richiesta normale
-			service(server);
+			System.out.println("Mando i codici");
+			sendCodes();
 		}
+	}
+	
+	private static void sendCodes() {
+		Codes codes = GenerateCodesService.deserialize_file();
+		codes.getCodes().forEach(code -> {
+			sendMessage(code.getCode(), code.getUser());
+		});
+	
 	}
 	
 	private static InlineResponse2003 login() {

@@ -75,12 +75,12 @@ public class GenerateCodesService {
 						flight2delete4returnNotFound.add(flight);
 						 
 						boolean isPriceOk = flight.getPrice().getAmount() <= interest.getCost();
-
+						System.out.println("Cerco match...");
 						//controlliamo se il volo di andata è compatibile
 						if (checkDeparture) {
 							LocalDateTime departure_min = LocalDateTime.parse(interest.getDeparture_time_min(), dtf);
-							LocalDateTime departure_max = LocalDateTime.parse(interest.getDeparture_time_max(), dtf_flights);
-							LocalDateTime takeoff = LocalDateTime.parse(flight.getTakeoff(), dtf);
+							LocalDateTime departure_max = LocalDateTime.parse(interest.getDeparture_time_max(), dtf);
+							LocalDateTime takeoff = LocalDateTime.parse(flight.getTakeoff(), dtf_flights);
 														
 							boolean isDepartureOk = flight.getDepartureFrom().equals(interest.getDeparture_airport());
 							boolean isDestinationOk = flight.getDestination().equals(interest.getArrival_airport());
@@ -117,8 +117,8 @@ public class GenerateCodesService {
 												if (departure_flight.getDestination().equals(flight.getDepartureFrom())) {
 											
 													LocalDateTime returnHome_min = LocalDateTime.parse(interest.getReturnHome_time_min(), dtf);
-													LocalDateTime returnHome_max = LocalDateTime.parse(interest.getReturnHome_time_max(), dtf_flights);
-													LocalDateTime takeoff = LocalDateTime.parse(flight.getTakeoff(), dtf);
+													LocalDateTime returnHome_max = LocalDateTime.parse(interest.getReturnHome_time_max(), dtf);
+													LocalDateTime takeoff = LocalDateTime.parse(flight.getTakeoff(), dtf_flights);
 													
 													boolean isReturnHomeOk = within(returnHome_min, returnHome_max, takeoff);
 													boolean isDepartureOk = flight.getDepartureFrom().equals(interest.getArrival_airport());
@@ -148,7 +148,12 @@ public class GenerateCodesService {
 				}); 
 				
 				if (!checkDeparture) {
-					((DepRetFlights)userFlights.get(name)).departureFlights.removeAll(flight2delete4returnNotFound);
+					if ((DepRetFlights)userFlights.get(name) != null) {
+						((DepRetFlights)userFlights.get(name)).departureFlights.removeAll(flight2delete4returnNotFound);
+					} else {
+						System.out.println("Perdonaci Signore perché non sappiamo quello che facciamo");
+					}
+					
 				}
 				
 			});

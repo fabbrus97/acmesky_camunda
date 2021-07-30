@@ -8,8 +8,8 @@ import io.swagger.client.auth.HttpBasicAuth;
 import io.swagger.client.model.*;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 
-import airlinetest.ApiClient;
-import airlinetest.Configuration;
+import airline.ApiClient;
+import airline.Configuration;
 
 import java.util.ArrayList;
 

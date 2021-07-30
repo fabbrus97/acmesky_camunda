@@ -1,6 +1,6 @@
 package it.unibo.soseng.acmesky;
 
-import io.swagger.client.model.InlineResponse200Flights;
+import io.swagger.client.model.LMflightFlight;
 import io.swagger.client.model.Lmflight;
 import it.unibo.soseng.acmesky.Json.Flight;
 import it.unibo.soseng.acmesky.Json.Offers;
@@ -16,7 +16,7 @@ public class SaveOffersLMService {
 		Offers o = GetOffersService.getJSON();
 		
 		Flight flight = new Flight();
-		InlineResponse200Flights f = lmflight.getFlight();
+		LMflightFlight f = lmflight.getFlight();
 		flight.setDepartureFrom(f.getDepartureFrom());
 		flight.setDestination(f.getDestination());
 		flight.setOfferCode(f.getOfferCode());
