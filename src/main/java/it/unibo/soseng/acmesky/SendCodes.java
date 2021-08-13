@@ -17,8 +17,9 @@ public class SendCodes implements JavaDelegate{
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 		
-		
-		sendCodeService.service(((ArrayList<String>)execution.getVariable("prontograms")).get(0));				
+		if ((boolean)execution.getVariable("matchFound")) {
+			sendCodeService.service(((ArrayList<String>)execution.getVariable("prontograms")).get(0));
+		}
 		
 	}
 	

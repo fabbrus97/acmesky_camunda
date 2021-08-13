@@ -34,8 +34,12 @@ public class SaveInterests implements JavaDelegate{
 		
 		String departure_time_min = execution.getVariable("departure_time_min").toString();
 		String departure_time_max = execution.getVariable("departure_time_max").toString();
-		String arrival_time_min = execution.getVariable("arrival_time_min").toString();
-		String arrival_time_max = execution.getVariable("arrival_time_max").toString();
+		String arrival_time_min = "";
+		String arrival_time_max = ""; 
+		if (execution.getVariable("arrival_time_min") != null ) {
+			arrival_time_min = execution.getVariable("arrival_time_min").toString();
+			arrival_time_max = execution.getVariable("arrival_time_max").toString();
+		}
 		
 		String client_id = execution.getVariable("client_id").toString(); 
 		

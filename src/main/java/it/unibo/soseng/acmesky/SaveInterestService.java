@@ -77,9 +77,11 @@ public class SaveInterestService {
 		
 		try {
 			if (!file.exists()) {
-				file.createNewFile(); //TODO quando crea il file, 
-				//deve essere fatto così:
-				//{ "clients": {} } e non vuoto
+				file.createNewFile();
+				FileOutputStream fos = new FileOutputStream(file);
+				fos.write("{ \"clients\": {} }".getBytes());
+				fos.close();
+
 			}
 				
 			Gson j = new Gson();

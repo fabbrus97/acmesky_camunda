@@ -10,164 +10,30 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonWriter;
 
-import it.unibo.soseng.acmesky.Json.Clients;
-import it.unibo.soseng.acmesky.Json.Code;
-import it.unibo.soseng.acmesky.Json.Codes;
-import it.unibo.soseng.acmesky.Json.Flight;
-import it.unibo.soseng.acmesky.Json.Offers;
+import it.unibo.soseng.acmesky.Json.*;
 
 public class GenerateCodesService {
 	
 	private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-	private static DateTimeFormatter dtf_flights = DateTimeFormatter.ofPattern("dd/MM/yyyy, HH:mma, 'CET'");
-	private static HashMap userFlights = new HashMap<String, DepRetFlights>();
+	
 	
 	public GenerateCodesService() {
 		
 	}
-
-
-	public static void service() {
+	
+	public static void service(ArrayList<String[]> matches) {
+		//le coppie sono formate da <id_cliente, codice_volo>
 		
-		/*
-		 * Cerchiamo prima tutti i voli di andata compatibile (findInterests(true))
-		 * facciamo una seconda passata per i voli di ritorno (findInterests(false))
-		 * Se l'utente ha espresso interesse per un volo di ritorno, il volo esiste ed è compatibile,
-		 * viene aggiunto alla lista dei voli di interesse di ritorno; se il volo non esiste, o non è compatibile,
-		 * il volo di andata viene cancellato
-		*/
-		
-		findInterests(true);
-		findInterests(false);
-		
-		userFlights.forEach((user, flights) -> {			
-			
-			((ArrayList<Flight>)flights).forEach(flight -> {
-				save_new_code(user.toString(), flight.getOfferCode());
-			});
-			
-			
-		});
-		
+		for (String[] match: matches) {
+			save_new_code(match[0], match[1]);
+		}
 		
 	}
 	
-	private static void findInterests(boolean checkDeparture) {
-		Offers o = GetOffersService.getJSON();
-		Clients clients = SaveInterestService.deserialize_file();
-		
-				
-		clients.getClients().forEach( (name, client) -> {
-
-			client.getInterests().forEach(interest -> {
-				
-				ArrayList<Flight> flight2delete4returnNotFound = new ArrayList<Flight>(); //lista dei voli da cancellare perché non esiste il volo di ritorno
-				
-				o.getOffers().forEach((companyName, flights) -> {
-					
-					flights.forEach(flight -> {
-						
-						flight2delete4returnNotFound.add(flight);
-						 
-						boolean isPriceOk = flight.getPrice().getAmount() <= interest.getCost();
-						System.out.println("Cerco match...");
-						//controlliamo se il volo di andata è compatibile
-						if (checkDeparture) {
-							LocalDateTime departure_min = LocalDateTime.parse(interest.getDeparture_time_min(), dtf);
-							LocalDateTime departure_max = LocalDateTime.parse(interest.getDeparture_time_max(), dtf);
-							LocalDateTime takeoff = LocalDateTime.parse(flight.getTakeoff(), dtf_flights);
-														
-							boolean isDepartureOk = flight.getDepartureFrom().equals(interest.getDeparture_airport());
-							boolean isDestinationOk = flight.getDestination().equals(interest.getArrival_airport());
-							boolean isArrivalOk = within(departure_min, departure_max, takeoff);
-							
-							if (isArrivalOk && isPriceOk && isDepartureOk && isDestinationOk) {
-								if (userFlights.containsKey(name)) {
-									((DepRetFlights)userFlights.get(name)).departureFlights.add(flight);
-								} else {
-									DepRetFlights dpf = new DepRetFlights();
-									dpf.departureFlights.add(flight);
-									userFlights.put(name, dpf);
-								}
-							}
-
-						}
-						
-						
-						//controlliamo se il volo di ritorno è compatibile
-						if (!checkDeparture) {
-							if (interest.getReturnHome_time_min() != null) {
-							
-								
-								
-								if (flight.getDepartureFrom().equals(interest.getArrival_airport())) {
-									if (flight.getDestination().equals(interest.getDeparture_airport())) {
-										flight2delete4returnNotFound.remove(flight);
-										
-										ArrayList<Flight> flights2remove = new ArrayList<Flight>();
-										
-										((DepRetFlights)userFlights.get(name)).departureFlights.forEach( departure_flight -> {			
-											
-											if (departure_flight.getDepartureFrom().equals(flight.getDestination())) {
-												if (departure_flight.getDestination().equals(flight.getDepartureFrom())) {
-											
-													LocalDateTime returnHome_min = LocalDateTime.parse(interest.getReturnHome_time_min(), dtf);
-													LocalDateTime returnHome_max = LocalDateTime.parse(interest.getReturnHome_time_max(), dtf);
-													LocalDateTime takeoff = LocalDateTime.parse(flight.getTakeoff(), dtf_flights);
-													
-													boolean isReturnHomeOk = within(returnHome_min, returnHome_max, takeoff);
-													boolean isDepartureOk = flight.getDepartureFrom().equals(interest.getArrival_airport());
-													boolean isDestinationOk = flight.getDestination().equals(interest.getDeparture_airport());
-													
-													boolean isPriceReallyOk = departure_flight.getPrice().getAmount() + flight.getPrice().getAmount() <= interest.getCost();  
-													
-													if (isReturnHomeOk && isPriceReallyOk && isDepartureOk && isDestinationOk) {
-														((DepRetFlights)userFlights.get(name)).returnFlights.add(flight);
-													} else {
-														flights2remove.add(departure_flight);
-													}
-												}
-											}
-											 
-										});
-										
-										((DepRetFlights)userFlights.get(name)).departureFlights.removeAll(flights2remove);
-									}
-								}
-								
-							} else {
-								flight2delete4returnNotFound.remove(flight);
-							}
-						}
-					});
-				}); 
-				
-				if (!checkDeparture) {
-					if ((DepRetFlights)userFlights.get(name) != null) {
-						((DepRetFlights)userFlights.get(name)).departureFlights.removeAll(flight2delete4returnNotFound);
-					} else {
-						System.out.println("Perdonaci Signore perché non sappiamo quello che facciamo");
-					}
-					
-				}
-				
-			});
-			
-			
-
-		});
-		
-	}
-	
-	private static boolean within(LocalDateTime start, LocalDateTime end, LocalDateTime test) {
-		return (start.isBefore(test) && end.isAfter(test)); 
-	}
-
 	private static void save_new_code(String user, String fly_code) {
 
 		Codes c  = deserialize_file();
@@ -253,17 +119,7 @@ public class GenerateCodesService {
 			e.printStackTrace();
 		}
 	}
-	
-}
 
-class DepRetFlights {
 	
-	ArrayList<Flight> departureFlights;  
-	ArrayList<Flight> returnFlights;
-	
-	public DepRetFlights() {
-		departureFlights = new ArrayList<Flight>();
-		returnFlights = new ArrayList<Flight>();
-	}
 	
 }

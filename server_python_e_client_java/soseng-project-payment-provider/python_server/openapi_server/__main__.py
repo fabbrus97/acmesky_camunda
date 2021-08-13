@@ -12,7 +12,7 @@ def main():
                 arguments={'title': 'serviziBancariAPI'},
                 pythonic_params=True)
 
-    app.run(port=8080)
+    app.run(port=8083)
 
 
 if __name__ == '__main__':

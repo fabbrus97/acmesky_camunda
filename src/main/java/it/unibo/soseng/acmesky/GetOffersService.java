@@ -59,6 +59,8 @@ public class GetOffersService {
             ArrayList<Flight> voli = new ArrayList<Flight>();
             if(flights != null){
             	
+            	System.out.println("Sto per aggiungere un volo");
+            	
                 for (LMflightFlight flight : flights) {
                     Flight f = new Flight();
                     f.setDepartureFrom(flight.getDepartureFrom());
@@ -68,6 +70,7 @@ public class GetOffersService {
                     LMflightFlightPrice price = flight.getPrice();
                     f.setPrice(price.getCurrency(), price.getAmount().intValue());
                     voli.add(f);
+                    System.out.println("Ricevuto il volo " + f.getDepartureFrom() + " - " + f.getDestination());
                 }
                 
         		offers.getOffers().put(result.getCompanyname(), voli);
@@ -84,7 +87,7 @@ public class GetOffersService {
     }
 
     public static void saveJSON(Offers offers){
-
+    	System.out.println("Scrivo offers dei voli su file");
         Gson j = new Gson();
 
         try {

@@ -301,7 +301,7 @@
     <bpmn:endEvent id="Event_1gtvcfn">
       <bpmn:incoming>Flow_007oppv</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sendTask id="Activity_004fvua" name="Notifica salvataggio effettuato" camunda:type="external" camunda:topic="interestSaved">
+    <bpmn:sendTask id="Activity_004fvua" name="Notifica salvataggio effettuato" camunda:class="it.unibo.soseng.acmesky.SendNotification">
       <bpmn:incoming>Flow_0vau315</bpmn:incoming>
       <bpmn:outgoing>Flow_007oppv</bpmn:outgoing>
     </bpmn:sendTask>
@@ -595,6 +595,10 @@
       <bpmndi:BPMNShape id="Activity_0pvekba_di" bpmnElement="Activity_06ktr8z" isExpanded="true">
         <dc:Bounds x="320" y="2868" width="570" height="290" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0efbm56_di" bpmnElement="Flow_0efbm56">
+        <di:waypoint x="750" y="3052" />
+        <di:waypoint x="832" y="3052" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_060wj0a_di" bpmnElement="Flow_060wj0a">
         <di:waypoint x="549" y="3052" />
         <di:waypoint x="650" y="3052" />
@@ -602,10 +606,6 @@
       <bpmndi:BPMNEdge id="Flow_0sidudz_di" bpmnElement="Flow_0sidudz">
         <di:waypoint x="398" y="3052" />
         <di:waypoint x="449" y="3052" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0efbm56_di" bpmnElement="Flow_0efbm56">
-        <di:waypoint x="750" y="3052" />
-        <di:waypoint x="832" y="3052" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Activity_1bdu6wo_di" bpmnElement="Activity_1evu2mx">
         <dc:Bounds x="449" y="3012" width="100" height="80" />
@@ -865,6 +865,9 @@
       <bpmndi:BPMNShape id="Event_16vcd2d_di" bpmnElement="Event_16vcd2d">
         <dc:Bounds x="855" y="2543" width="36" height="36" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1e8nnt8_di" bpmnElement="Activity_0x2v3fo">
+        <dc:Bounds x="970" y="2350" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_1qxu82t_di" bpmnElement="Gateway_1qxu82t" isMarkerVisible="true">
         <dc:Bounds x="758" y="2455" width="50" height="50" />
       </bpmndi:BPMNShape>
@@ -903,9 +906,6 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_048mzkm_di" bpmnElement="TextAnnotation_048mzkm">
         <dc:Bounds x="2490" y="2325" width="140" height="129" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1e8nnt8_di" bpmnElement="Activity_0x2v3fo">
-        <dc:Bounds x="970" y="2350" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="DataStoreReference_1pgijno_di" bpmnElement="DataStoreReference_1pgijno">
         <dc:Bounds x="935" y="3135" width="50" height="50" />

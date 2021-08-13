@@ -24,10 +24,10 @@ public class InitListener implements ExecutionListener {
 	    */
 		
 		
-		setVariable(execution, "/public/simonef/server_list/airline.list", "airlines");
-		setVariable(execution, "/public/simonef/server_list/geo-distance-provider.list", "geoproviders");
-		setVariable(execution, "/public/simonef/server_list/payment-provider.list", "payments");
-		setVariable(execution, "/public/simonef/server_list/prontogram.list", "prontograms");
+		setVariable(execution, "server_list/airline.list", "airlines");
+		setVariable(execution, "server_list/geo-distance-provider.list", "geoproviders");
+		setVariable(execution, "server_list/payment-provider.list", "payments");
+		setVariable(execution, "server_list/prontogram.list", "prontograms");
 		
 	}
 	
