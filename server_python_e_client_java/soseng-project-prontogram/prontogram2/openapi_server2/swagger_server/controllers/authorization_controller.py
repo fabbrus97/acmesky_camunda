@@ -13,7 +13,8 @@ def check_basicAuth(username, password, required_scopes):
             if username == u["username"]:
                 if password == u["password"]:
                     print("login successful for", username)
-                    return {"user": username}
+                    data = {"user": username}
+                    return data
     #return {'test_key': 'test_value'}
     print("login failed")
     return None

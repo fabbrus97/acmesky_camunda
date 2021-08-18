@@ -302,7 +302,8 @@ def post_login(maps_v1_credentials=None):  # noqa: E501
 
 '''
 
-def post_login(data=None): #TODO non va una sega cioè non viene passato l'oggetto dall'auth_controller
-    if data:
-        print("Login effettuato con successo per utente", data.user)
+def post_login(token_info=None):
+    print("qualcuno sta facendo il login")
+    if token_info:
+        print("Login effettuato con successo per utente", token_info["user"])
     return
