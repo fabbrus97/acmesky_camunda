@@ -28,7 +28,12 @@ public class GenerateCodesService {
 	public static void service(ArrayList<String[]> matches) {
 		//le coppie sono formate da <id_cliente, codice_volo>
 		
+		if (matches.isEmpty()) {
+			System.out.println("Non ho trovato match, non genero codici");
+		}
+		
 		for (String[] match: matches) {
+			System.out.println("Genero un nuovo codice per " + match[0] + " " + match[1]);
 			save_new_code(match[0], match[1]);
 		}
 		
@@ -43,9 +48,13 @@ public class GenerateCodesService {
 			habemus_codex = true;
 			//genera 6 caratteri alfanumerici random
 			new_random_code = "";
+			for (int i = 0; i < 6; i++) {
+				int digit = ((int)(Math.random()*100)%36);
+				new_random_code += Character.forDigit(digit, Character.MAX_RADIX);
+			}
 			//controlla se esistono già
 			for (Code code: c.getCodes()) {
-				if (code.getCode() == new_random_code) {
+				if (code.getCode() == new_random_code ) {
 					LocalDateTime creation_date = LocalDateTime.parse(code.getCreation_date(), dtf);
 					LocalDateTime now = LocalDateTime.now();
 					Duration duration = Duration.between(creation_date.toLocalDate(), now.toLocalDate());

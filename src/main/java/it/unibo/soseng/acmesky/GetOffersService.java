@@ -67,6 +67,7 @@ public class GetOffersService {
                     f.setDestination(flight.getDestination());
                     f.setDepartureFrom(flight.getDepartureFrom());
                     f.setTakeoff(flight.getTakeoff());
+                    f.setOfferCode(flight.getOfferCode());
                     LMflightFlightPrice price = flight.getPrice();
                     f.setPrice(price.getCurrency(), price.getAmount().intValue());
                     voli.add(f);

@@ -16,13 +16,15 @@ public class SendCodes implements JavaDelegate{
 	
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		
+
 		if ((boolean)execution.getVariable("matchFound")) {
-			sendCodeService.service(((ArrayList<String>)execution.getVariable("prontograms")).get(0));
-		}
+				System.out.println("Chiamo servizio 'sendCodeService'");
+				sendCodeService.service(((ArrayList<String>)execution.getVariable("prontograms")).get(0));
+		} 
 		
 	}
 	
 	
 
 }
+	

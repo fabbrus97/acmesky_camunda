@@ -22,8 +22,7 @@ public class InitListener implements ExecutionListener {
 	     /public/simonef/server_list/payment-provider.list  
 	     /public/simonef/server_list/prontogram.list
 	    */
-		
-		
+				
 		setVariable(execution, "server_list/airline.list", "airlines");
 		setVariable(execution, "server_list/geo-distance-provider.list", "geoproviders");
 		setVariable(execution, "server_list/payment-provider.list", "payments");
@@ -32,6 +31,9 @@ public class InitListener implements ExecutionListener {
 	}
 	
 	void setVariable(DelegateExecution execution, String fileName, String varName) throws Exception {
+		
+		System.out.println("Leggo la lista dei server...");
+		
 		ArrayList<String> urlList = new ArrayList<String>();
 		BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(fileName)));
 		

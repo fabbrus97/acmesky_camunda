@@ -7,7 +7,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Map;
 
@@ -18,6 +22,8 @@ import it.unibo.soseng.acmesky.Json.*;
 
 
 public class SaveInterestService {
+	
+	private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 
 	public SaveInterestService(){
 		
@@ -46,6 +52,7 @@ public class SaveInterestService {
 			
 			interest.setReturnHome_time_min(arrival_time_min);
 			interest.setReturnHome_time_max(arrival_time_max);
+			
 			interest.setDeparture_time_min(departure_time_min);
 			interest.setDeparture_time_max(departure_time_max);
 			interest.setCost(cost);
@@ -102,6 +109,9 @@ public class SaveInterestService {
 		System.out.println("Scriviamo il json finale...");
 		Gson j = new Gson();
 		
+		//prima di scrivere il json, rimuoviamo i voli scaduti
+		clients = removeOldFlights(clients);
+		
 		try {
 			Writer writer;
 			writer = new FileWriter(new File(StaticValues.client_interests_file_path));
@@ -119,6 +129,20 @@ public class SaveInterestService {
 		 
 	}
 	
-	
+	private static Clients removeOldFlights(Clients clients) {
+		clients.getClients().forEach( (username, client) -> {
+			ArrayList<Interest> elements2delete = new ArrayList<Interest>();
+			client.interests.forEach(interest -> {
+				LocalDateTime ld = LocalDateTime.from(dtf.parse(interest.getDeparture_time_max()));
+				
+				if (ld.isAfter(LocalDateTime.now())){
+					System.out.println("Trovato volo scaduto per cliente " + username);
+					elements2delete.add(interest);
+				}
+			});
+			client.getInterests().removeAll(elements2delete);
+		});
+		return clients; 
+	}
 	
 }

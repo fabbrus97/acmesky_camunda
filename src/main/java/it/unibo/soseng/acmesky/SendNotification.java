@@ -12,7 +12,7 @@ public class SendNotification implements JavaDelegate{
 		execution.getProcessEngineServices()
 			.getRuntimeService()
 			.createMessageCorrelation("AckInterests")
-			.correlate();
+			.correlateAll();
 		
 	}
 

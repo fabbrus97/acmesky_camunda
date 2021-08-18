@@ -25,29 +25,30 @@ public class SendInterestService {
 		if (execution.getVariable("customInterest") != null) {
 			try {
 			
-			if (execution.getVariable("secondDate") != null) {
-				execution.getProcessEngine().getRuntimeService().createMessageCorrelation("GetInterests")
-					.setVariable("departure_airport", execution.getVariable("first_airport"))
-					.setVariable("arrival_airport", execution.getVariable("second_airport"))	
-					.setVariable("departure_time_min", sdt.parse(execution.getVariable("firstDate").toString()))
-					.setVariable("departure_time_max", sdt.parse(execution.getVariable("secondDateInterval").toString()))
-					.setVariable("arrival_time_min", sdt.parse(execution.getVariable("secondDate").toString()))
-					.setVariable("arrival_time_max", sdt.parse(execution.getVariable("secondDateInterval").toString()))
-					.setVariable("client_id", execution.getVariable("username")) 
-					.setVariable("cost", execution.getVariable("max_price"))
-					.correlate();
-			} else {
-				if (execution.getVariable("secondDate") != null) {
+				if (execution.getVariable("secondDate") != null && !execution.getVariable("secondDate").toString().isEmpty()) {
 					execution.getProcessEngine().getRuntimeService().createMessageCorrelation("GetInterests")
 						.setVariable("departure_airport", execution.getVariable("first_airport"))
 						.setVariable("arrival_airport", execution.getVariable("second_airport"))	
-						.setVariable("departure_time_min", sdt.parse(execution.getVariable("firstDate").toString()))
-						.setVariable("departure_time_max", sdt.parse(execution.getVariable("secondDateInterval").toString()))
+						.setVariable("departure_time_min", sdt.format(sdt.parse(execution.getVariable("firstDate").toString())))
+						.setVariable("departure_time_max", sdt.format(sdt.parse(execution.getVariable("secondDateInterval").toString())))
+						.setVariable("arrival_time_min", sdt.format(sdt.parse(execution.getVariable("secondDate").toString())))
+						.setVariable("arrival_time_max", sdt.format(sdt.parse(execution.getVariable("secondDateInterval").toString())))
 						.setVariable("client_id", execution.getVariable("username")) 
 						.setVariable("cost", execution.getVariable("max_price"))
 						.correlate();
-			}
-			execution.removeVariable("customInterest");
+				} else {
+						
+					execution.getProcessEngine().getRuntimeService().createMessageCorrelation("GetInterests")
+						.setVariable("departure_airport", execution.getVariable("first_airport"))
+						.setVariable("arrival_airport", execution.getVariable("second_airport"))	
+						.setVariable("departure_time_min", sdt.format(sdt.parse(execution.getVariable("firstDate").toString())))
+						.setVariable("departure_time_max", sdt.format(sdt.parse(execution.getVariable("firstDateInterval").toString())))
+						.setVariable("client_id", execution.getVariable("username")) 
+						.setVariable("cost", execution.getVariable("max_price"))
+						.correlate();
+				
+				}
+				execution.removeVariable("customInterest");
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -128,6 +129,7 @@ public class SendInterestService {
 				.setVariable("client_id", "mario") //TODO
 				.setVariable("cost", max_price)
 				.correlate();
+			
 		}
 		
 	}

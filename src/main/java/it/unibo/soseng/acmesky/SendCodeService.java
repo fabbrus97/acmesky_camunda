@@ -3,8 +3,6 @@ package it.unibo.soseng.acmesky;
 import prontogramprovider.*;
 import prontogramprovider.auth.*;
 
-import java.time.format.DateTimeFormatter;
-
 import io.swagger.client.model.*;
 import it.unibo.soseng.acmesky.Json.Codes;
 import prontogramprovider.prontogram_client.DefaultApi;
@@ -27,15 +25,15 @@ public class SendCodeService {
 		url = server;
 				
 		if (StaticValues.prontogram_key != "") { 
-			
+			System.out.println("Abbiamo una api key per prontogram, provo a inviare i codici");
 			//TODO cosa succede se abbiamo il token ma è scaduto?
 			sendCodes();
 			
 		} else {
+			System.out.println("Non abbiamo una api key per prontogram, provo a registrarmi");
 			//richiesta per registrarsi 
 			register();
 			//richiesta normale
-			System.out.println("Mando i codici");
 			sendCodes();
 		}
 	}
@@ -58,9 +56,10 @@ public class SendCodeService {
         basicAuth.setUsername(StaticValues.prontogram_username);
         basicAuth.setPassword(StaticValues.prontogram_password);
         RisorseApi apiInstance = new RisorseApi();
+
         try {
         	
-            InlineResponse2003 result = apiInstance.postLogin();
+            InlineResponse2003 result = apiInstance.postLogin();	
             System.out.println(result);
             return result;
         } catch (ApiException e) {
@@ -77,22 +76,25 @@ public class SendCodeService {
 		defaultClient.setBasePath(url);
         RisorseApi apiInstance = new RisorseApi();
 
+        if (token != null && token.getToken() != null) {
+        	defaultClient.setAccessToken(token.getToken());
         
-        defaultClient.setAccessToken(token.getToken());
-        
-        try {
-        	OfferMessage offer = new OfferMessage();
-        	offer.code(offer_code);
-        	CreatemessageData data = new CreatemessageData();
-        	data.offer(offer); data.receiver(receiver);
-        	Message message = new Message();
-        	message.data(data);
-        	apiInstance.setApiClient(defaultClient);
-            apiInstance.postCreatemessage(message);
-            //TODO come capire se il token è scaduto?
-        } catch (ApiException e) {
-            System.err.println("Exception when calling RisorseApi#postAllmessage");
-            e.printStackTrace();
+	        try {
+	        	OfferMessage offer = new OfferMessage();
+	        	offer.code(offer_code);
+	        	CreatemessageData data = new CreatemessageData();
+	        	data.offer(offer); data.receiver(receiver);
+	        	Message message = new Message();
+	        	message.data(data);
+	        	apiInstance.setApiClient(defaultClient);
+	            apiInstance.postCreatemessage(message);
+	            //TODO come capire se il token è scaduto?
+	        } catch (ApiException e) {
+	            System.err.println("Exception when calling RisorseApi#postAllmessage");
+	            e.printStackTrace();
+	        }
+        } else {
+        	System.out.println("Errore di autenticazione col server di prontogram, messaggio non inviato");
         }
 	}
 	
@@ -108,8 +110,10 @@ public class SendCodeService {
 		
 		try {
 			defaultInstance.postRegister(body);
+			System.out.println("Richiesta di registrazione per prontogram inviata");
 		} catch (ApiException e) {
 			// TODO Auto-generated catch block
+			System.out.println("Eccezione registrandosi per prontogram");
 			e.printStackTrace();
 		}
 		

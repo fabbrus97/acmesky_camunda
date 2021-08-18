@@ -12,7 +12,6 @@ public class SaveInterests implements JavaDelegate{
 	
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		// TODO Auto-generated method stub
 		
 		/*Il cliente manda un messaggio con:
 		 * 

@@ -51,10 +51,19 @@ public class FindMatchService {
 			
 			
 			(((DepRetFlights)flights).departureFlights).forEach(flight -> {
+				
+				
+				System.out.println("Sto creando un match per l'utente " + user);
+				System.out.println("Il volo è " + flight.getDepartureFrom() + " - " + flight.getDestination() + " (" + flight.getOfferCode() + ")");
+				
 				matches.add(new String[] {(String)user, flight.getOfferCode()});
 			});
 			
 			(((DepRetFlights)flights).returnFlights).forEach(flight -> {
+				
+				System.out.println("Sto creando un match per l'utente " + user);
+				System.out.println("Il volo è " + flight.getDepartureFrom() + " - " + flight.getDestination() + " (" + flight.getOfferCode() + ")");
+				
 				matches.add(new String[] {(String)user, flight.getOfferCode()});
 			});
 			
@@ -85,6 +94,7 @@ public class FindMatchService {
 						System.out.println("Cerco match...");
 						//controlliamo se il volo di andata è compatibile
 						if (checkDeparture) {
+							
 							LocalDateTime departure_min = LocalDateTime.parse(interest.getDeparture_time_min(), dtf);
 							LocalDateTime departure_max = LocalDateTime.parse(interest.getDeparture_time_max(), dtf);
 							LocalDateTime takeoff = LocalDateTime.parse(flight.getTakeoff(), dtf_flights);
@@ -118,32 +128,35 @@ public class FindMatchService {
 										
 										ArrayList<Flight> flights2remove = new ArrayList<Flight>();
 										
-										((DepRetFlights)userFlights.get(name)).departureFlights.forEach( departure_flight -> {			
-											
-											if (departure_flight.getDepartureFrom().equals(flight.getDestination())) {
-												if (departure_flight.getDestination().equals(flight.getDepartureFrom())) {
-											
-													LocalDateTime returnHome_min = LocalDateTime.parse(interest.getReturnHome_time_min(), dtf);
-													LocalDateTime returnHome_max = LocalDateTime.parse(interest.getReturnHome_time_max(), dtf);
-													LocalDateTime takeoff = LocalDateTime.parse(flight.getTakeoff(), dtf_flights);
-													
-													boolean isReturnHomeOk = within(returnHome_min, returnHome_max, takeoff);
-													boolean isDepartureOk = flight.getDepartureFrom().equals(interest.getArrival_airport());
-													boolean isDestinationOk = flight.getDestination().equals(interest.getDeparture_airport());
-													
-													boolean isPriceReallyOk = departure_flight.getPrice().getAmount() + flight.getPrice().getAmount() <= interest.getCost();  
-													
-													if (isReturnHomeOk && isPriceReallyOk && isDepartureOk && isDestinationOk) {
-														((DepRetFlights)userFlights.get(name)).returnFlights.add(flight);
-													} else {
-														flights2remove.add(departure_flight);
+										if (((DepRetFlights)userFlights.get(name)) != null ) {
+											((DepRetFlights)userFlights.get(name)).departureFlights.forEach( departure_flight -> {			
+												
+												if (departure_flight.getDepartureFrom().equals(flight.getDestination())) {
+													if (departure_flight.getDestination().equals(flight.getDepartureFrom())) {
+												
+														LocalDateTime returnHome_min = LocalDateTime.parse(interest.getReturnHome_time_min(), dtf);
+														LocalDateTime returnHome_max = LocalDateTime.parse(interest.getReturnHome_time_max(), dtf);
+														LocalDateTime takeoff = LocalDateTime.parse(flight.getTakeoff(), dtf_flights);
+														
+														boolean isReturnHomeOk = within(returnHome_min, returnHome_max, takeoff);
+														boolean isDepartureOk = flight.getDepartureFrom().equals(interest.getArrival_airport());
+														boolean isDestinationOk = flight.getDestination().equals(interest.getDeparture_airport());
+														
+														boolean isPriceReallyOk = departure_flight.getPrice().getAmount() + flight.getPrice().getAmount() <= interest.getCost();  
+														
+														if (isReturnHomeOk && isPriceReallyOk && isDepartureOk && isDestinationOk) {
+															((DepRetFlights)userFlights.get(name)).returnFlights.add(flight);
+														} else {
+															flights2remove.add(departure_flight);
+														}
 													}
 												}
-											}
-											 
-										});
+												 
+											});
+											((DepRetFlights)userFlights.get(name)).departureFlights.removeAll(flights2remove);
+										}
 										
-										((DepRetFlights)userFlights.get(name)).departureFlights.removeAll(flights2remove);
+										
 									}
 								}
 								
