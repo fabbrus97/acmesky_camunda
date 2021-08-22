@@ -47,6 +47,7 @@
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/SendCodeService.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/LoggerDelegate.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/ProcessConstants.java
+/home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/cliente/Cliente.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/ForwardLink.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/SendCodes.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/SaveInterests.java

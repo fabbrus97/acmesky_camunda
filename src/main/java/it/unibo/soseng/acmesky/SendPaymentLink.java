@@ -16,7 +16,7 @@ public class SendPaymentLink implements JavaDelegate {
 	public void execute(DelegateExecution execution) throws Exception {
 		// TODO Auto-generated method stub
 		sendPaymentLinkService.service(execution.getProcessEngine().getRuntimeService(), 
-				((ArrayList<String>)execution.getVariable("payments")).get(0));
+				execution.getVariable("paymentLink").toString(), execution.getVariable("code2check").toString());
 	}
 
 }

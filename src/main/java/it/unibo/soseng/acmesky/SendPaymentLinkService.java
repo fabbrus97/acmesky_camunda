@@ -8,11 +8,14 @@ public class SendPaymentLinkService {
 		
 	}
 	
-	public static void service(RuntimeService runtimeService, String link) {
+	public static void service(RuntimeService runtimeService, String link, String code) {
+		
+		StaticValues.codes2delete.put(link, code);
 		
 		runtimeService.createMessageCorrelation("PaymentLink")
 		.setVariable("paymentLink", link)
-		.correlate();
+		.setVariable("codeCorrect", true)
+		.correlateAll();
 		
 		
 	}

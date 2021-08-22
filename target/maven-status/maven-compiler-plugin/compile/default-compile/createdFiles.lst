@@ -46,6 +46,7 @@ it/unibo/soseng/acmesky/SaveInterests.class
 it/unibo/soseng/acmesky/ProcessConstants.class
 it/unibo/soseng/acmesky/GenerateCodes.class
 it/unibo/soseng/cliente/StaticValues.class
+it/unibo/soseng/cliente/Cliente.class
 it/unibo/soseng/acmesky/FindMatch.class
 it/unibo/soseng/acmesky/GetOffers.class
 it/unibo/soseng/acmesky/SendPaymentLinkService.class

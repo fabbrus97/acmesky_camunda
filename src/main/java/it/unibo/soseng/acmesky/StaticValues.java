@@ -1,5 +1,8 @@
 package it.unibo.soseng.acmesky;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class StaticValues {
 	
 	public static String airline_username = "";
@@ -16,5 +19,8 @@ public class StaticValues {
 	public static String client_interests_file_path = "client_interests.json";
 	public static String codes_file_path = "codes.json";
 	public static String token_compagnia_trasporti = "";
+	/** Server list: **/
+	public static String paymentUrl = "";
+	public static HashMap<String, String> codes2delete = new HashMap<String, String>(); //payment_link, code2delete
 	
 }

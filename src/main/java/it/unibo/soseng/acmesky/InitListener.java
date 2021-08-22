@@ -39,12 +39,19 @@ public class InitListener implements ExecutionListener {
 		
 		String url = bufferedReader.readLine();
 		while(url != null) {
+			
+			if (varName.equals("payments")) {
+				System.out.println("HO IMPOSTATO UN URL PER PAYMENTS: " + url);
+				StaticValues.paymentUrl = url;
+			}
+			
 			urlList.add(url);
 			System.out.println("Eseguo init listener per " + varName + ": " + url);
 			url = bufferedReader.readLine();
 			
 		}
         
+		
         execution.setVariable(varName, urlList);
 	}
 		
