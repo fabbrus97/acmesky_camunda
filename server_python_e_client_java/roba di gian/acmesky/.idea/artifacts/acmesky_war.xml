@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="acmesky:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>acmesky</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="acmesky.war">
+      <element id="artifact" artifact-name="acmesky:war exploded" />
+    </root>
+  </artifact>
+</component>

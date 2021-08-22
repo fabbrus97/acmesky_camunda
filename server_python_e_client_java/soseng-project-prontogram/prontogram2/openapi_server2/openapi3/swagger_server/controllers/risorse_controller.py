@@ -265,8 +265,9 @@ def post_createmessage(token_info=None, body=None):  # noqa: E501
             }
         }
     db_message.append(msg)     
-    simpleCamundaRESTPost.sendMessage("Message_0fnc6rd", {"msgBody": msg, "type": "Body1"}) #TODO controlla che il tipo sia Body1
-    #TODO cambia Message_0fnc6rd con CodeMessage
+    # simpleCamundaRESTPost.sendMessage("CodeMessage", {"msgBody": {"value": msg, "type": "Body1"}}) #TODO controlla che il tipo sia Body1
+    simpleCamundaRESTPost.sendMessage("CodeMessage", {"code": {"value": body["data"]["offer"]["code"], "type": "String"}}) #TODO controlla che il tipo sia Body1
+
 
 '''
 def post_login(maps_v1_credentials=None):  # noqa: E501

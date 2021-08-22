@@ -1,0 +1,39 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="acmesky:war exploded">
+    <output-path>$PROJECT_DIR$/target/acmesky</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>acmesky</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="acmesky" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: io.swagger:airline.airline-client:1.0.0" />
+          <element id="library" level="project" name="Maven: io.swagger.core.v3:swagger-annotations:2.0.0" />
+          <element id="library" level="project" name="Maven: com.squareup.okhttp:okhttp:2.7.5" />
+          <element id="library" level="project" name="Maven: com.squareup.okio:okio:1.6.0" />
+          <element id="library" level="project" name="Maven: com.squareup.okhttp:logging-interceptor:2.7.5" />
+          <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.1" />
+          <element id="library" level="project" name="Maven: io.gsonfire:gson-fire:1.8.3" />
+          <element id="library" level="project" name="Maven: org.threeten:threetenbp:1.3.5" />
+          <element id="library" level="project" name="Maven: io.swagger:geoprovider.geo-client:1.0.0" />
+          <element id="library" level="project" name="Maven: io.swagger:paymentprovider.payment-client:1.0.0" />
+          <element id="library" level="project" name="Maven: io.swagger:prontogramprovider.prontogram-client:1.0.0" />
+          <element id="library" level="project" name="Maven: org.camunda.bpm.javaee:camunda-ejb-client:7.15.0" />
+          <element id="library" level="project" name="Maven: org.camunda.bpm:camunda-engine-cdi:7.15.0" />
+          <element id="library" level="project" name="Maven: org.camunda.bpm.assert:camunda-bpm-assert:10.0.0" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/acmesky/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="acmesky/web/Web" />
+    </root>
+  </artifact>
+</component>

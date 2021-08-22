@@ -31,22 +31,24 @@ def get_link(inline_object1=None):  # noqa: E501
 
     :rtype: InlineResponse200
     """
-
+    print("sono in get_link")
     if connexion.request.is_json:
         inline_object1 = InlineObject1.from_dict(connexion.request.get_json())  # noqa: E501
         if inline_object1.amount.value <= 0:
+            print("Errore con la quantità di danari")
             return "Error in amount value", 400
         if inline_object1.amount.currency not in ["eur", "usd"]:
+            print("Errore con la currency")
             return "Currency non found", 400
     chars = '1234567890'
     link = ""
+    print("tutto ok, genero il link")
     for _ in range(0, 10):
         link += chars[random.randint(0, len(chars)-1)] 
+    print("generato link ", link)
     payment = {"link": link, "data": inline_object1.to_dict()}
     active_payment_links.append(payment)
     ret = InlineResponse200(link=link) #{"link": link}
-
-    
 
     return ret
 
@@ -100,7 +102,9 @@ def post_paymentdata(inline_object=None):  # noqa: E501
     if connexion.request.is_json:
         inline_object = InlineObject.from_dict(connexion.request.get_json())  # noqa: E501
     for p in active_payment_links:
-        if inline_object.transaction.id == p.link:
+        print("controllo il link: ", inline_object.transaction.id)
+        if inline_object.transaction.id == p["link"]:
+            print("trovata corrispondenza!!!")
             if len(inline_object.card_number) > 5:
                 #check expiration
                 today = datetime.date.today()
@@ -108,12 +112,14 @@ def post_paymentdata(inline_object=None):  # noqa: E501
                 month = today.month
                 if year <= inline_object.expiration.year and month < inline_object.expiration.month:
                     if inline_object.circuit in ["visa", "mastercard"]:
-                        simpleCamundaRESTPost.sendMessage("ConfirmPaymentSuccessfull", {"paymCorrect": {"value": "true", "type":"Boolean"}}) #conferma pagamento per cliente - successo
-                        pay_people(p, inline_object)
+                        simpleCamundaRESTPost.sendMessage("ClientPaymentConfirmed", {"paymCorrect": {"value": True, "type": "Boolean"}}) #conferma pagamento per cliente - successo
+                        simpleCamundaRESTPost.sendMessage("ConfirmPaymentSuccessfull", {"paymLink": {"value": inline_object.transaction.id, "type": "String"}}) #acmesky
+                        #pay_people(p, inline_object) TODO
                         active_payment_links.remove(p)
                         return #successo
-    simpleCamundaRESTPost.sendMessage("PaymentFailure")
-    simpleCamundaRESTPost.sendMessage("ConfirmPaymentSuccessfull", {"paymFailed": {"value": "false", "type":"Boolean"}}) #conferma pagamento per cliente - fallimento
+    simpleCamundaRESTPost.sendMessage("PaymentFailure") #acmesky
+    simpleCamundaRESTPost.sendMessage("ClientPaymentConfirmed", {"paymFailed": {"value": True, "type": "Boolean"}}) #conferma pagamento per cliente - fallimento
+    
     return 'Error in payment data', 400
 
 
