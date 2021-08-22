@@ -1,8 +1,8 @@
-# swagger-java-client
+# geoprovider.geo-client
 
 fornitoreDistanzeAPI
 - API version: 1.0
-  - Build date: 2021-04-30T10:18:43.076+02:00[Europe/Rome]
+  - Build date: 2021-07-22T12:18:12.930+02:00[Europe/Rome]
 
 È l'API RESTful offerta dal *Fornitore delle distanze geografiche* che, come suggerisce il nome, vi racchiude la capability di calcolare la distanza tra due posizioni geografiche.
 
@@ -39,7 +39,7 @@ Add this dependency to your project's POM:
 ```xml
 <dependency>
   <groupId>io.swagger</groupId>
-  <artifactId>swagger-java-client</artifactId>
+  <artifactId>geoprovider.geo-client</artifactId>
   <version>1.0.0</version>
   <scope>compile</scope>
 </dependency>
@@ -50,7 +50,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "io.swagger:swagger-java-client:1.0.0"
+compile "io.swagger:geoprovider.geo-client:1.0.0"
 ```
 
 ### Others
@@ -63,7 +63,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/swagger-java-client-1.0.0.jar`
+* `target/geoprovider.geo-client-1.0.0.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -89,9 +89,9 @@ public class RisorseApiExample {
         authorization.setPassword("YOUR PASSWORD");
 
         RisorseApi apiInstance = new RisorseApi();
-        InlineObject body = new InlineObject(); // InlineObject | 
+        GeoBody body = new GeoBody(); // GeoBody | Specifica un punto geografico di partenza e un array di uno o più punti di arrivo.
         try {
-            InlineResponse200 result = apiInstance.postDistance(body);
+            DistanceResult result = apiInstance.postDistance(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling RisorseApi#postDistance");
@@ -114,7 +114,7 @@ public class RisorseApiExample {
         RisorseApi apiInstance = new RisorseApi();
         Credentials body = new Credentials(); // Credentials | 
         try {
-            InlineResponse2001 result = apiInstance.postRegistration(body);
+            RegisterMaps result = apiInstance.postRegistration(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling RisorseApi#postRegistration");
@@ -136,10 +136,10 @@ Class | Method | HTTP request | Description
 ## Documentation for Models
 
  - [Credentials](docs/Credentials.md)
- - [InlineObject](docs/InlineObject.md)
- - [InlineResponse200](docs/InlineResponse200.md)
- - [InlineResponse2001](docs/InlineResponse2001.md)
- - [InlineResponse200Distance](docs/InlineResponse200Distance.md)
+ - [DistanceResult](docs/DistanceResult.md)
+ - [DistanceResultDistance](docs/DistanceResultDistance.md)
+ - [GeoBody](docs/GeoBody.md)
+ - [RegisterMaps](docs/RegisterMaps.md)
 
 ## Documentation for Authorization
 

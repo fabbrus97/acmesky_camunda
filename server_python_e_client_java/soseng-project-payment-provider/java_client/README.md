@@ -2,7 +2,7 @@
 
 serviziBancariAPI
 - API version: 1.0
-  - Build date: 2021-05-20T16:01:27.643+02:00[Europe/Rome]
+  - Build date: 2021-08-22T16:27:55.181+02:00[Europe/Rome]
 
 È l'API Restful offerta dal *fornitore dei servizi bancari* che rende accessibile la capability di generazione di un link di pagamento con certi parametri e di ricevere dati relativi al pagamento di un cliente.
 
@@ -71,10 +71,10 @@ Then manually install the following JARs:
 Please follow the [installation](#installation) instruction and execute the following Java code:
 
 ```java
-import io.swagger.paymentprovider.*;
-import io.swagger.paymentprovider.auth.*;
+import paymentprovider.*;
+import paymentprovider.auth.*;
 import io.swagger.client.model.*;
-import io.swagger.paymentprovider.payment_client.RisorseApi;
+import paymentprovider.payment_client.RisorseApi;
 
 import java.io.File;
 import java.util.*;
@@ -91,9 +91,9 @@ public class RisorseApiExample {
         //apikey.setApiKeyPrefix("Token");
 
         RisorseApi apiInstance = new RisorseApi();
-        Body1 body = new Body1(); // Body1 | 
+        LinkBody body = new LinkBody(); // LinkBody | 
         try {
-            InlineResponse200 result = apiInstance.getLink(body);
+            ActiveLink result = apiInstance.getLink(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling RisorseApi#getLink");
@@ -101,10 +101,10 @@ public class RisorseApiExample {
         }
     }
 }
-import io.swagger.paymentprovider.*;
-import io.swagger.paymentprovider.auth.*;
+import paymentprovider.*;
+import paymentprovider.auth.*;
 import io.swagger.client.model.*;
-import io.swagger.paymentprovider.payment_client.RisorseApi;
+import paymentprovider.payment_client.RisorseApi;
 
 import java.io.File;
 import java.util.*;
@@ -121,7 +121,7 @@ public class RisorseApiExample {
         //apikey.setApiKeyPrefix("Token");
 
         RisorseApi apiInstance = new RisorseApi();
-        Body body = new Body(); // Body | 
+        PaymentDataBody body = new PaymentDataBody(); // PaymentDataBody | 
         try {
             apiInstance.postPaymentdata(body);
         } catch (ApiException e) {
@@ -130,10 +130,10 @@ public class RisorseApiExample {
         }
     }
 }
-import io.swagger.paymentprovider.*;
-import io.swagger.paymentprovider.auth.*;
+import paymentprovider.*;
+import paymentprovider.auth.*;
 import io.swagger.client.model.*;
-import io.swagger.paymentprovider.payment_client.RisorseApi;
+import paymentprovider.payment_client.RisorseApi;
 
 import java.io.File;
 import java.util.*;
@@ -145,7 +145,7 @@ public class RisorseApiExample {
         RisorseApi apiInstance = new RisorseApi();
         MapsV1Credentials body = new MapsV1Credentials(); // MapsV1Credentials | 
         try {
-            InlineResponse2001 result = apiInstance.postRegistration(body);
+            PaymentRegistration result = apiInstance.postRegistration(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling RisorseApi#postRegistration");
@@ -167,12 +167,12 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
- - [Body](docs/Body.md)
- - [Body1](docs/Body1.md)
- - [InlineResponse200](docs/InlineResponse200.md)
- - [InlineResponse2001](docs/InlineResponse2001.md)
+ - [ActiveLink](docs/ActiveLink.md)
  - [LinkAmount](docs/LinkAmount.md)
+ - [LinkBody](docs/LinkBody.md)
  - [MapsV1Credentials](docs/MapsV1Credentials.md)
+ - [PaymentDataBody](docs/PaymentDataBody.md)
+ - [PaymentRegistration](docs/PaymentRegistration.md)
  - [PaymentdataExpiration](docs/PaymentdataExpiration.md)
  - [PaymentdataTransaction](docs/PaymentdataTransaction.md)
 

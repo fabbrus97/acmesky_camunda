@@ -1,8 +1,8 @@
-# swagger-java-client
+# prontogramprovider.prontogram-client
 
 prontogramAPI
-- API version: 1.0
-  - Build date: 2021-04-30T10:20:00.422+02:00[Europe/Rome]
+- API version: 1.0.0
+  - Build date: 2021-07-19T19:09:52.075194+02:00[Europe/Rome]
 
 È l'API Restful offerta dall'applicazione di messaggistica *Prontogram* che vi racchiude la capability di inoltrare i messaggi circa le offerte inviate da ACMESky ai clienti interessati.
 
@@ -39,7 +39,7 @@ Add this dependency to your project's POM:
 ```xml
 <dependency>
   <groupId>io.swagger</groupId>
-  <artifactId>swagger-java-client</artifactId>
+  <artifactId>prontogramprovider.prontogram-client</artifactId>
   <version>1.0.0</version>
   <scope>compile</scope>
 </dependency>
@@ -50,7 +50,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "io.swagger:swagger-java-client:1.0.0"
+compile "io.swagger:prontogramprovider.prontogram-client:1.0.0"
 ```
 
 ### Others
@@ -63,7 +63,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/swagger-java-client-1.0.0.jar`
+* `target/prontogramprovider.prontogram-client-1.0.0.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -71,149 +71,24 @@ Then manually install the following JARs:
 Please follow the [installation](#installation) instruction and execute the following Java code:
 
 ```java
-import io.swagger.client.*;
-import io.swagger.client.auth.*;
+import prontogramprovider.*;
+import prontogramprovider.auth.*;
 import io.swagger.client.model.*;
-import io.swagger.client.api.RisorseApi;
+import prontogramprovider.prontogram_client.DefaultApi;
 
 import java.io.File;
 import java.util.*;
 
-public class RisorseApiExample {
-
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-
-
-        RisorseApi apiInstance = new RisorseApi();
-        String username = "username_example"; // String | Username dell'utente
-        try {
-            apiInstance.getMessageUsername(username);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling RisorseApi#getMessageUsername");
-            e.printStackTrace();
-        }
-    }
-}
-import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.RisorseApi;
-
-import java.io.File;
-import java.util.*;
-
-public class RisorseApiExample {
-
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-
-
-        RisorseApi apiInstance = new RisorseApi();
-        String username = "username_example"; // String | Username dell'utente
-        String messageid = "messageid_example"; // String | Id del messaggio
-        try {
-            InlineResponse2001 result = apiInstance.getMessageUsernameFromMessageid(username, messageid);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling RisorseApi#getMessageUsernameFromMessageid");
-            e.printStackTrace();
-        }
-    }
-}
-import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.RisorseApi;
-
-import java.io.File;
-import java.util.*;
-
-public class RisorseApiExample {
-
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-
-
-        RisorseApi apiInstance = new RisorseApi();
-        String username = "username_example"; // String | Username dell'utente
-        String messageid = "messageid_example"; // String | Id del messaggio
-        try {
-            InlineResponse2002 result = apiInstance.getMessageUsernameMessageid(username, messageid);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling RisorseApi#getMessageUsernameMessageid");
-            e.printStackTrace();
-        }
-    }
-}
-import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.RisorseApi;
-
-import java.io.File;
-import java.util.*;
-
-public class RisorseApiExample {
-
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-
-
-        RisorseApi apiInstance = new RisorseApi();
-        try {
-            InlineResponse200 result = apiInstance.postAllmessage();
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling RisorseApi#postAllmessage");
-            e.printStackTrace();
-        }
-    }
-}
-import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.RisorseApi;
-
-import java.io.File;
-import java.util.*;
-
-public class RisorseApiExample {
-
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-
-
-        RisorseApi apiInstance = new RisorseApi();
-        Body body = new Body(); // Body | Il body della richiesta HTTP è di tipo `application/vnd.api+json` in quanto l'API prontogramAPI è al livello 3 di modello di maturità di Richardson.
-        try {
-            apiInstance.postCreatemessage(body);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling RisorseApi#postCreatemessage");
-            e.printStackTrace();
-        }
-    }
-}
-import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.RisorseApi;
-
-import java.io.File;
-import java.util.*;
-
-public class RisorseApiExample {
+public class DefaultApiExample {
 
     public static void main(String[] args) {
         
-        RisorseApi apiInstance = new RisorseApi();
-        MapsV1Credentials body = new MapsV1Credentials(); // MapsV1Credentials | 
+        DefaultApi apiInstance = new DefaultApi();
+        RegisterBody body = new RegisterBody(); // RegisterBody | 
         try {
-            InlineResponse2003 result = apiInstance.postLogin(body);
-            System.out.println(result);
+            apiInstance.postRegister(body);
         } catch (ApiException e) {
-            System.err.println("Exception when calling RisorseApi#postLogin");
+            System.err.println("Exception when calling DefaultApi#postRegister");
             e.printStackTrace();
         }
     }
@@ -226,6 +101,7 @@ All URIs are relative to *https://soseng-unibo.stoplight.io/mocks/soseng-unibo/s
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*DefaultApi* | [**postRegister**](docs/DefaultApi.md#postRegister) | **POST** /register | Registra un nuovo utente
 *RisorseApi* | [**getMessageUsername**](docs/RisorseApi.md#getMessageUsername) | **GET** /message/{username} | Restituisci i primi 10 messaggi del cliente
 *RisorseApi* | [**getMessageUsernameFromMessageid**](docs/RisorseApi.md#getMessageUsernameFromMessageid) | **GET** /message/{username}/from/{messageid} | Restituisci 10 messaggi del cliente
 *RisorseApi* | [**getMessageUsernameMessageid**](docs/RisorseApi.md#getMessageUsernameMessageid) | **GET** /message/{username}/{messageid} | Restituisci il messaggio del cliente
@@ -235,7 +111,6 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
- - [Body](docs/Body.md)
  - [CreatemessageData](docs/CreatemessageData.md)
  - [InlineResponse200](docs/InlineResponse200.md)
  - [InlineResponse2001](docs/InlineResponse2001.md)
@@ -252,11 +127,17 @@ Class | Method | HTTP request | Description
  - [InlineResponse200Links1](docs/InlineResponse200Links1.md)
  - [InlineResponse200Message](docs/InlineResponse200Message.md)
  - [MapsV1Credentials](docs/MapsV1Credentials.md)
+ - [Message](docs/Message.md)
  - [OfferMessage](docs/OfferMessage.md)
+ - [RegisterBody](docs/RegisterBody.md)
 
 ## Documentation for Authorization
 
 Authentication schemes defined for the API:
+### basicAuth
+
+- **Type**: HTTP basic authentication
+
 ### tokenSessione
 
 

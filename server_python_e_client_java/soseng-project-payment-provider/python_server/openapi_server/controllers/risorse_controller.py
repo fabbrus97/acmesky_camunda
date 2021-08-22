@@ -105,7 +105,7 @@ def post_paymentdata(inline_object=None):  # noqa: E501
         print("controllo il link: ", inline_object.transaction.id)
         if inline_object.transaction.id == p["link"]:
             print("trovata corrispondenza!!!")
-            if len(inline_object.card_number) > 5:
+            if inline_object.card_number > 100000: #la carta ha almeno 6 cifre
                 #check expiration
                 today = datetime.date.today()
                 year = today.year
@@ -118,7 +118,7 @@ def post_paymentdata(inline_object=None):  # noqa: E501
                         active_payment_links.remove(p)
                         return #successo
     simpleCamundaRESTPost.sendMessage("PaymentFailure") #acmesky
-    simpleCamundaRESTPost.sendMessage("ClientPaymentConfirmed", {"paymFailed": {"value": True, "type": "Boolean"}}) #conferma pagamento per cliente - fallimento
+    simpleCamundaRESTPost.sendMessage("ClientPaymentConfirmed", {"paymCorrect": {"value": False, "type": "Boolean"}}) #conferma pagamento per cliente - fallimento
     
     return 'Error in payment data', 400
 

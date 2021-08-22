@@ -27,9 +27,9 @@ import java.io.IOException;
 
 
 import io.swagger.client.model.Credentials;
-import io.swagger.client.model.InlineObject;
-import io.swagger.client.model.InlineResponse200;
-import io.swagger.client.model.InlineResponse2001;
+import io.swagger.client.model.DistanceResult;
+import io.swagger.client.model.GeoBody;
+import io.swagger.client.model.RegisterMaps;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -58,13 +58,13 @@ public class RisorseApi {
 
     /**
      * Build call for postDistance
-     * @param body  (optional)
+     * @param body Specifica un punto geografico di partenza e un array di uno o più punti di arrivo. (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call postDistanceCall(InlineObject body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call postDistanceCall(GeoBody body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
         
         // create path and map variables
@@ -106,7 +106,7 @@ public class RisorseApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call postDistanceValidateBeforeCall(InlineObject body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call postDistanceValidateBeforeCall(GeoBody body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = postDistanceCall(body, progressListener, progressRequestListener);
         return call;
@@ -120,37 +120,37 @@ public class RisorseApi {
     /**
      * Calcola distanza geografica
      * È la risorsa che restituisce la distanza geografica tra due punti geografici oppure le distanze geografiche tra un punto e ciascun punto di una lista.
-     * @param body  (optional)
-     * @return InlineResponse200
+     * @param body Specifica un punto geografico di partenza e un array di uno o più punti di arrivo. (optional)
+     * @return DistanceResult
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse200 postDistance(InlineObject body) throws ApiException {
-        ApiResponse<InlineResponse200> resp = postDistanceWithHttpInfo(body);
+    public DistanceResult postDistance(GeoBody body) throws ApiException {
+        ApiResponse<DistanceResult> resp = postDistanceWithHttpInfo(body);
         return resp.getData();
     }
 
     /**
      * Calcola distanza geografica
      * È la risorsa che restituisce la distanza geografica tra due punti geografici oppure le distanze geografiche tra un punto e ciascun punto di una lista.
-     * @param body  (optional)
-     * @return ApiResponse&lt;InlineResponse200&gt;
+     * @param body Specifica un punto geografico di partenza e un array di uno o più punti di arrivo. (optional)
+     * @return ApiResponse&lt;DistanceResult&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse200> postDistanceWithHttpInfo(InlineObject body) throws ApiException {
+    public ApiResponse<DistanceResult> postDistanceWithHttpInfo(GeoBody body) throws ApiException {
         com.squareup.okhttp.Call call = postDistanceValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse200>(){}.getType();
+        Type localVarReturnType = new TypeToken<DistanceResult>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
      * Calcola distanza geografica (asynchronously)
      * È la risorsa che restituisce la distanza geografica tra due punti geografici oppure le distanze geografiche tra un punto e ciascun punto di una lista.
-     * @param body  (optional)
+     * @param body Specifica un punto geografico di partenza e un array di uno o più punti di arrivo. (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call postDistanceAsync(InlineObject body, final ApiCallback<InlineResponse200> callback) throws ApiException {
+    public com.squareup.okhttp.Call postDistanceAsync(GeoBody body, final ApiCallback<DistanceResult> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -172,7 +172,7 @@ public class RisorseApi {
         }
 
         com.squareup.okhttp.Call call = postDistanceValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse200>(){}.getType();
+        Type localVarReturnType = new TypeToken<DistanceResult>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -241,11 +241,11 @@ public class RisorseApi {
      * Registra un nuovo utente
      * È la risorsa che permette ad un utente di registrarsi, dopo aver fornito la propria username e password.
      * @param body  (optional)
-     * @return InlineResponse2001
+     * @return RegisterMaps
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2001 postRegistration(Credentials body) throws ApiException {
-        ApiResponse<InlineResponse2001> resp = postRegistrationWithHttpInfo(body);
+    public RegisterMaps postRegistration(Credentials body) throws ApiException {
+        ApiResponse<RegisterMaps> resp = postRegistrationWithHttpInfo(body);
         return resp.getData();
     }
 
@@ -253,12 +253,12 @@ public class RisorseApi {
      * Registra un nuovo utente
      * È la risorsa che permette ad un utente di registrarsi, dopo aver fornito la propria username e password.
      * @param body  (optional)
-     * @return ApiResponse&lt;InlineResponse2001&gt;
+     * @return ApiResponse&lt;RegisterMaps&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2001> postRegistrationWithHttpInfo(Credentials body) throws ApiException {
+    public ApiResponse<RegisterMaps> postRegistrationWithHttpInfo(Credentials body) throws ApiException {
         com.squareup.okhttp.Call call = postRegistrationValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2001>(){}.getType();
+        Type localVarReturnType = new TypeToken<RegisterMaps>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -270,7 +270,7 @@ public class RisorseApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call postRegistrationAsync(Credentials body, final ApiCallback<InlineResponse2001> callback) throws ApiException {
+    public com.squareup.okhttp.Call postRegistrationAsync(Credentials body, final ApiCallback<RegisterMaps> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -292,7 +292,7 @@ public class RisorseApi {
         }
 
         com.squareup.okhttp.Call call = postRegistrationValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2001>(){}.getType();
+        Type localVarReturnType = new TypeToken<RegisterMaps>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

@@ -1,1 +1,0 @@
-# soseng-project-payment-provider

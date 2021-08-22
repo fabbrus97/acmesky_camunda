@@ -1,12 +1,42 @@
 openapi: 3.0.0
 info:
   title: prontogramAPI
-  version: '1.0'
+  version: '1.0.0'
   description: È l'API Restful offerta dall'applicazione di messaggistica *Prontogram* che vi racchiude la capability di inoltrare i messaggi circa le offerte inviate da ACMESky ai clienti interessati.
 servers:
   - url: 'https://soseng-unibo.stoplight.io/mocks/soseng-unibo/soseng-project-documentation/6636887'
     description: testing
 paths:
+  /register:
+    post:
+      summary: Registra un nuovo utente
+      operationId: post-register
+      description: Registra un nuovo utente; prende in input solo un nome utente e una password
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+          headers: {}
+        '406':
+          description: Not Acceptable
+        '415':
+          description: Unsupported Media Type
+        '500':
+          description: Server Error
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/RegisterBody'
+            examples:
+              Esempio:
+                value:
+                  data:
+                    username: mrossi85
+                    password: 12345678
   /message:
     get:
       summary: Restituisci tutti i messaggi
@@ -144,6 +174,7 @@ paths:
             schema:
               description: ''
               type: object
+              title: message
               properties:
                 data:
                   type: object
@@ -406,31 +437,19 @@ paths:
           description: Internal Server Error
       description: È la risorsa che permette al cliente o ad ACMESky di ottenere il token temporaneo tramite cui potranno essere identificati e autorizzati da Prontogram.
       requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Maps.v1_Credentials'
-            examples:
-              Esempio:
-                value:
-                  username: Mario
-                  password: st1222a2aring
       tags:
         - Risorse
+      security:
+        - basicAuth: []
+
 components:
   securitySchemes:
-  #  tokenSessione:
-  #    type: oauth2
-  #    flows:
-  #      authorizationCode:
-  #        authorizationUrl: ''
-  #        tokenUrl: ''
-  #        refreshUrl: ''
-  #        scopes: {}
-  #    description: Abbiamo utilizzato OAuth2 come schema di sicurezza perché consente di creare un token di sessione che permette agli utenti di essere identificati da Prontogram e di fruire dei servizi che espone.
     tokenSessione:
-        type: http
-        scheme: bearer
+      type: http
+      scheme: bearer
+    basicAuth:
+      type: http
+      scheme: basic
   schemas:
     offerMessage:
       title: offerMessage
@@ -445,6 +464,15 @@ components:
           description: Breve descrizione dell'offerta
     Maps.v1_Credentials:
       title: credentials
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    RegisterBody:
+      title: RegisterBody
+      description: Body della richiesta di registrazione
       type: object
       properties:
         username:

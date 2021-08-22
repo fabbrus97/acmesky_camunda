@@ -23,6 +23,7 @@ paths:
         content:
           application/json:
             schema:
+              title: paymentDataBody
               type: object
               properties:
                 card_number:
@@ -74,6 +75,7 @@ paths:
           content:
             application/json:
               schema:
+                title: activeLink
                 type: object
                 properties:
                   link:
@@ -92,6 +94,7 @@ paths:
         content:
           application/json:
             schema:
+              title: linkBody
               type: object
               properties:
                 amount:
@@ -132,6 +135,7 @@ paths:
           content:
             application/json:
               schema:
+                title: paymentRegistration
                 type: object
                 properties:
                   token:

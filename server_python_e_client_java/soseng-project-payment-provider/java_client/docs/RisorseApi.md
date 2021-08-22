@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 <a name="getLink"></a>
 # **getLink**
-> InlineResponse200 getLink(body)
+> ActiveLink getLink(body)
 
 Genera link di pagamento
 
@@ -19,11 +19,11 @@ Genera link di pagamento
 ### Example
 ```java
 // Import classes:
-//import io.swagger.paymentprovider.ApiClient;
-//import io.swagger.paymentprovider.ApiException;
-//import io.swagger.paymentprovider.Configuration;
-//import io.swagger.paymentprovider.auth.*;
-//import io.swagger.paymentprovider.payment_client.RisorseApi;
+//import paymentprovider.ApiClient;
+//import paymentprovider.ApiException;
+//import paymentprovider.Configuration;
+//import paymentprovider.auth.*;
+//import paymentprovider.payment_client.RisorseApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -34,9 +34,9 @@ apikey.setApiKey("YOUR API KEY");
 //apikey.setApiKeyPrefix("Token");
 
 RisorseApi apiInstance = new RisorseApi();
-Body1 body = new Body1(); // Body1 | 
+LinkBody body = new LinkBody(); // LinkBody | 
 try {
-    InlineResponse200 result = apiInstance.getLink(body);
+    ActiveLink result = apiInstance.getLink(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling RisorseApi#getLink");
@@ -48,11 +48,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body1**](Body1.md)|  | [optional]
+ **body** | [**LinkBody**](LinkBody.md)|  | [optional]
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**ActiveLink**](ActiveLink.md)
 
 ### Authorization
 
@@ -74,11 +74,11 @@ Ricevi dati di pagamento
 ### Example
 ```java
 // Import classes:
-//import io.swagger.paymentprovider.ApiClient;
-//import io.swagger.paymentprovider.ApiException;
-//import io.swagger.paymentprovider.Configuration;
-//import io.swagger.paymentprovider.auth.*;
-//import io.swagger.paymentprovider.payment_client.RisorseApi;
+//import paymentprovider.ApiClient;
+//import paymentprovider.ApiException;
+//import paymentprovider.Configuration;
+//import paymentprovider.auth.*;
+//import paymentprovider.payment_client.RisorseApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -89,7 +89,7 @@ apikey.setApiKey("YOUR API KEY");
 //apikey.setApiKeyPrefix("Token");
 
 RisorseApi apiInstance = new RisorseApi();
-Body body = new Body(); // Body | 
+PaymentDataBody body = new PaymentDataBody(); // PaymentDataBody | 
 try {
     apiInstance.postPaymentdata(body);
 } catch (ApiException e) {
@@ -102,7 +102,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body**](Body.md)|  | [optional]
+ **body** | [**PaymentDataBody**](PaymentDataBody.md)|  | [optional]
 
 ### Return type
 
@@ -119,7 +119,7 @@ null (empty response body)
 
 <a name="postRegistration"></a>
 # **postRegistration**
-> InlineResponse2001 postRegistration(body)
+> PaymentRegistration postRegistration(body)
 
 Registra un nuovo utente
 
@@ -128,14 +128,14 @@ Registra un nuovo utente
 ### Example
 ```java
 // Import classes:
-//import io.swagger.paymentprovider.ApiException;
-//import io.swagger.paymentprovider.payment_client.RisorseApi;
+//import paymentprovider.ApiException;
+//import paymentprovider.payment_client.RisorseApi;
 
 
 RisorseApi apiInstance = new RisorseApi();
 MapsV1Credentials body = new MapsV1Credentials(); // MapsV1Credentials | 
 try {
-    InlineResponse2001 result = apiInstance.postRegistration(body);
+    PaymentRegistration result = apiInstance.postRegistration(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling RisorseApi#postRegistration");
@@ -151,7 +151,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**PaymentRegistration**](PaymentRegistration.md)
 
 ### Authorization
 

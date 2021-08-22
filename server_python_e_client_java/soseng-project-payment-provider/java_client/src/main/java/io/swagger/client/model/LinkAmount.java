@@ -26,7 +26,7 @@ import java.math.BigDecimal;
  * LinkAmount
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2021-05-20T16:01:27.643+02:00[Europe/Rome]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2021-08-22T16:27:55.181+02:00[Europe/Rome]")
 public class LinkAmount {
   @SerializedName("value")
   private BigDecimal value = null;

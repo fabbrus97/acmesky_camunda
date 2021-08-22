@@ -14,7 +14,7 @@ def info_from_apikey(api_key, required_scopes):
     :return: Information attached to provided api_key or None if api_key is invalid or does not allow access to called API
     :rtype: dict | None
     """
-
+    print("tentativo di login!")
     with open("tokens.json") as tokens_file:
         tokens = json.load(tokens_file)
         for token in tokens:
@@ -24,7 +24,7 @@ def info_from_apikey(api_key, required_scopes):
                 # ma siccome sarà solo acmesky a usare questi metodi, non ha molto senso 
                 # implementare degli uid perché avrà sempre lo stesso valore - quello corrispondente
                 # ad acmesky
-
+    print("tentativo fallito")
     return
 
 

@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 <a name="postDistance"></a>
 # **postDistance**
-> InlineResponse200 postDistance(body)
+> DistanceResult postDistance(body)
 
 Calcola distanza geografica
 
@@ -31,9 +31,9 @@ authorization.setUsername("YOUR USERNAME");
 authorization.setPassword("YOUR PASSWORD");
 
 RisorseApi apiInstance = new RisorseApi();
-InlineObject body = new InlineObject(); // InlineObject | 
+GeoBody body = new GeoBody(); // GeoBody | Specifica un punto geografico di partenza e un array di uno o più punti di arrivo.
 try {
-    InlineResponse200 result = apiInstance.postDistance(body);
+    DistanceResult result = apiInstance.postDistance(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling RisorseApi#postDistance");
@@ -45,11 +45,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**InlineObject**](InlineObject.md)|  | [optional]
+ **body** | [**GeoBody**](GeoBody.md)| Specifica un punto geografico di partenza e un array di uno o più punti di arrivo. | [optional]
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**DistanceResult**](DistanceResult.md)
 
 ### Authorization
 
@@ -62,7 +62,7 @@ Name | Type | Description  | Notes
 
 <a name="postRegistration"></a>
 # **postRegistration**
-> InlineResponse2001 postRegistration(body)
+> RegisterMaps postRegistration(body)
 
 Registra un nuovo utente
 
@@ -78,7 +78,7 @@ Registra un nuovo utente
 RisorseApi apiInstance = new RisorseApi();
 Credentials body = new Credentials(); // Credentials | 
 try {
-    InlineResponse2001 result = apiInstance.postRegistration(body);
+    RegisterMaps result = apiInstance.postRegistration(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling RisorseApi#postRegistration");
@@ -94,7 +94,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**RegisterMaps**](RegisterMaps.md)
 
 ### Authorization
 

@@ -8,6 +8,7 @@ import io.swagger.client.model.Body;
 import io.swagger.client.model.InlineResponse2001;
 import io.swagger.client.model.MapsV1Credentials;
 import io.swagger.client.model.PaymentDataBody;
+import io.swagger.client.model.PaymentRegistration;
 import io.swagger.client.model.PaymentdataExpiration;
 import io.swagger.client.model.PaymentdataTransaction;
 import paymentprovider.ApiClient;
@@ -98,7 +99,7 @@ public class SendPaymentService {
         body.setPassword("123456789"); //TODO
         System.out.println("Sto per registrarmi al servizio di pagamento");
         try {
-            InlineResponse2001 result = apiInstance.postRegistration(body);
+            PaymentRegistration result = apiInstance.postRegistration(body);
             System.out.println(result);
             StaticValues.payment_provider_key = result.getToken() ;
             System.out.println("Registrazione effettuata");

@@ -3,12 +3,12 @@ package it.unibo.soseng.acmesky;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+import io.swagger.client.model.ActiveLink;
 import io.swagger.client.model.Body;
-import io.swagger.client.model.InlineResponse200;
-import io.swagger.client.model.InlineResponse2001;
 import io.swagger.client.model.LinkAmount;
 import io.swagger.client.model.LinkBody;
 import io.swagger.client.model.MapsV1Credentials;
+import io.swagger.client.model.PaymentRegistration;
 import paymentprovider.ApiClient;
 import paymentprovider.ApiException;
 import paymentprovider.Configuration;
@@ -50,7 +50,7 @@ public class GetLinkService {
 	        body.setUsername(StaticValues.prontogram_username);
 	        body.setPassword(StaticValues.prontogram_password);
 	        try {
-	            InlineResponse2001 result = apiInstance.postRegistration(body);
+	            PaymentRegistration result = apiInstance.postRegistration(body);
 	            System.out.println(result);
 	            StaticValues.payment_provider_key = result.getToken() ;
 	            
@@ -87,9 +87,9 @@ public class GetLinkService {
         body.setAmount(amount);
         body.setOfferCode(offer_code); //TODO non ricordo se è offer_code - cioè offerta cliente - oppure codice del volo
         try {
-            InlineResponse200 result = apiInstance.getLink(body);
+            ActiveLink result = apiInstance.getLink(body);
             System.out.println(result);
-            return result.toString();
+            return result.getLink();
         } catch (ApiException e) {
             System.err.println("Exception when calling RisorseApi#getLink");
             e.printStackTrace();

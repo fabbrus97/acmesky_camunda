@@ -14,9 +14,9 @@ package io.swagger.client.api;
 
 import io.swagger.client.ApiException;
 import io.swagger.client.model.Credentials;
-import io.swagger.client.model.InlineObject;
-import io.swagger.client.model.InlineResponse200;
-import io.swagger.client.model.InlineResponse2001;
+import io.swagger.client.model.DistanceResult;
+import io.swagger.client.model.GeoBody;
+import io.swagger.client.model.RegisterMaps;
 import org.junit.Test;
 import org.junit.Ignore;
 
@@ -43,8 +43,8 @@ public class RisorseApiTest {
      */
     @Test
     public void postDistanceTest() throws ApiException {
-        InlineObject body = null;
-        InlineResponse200 response = api.postDistance(body);
+        GeoBody body = null;
+        DistanceResult response = api.postDistance(body);
 
         // TODO: test validations
     }
@@ -59,7 +59,7 @@ public class RisorseApiTest {
     @Test
     public void postRegistrationTest() throws ApiException {
         Credentials body = null;
-        InlineResponse2001 response = api.postRegistration(body);
+        RegisterMaps response = api.postRegistration(body);
 
         // TODO: test validations
     }
