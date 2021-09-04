@@ -12,6 +12,8 @@ import org.camunda.bpm.engine.delegate.ExecutionListener;
 
 public class InitListener implements ExecutionListener {
 	
+	private enum services {PAYMENT, PRONTOGRAM, AIRLINE, GEOPROVIDER};
+	
 	@Override
     public void notify(DelegateExecution execution) throws Exception {
      
@@ -43,6 +45,10 @@ public class InitListener implements ExecutionListener {
 			if (varName.equals("payments")) {
 				System.out.println("HO IMPOSTATO UN URL PER PAYMENTS: " + url);
 				StaticValues.paymentUrl = url;
+			}
+			
+			if (varName.equals("geoproviders")) {
+				StaticValues.geoproviderUrl = url;
 			}
 			
 			urlList.add(url);

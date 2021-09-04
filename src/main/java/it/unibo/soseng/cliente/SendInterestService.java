@@ -16,15 +16,35 @@ public class SendInterestService {
 		
 	}
 	
-	private static String[] airports = {"BLQ","BGY","CTA","MXP","VRN","FCO","TYO","PEK","JFK","LGW","FRA","BCN","LIS","BOG","AUH","MOW","ORY"};
+	private static String[] airports = {"airport BLQ",
+            "airport BGY",
+            "airport CTA",
+            "airport MXP",
+            "airport VRN",
+            "airport FCO",
+            "airport LGW",
+            "airport FRA",
+            "airport BCN",
+            "airport LIS",
+            "airport AUH",
+            "airport SVO", 
+            "airport ORY"};
 
 	public static void service(DelegateExecution execution) {
 		
-		System.out.println("Ricevuta data: " + execution.getVariable("firstDate"));
+		Transazione t = new Transazione("");
 		
+		
+		Cliente c = new Cliente("");
+		c.payment_password = "1234567890";
+				
 		if (execution.getVariable("customInterest") != null) {
 			try {
-			
+				
+				String username = execution.getVariable("username").toString();
+				t.username = username;
+				c.payment_username = username;
+			    
 				if (execution.getVariable("secondDate") != null && !execution.getVariable("secondDate").toString().isEmpty()) {
 					execution.getProcessEngine().getRuntimeService().createMessageCorrelation("GetInterests")
 						.setVariable("departure_airport", execution.getVariable("first_airport"))
@@ -34,6 +54,7 @@ public class SendInterestService {
 						.setVariable("arrival_time_min", sdt.format(sdt.parse(execution.getVariable("secondDate").toString())))
 						.setVariable("arrival_time_max", sdt.format(sdt.parse(execution.getVariable("secondDateInterval").toString())))
 						.setVariable("client_id", execution.getVariable("username")) 
+						.setVariable("clientAddress", execution.getVariable("clientAddress"))
 						.setVariable("cost", execution.getVariable("max_price"))
 						.correlate();
 				} else {
@@ -44,6 +65,7 @@ public class SendInterestService {
 						.setVariable("departure_time_min", sdt.format(sdt.parse(execution.getVariable("firstDate").toString())))
 						.setVariable("departure_time_max", sdt.format(sdt.parse(execution.getVariable("firstDateInterval").toString())))
 						.setVariable("client_id", execution.getVariable("username")) 
+						.setVariable("clientAddress", execution.getVariable("clientAddress"))
 						.setVariable("cost", execution.getVariable("max_price"))
 						.correlate();
 				
@@ -55,9 +77,12 @@ public class SendInterestService {
 			
 		} else {
 		
+			t.username = "mariorossi".concat(String.valueOf(StaticValues.contatore_mario_rossi));
+			c.payment_username = "mariorossi".concat(String.valueOf(StaticValues.contatore_mario_rossi++));
+			
 			RuntimeService runtimeService = execution.getProcessEngine().getRuntimeService();
 			
-			//genera una data, un intervallo di tempo casuale e calcola la seconda data
+			//genera la prima data e un intervallo di tempo casualmente; poi calcola la seconda data
 			int year = 2021;
 			int min_month = 0;
 	        int max_month = 11;
@@ -126,11 +151,15 @@ public class SendInterestService {
 				.setVariable("departure_time_max", sdt.format(secondDateInterval))
 				.setVariable("arrival_time_min", sdt.format(firstDate))
 				.setVariable("arrival_time_max", sdt.format(secondDateInterval))
-				.setVariable("client_id", "mario") //TODO
+				.setVariable("client_id", t.username )
+				.setVariable("clientAddress", "via indipendenza 1, bologna, italia")
 				.setVariable("cost", max_price)
 				.correlate();
 			
 		}
-		
+	
+		StaticValues.clienti.put(execution.getVariable("username").toString(), c);
+		StaticValues.transazioni.add(t);
+
 	}
 }

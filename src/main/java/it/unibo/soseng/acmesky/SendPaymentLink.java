@@ -14,7 +14,7 @@ public class SendPaymentLink implements JavaDelegate {
 	
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		// TODO Auto-generated method stub
+
 		sendPaymentLinkService.service(execution.getProcessEngine().getRuntimeService(), 
 				execution.getVariable("paymentLink").toString(), execution.getVariable("code2check").toString());
 	}

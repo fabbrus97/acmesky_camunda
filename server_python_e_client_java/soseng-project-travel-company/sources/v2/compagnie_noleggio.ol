@@ -18,6 +18,8 @@ cset{
 }
 
 main {
+    println@Console("Server avviato")()
+
     while(true){
         [richiesta(dati_richiesta)] {
             //TODO controlla dati e restituisci ok <=> se ci sono tutti i dati
@@ -33,7 +35,7 @@ main {
                 println@Console("Ricevuto username " + newuser)();
                 //controlla che nome utente sia univoco
                 ok = true
-                response = "username creato"
+                response.text = "username creato"
                 for (i = 0 , i < #global.users, i++){
                     println@Console("controllo " + global.users[i].user.username)()
                     if (newuser == global.users[i].user.username){
@@ -42,7 +44,7 @@ main {
                 }
                 if (ok){
                     println@Console("Username esistente")()
-                    response = "Username esistente"
+                    response.text = "Username esistente"
                 }
                 else {
             
@@ -50,11 +52,11 @@ main {
                     //controlla che password sia lunga almeno 6
                     if (pwdlength < 7 ){
                         println@Console("Password troppo corta")()
-                        response = "Password troppo corta"
+                        response.text = "Password troppo corta"
                     } else {
 
                         println@Console("Creo nuovo utente  " + newuser)();
-                        response = "Nuovo utente creato"
+                        response.text = "Nuovo utente creato"
                             
                         //aggiungi nuovo utente
                         println@Console("#global.users: " + #global.users)()

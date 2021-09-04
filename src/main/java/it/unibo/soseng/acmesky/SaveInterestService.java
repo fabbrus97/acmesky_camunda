@@ -30,7 +30,7 @@ public class SaveInterestService {
 	}
 	
 	public static void service(String departure_airport, String arrival_airport, String departure_time_min, String departure_time_max,
-			String arrival_time_min, String arrival_time_max, String client_id, int cost) {
+			String arrival_time_min, String arrival_time_max, String client_id, String clientAddress, int cost) {
 		
 		//salviamo gli interessi su un file json; dobbiamo quindi prima aprirlo, parsarlo, aggiungere l'interesse 
 		//un cliente potrebbe avere più di un interesse), e risalvare il tutto
@@ -55,11 +55,14 @@ public class SaveInterestService {
 			
 			interest.setDeparture_time_min(departure_time_min);
 			interest.setDeparture_time_max(departure_time_max);
+			
+			//interest.setClientAddress(clientAddress);
+			
 			interest.setCost(cost);
 		
 			//cerchiamo se esiste già una entry per il client_id
 			if (clients.clients.get(client_id) != null){
-				
+				clients.clients.get(client_id).setClientAddress(clientAddress);
 				clients.clients.get(client_id).interests.add(interest);
 			} else { //crea nuovo client
 				Client c = new Client();
@@ -105,7 +108,7 @@ public class SaveInterestService {
 		return c; 
 	}
 	
-	private static void serialize_json(Clients clients) {
+	public static void serialize_json(Clients clients) {
 		System.out.println("Scriviamo il json finale...");
 		Gson j = new Gson();
 		
@@ -144,5 +147,7 @@ public class SaveInterestService {
 		});
 		return clients; 
 	}
+
+	
 	
 }

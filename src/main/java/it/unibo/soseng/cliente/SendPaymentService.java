@@ -28,30 +28,39 @@ public class SendPaymentService {
 		
 	}
 	
-	public static void service(String payment, String url) {
-		//FIXME url è il link/codice al quale dobbiamo pagare, non
+	public static void service(String payment, String url, String username) {
+		//payment è il link/codice al quale dobbiamo pagare - non l'indirizzo del server del servizio -, non
 		//so quale dei due sarà - o se sarà una stringa
-		
-		//TODO: se per acmesky questo approccio va più che bene, per "cliente"
-		//è meno ideale, perché così tutti i clienti condividono la stessa chiave 
-		//per l'api; StaticValues.payment_provider_key dovrebbe essere una hashmap ed essere
-		//usato tipo così: StaticValues.payment_provider_key["mario rossi"]
 		
 		paymentLink = payment;
 		provider_url = url;
 		
+		Transazione current_trans = null; 
+		
+		for (Transazione t: StaticValues.transazioni) {
+			if (t.username.contentEquals(username)) {
+				current_trans = t; 
+				break;
+			}
+			
+		}
+		
+		current_trans.payment_link = url;
+		Cliente c = StaticValues.clienti.get(current_trans.username);
+		
 		//if key
-		if (StaticValues.payment_provider_key.isEmpty() || StaticValues.payment_provider_key == null || StaticValues.payment_provider_key.length() == 0) {
+		if (c.payment_token == null || c.payment_token.length() == 0) {
 			System.out.println("Mi registro");
-			register();
+			c.payment_token = register(c.payment_username, c.payment_password);
+			StaticValues.clienti.put(username, c);
 		} 
-		System.out.println("Sono già registrato al servizio di pagamento, la mia chiave è: " + StaticValues.payment_provider_key.toString() + " (" + StaticValues.payment_provider_key.length() + ")");
-		ask_link();
+		
+		ask_link(c.payment_token);
 		
 		
 	}
 	
-	private static void ask_link() {
+	private static void ask_link(String token) {
 		// chiedi url per far pagare cliente
 		
 		ApiClient defaultClient = Configuration.getDefaultApiClient();
@@ -59,7 +68,7 @@ public class SendPaymentService {
 
         // Configure API key authorization: apikey
         ApiKeyAuth apikey = (ApiKeyAuth) defaultClient.getAuthentication("apikey");
-        apikey.setApiKey(StaticValues.payment_provider_key);
+        apikey.setApiKey(token);
         // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
         //apikey.setApiKeyPrefix("Token");
 
@@ -91,21 +100,22 @@ public class SendPaymentService {
 					
 	}
 	
-	private static void register() {
+	private static String register(String username, String password) {
 		RisorseApi apiInstance = new RisorseApi();
 		apiInstance.getApiClient().setBasePath(provider_url);
         MapsV1Credentials body = new MapsV1Credentials(); // MapsV1Credentials |
-        body.setUsername("mariorossi"); //TODO
-        body.setPassword("123456789"); //TODO
+        body.setUsername(username);
+        body.setPassword(password); 
         System.out.println("Sto per registrarmi al servizio di pagamento");
         try {
             PaymentRegistration result = apiInstance.postRegistration(body);
             System.out.println(result);
-            StaticValues.payment_provider_key = result.getToken() ;
             System.out.println("Registrazione effettuata");
+            return result.getToken() ;
         } catch (ApiException e) {
             System.err.println("Exception when calling RisorseApi#postRegistration");
             e.printStackTrace();
         }
+        return null;
 	}
 }

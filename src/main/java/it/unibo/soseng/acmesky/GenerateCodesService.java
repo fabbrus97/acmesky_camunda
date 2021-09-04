@@ -104,7 +104,6 @@ public class GenerateCodesService {
 			fileReader.close();
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
 		}
@@ -124,7 +123,6 @@ public class GenerateCodesService {
 			System.out.println("Fatto");
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

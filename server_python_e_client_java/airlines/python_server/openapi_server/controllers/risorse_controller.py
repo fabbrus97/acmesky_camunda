@@ -18,7 +18,19 @@ from openapi_server import util
 from random import randint, seed
 
 def add_flight():
-    sources = ["BLQ","BGY","CTA","MXP","VRN","FCO","TYO","PEK","JFK","LGW","FRA","BCN","LIS","BOG","AUH","MOW","ORY"]
+    sources = ["airport BLQ",
+               "airport BGY",
+               "airport CTA",
+               "airport MXP",
+               "airport VRN",
+               "airport FCO",
+               "airport LGW",
+               "airport FRA",
+               "airport BCN",
+               "airport LIS",
+               "airport AUH",
+               "airport SVO", 
+               "airport ORY"]
 
     now = datetime.datetime.now()
 

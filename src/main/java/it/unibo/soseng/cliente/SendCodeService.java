@@ -11,7 +11,23 @@ public class SendCodeService {
 		
 	}
 	
-	static void service(RuntimeService runtimeService, String code) {
+	static void service(RuntimeService runtimeService, DelegateExecution execution) {
+		
+		String code  = execution.getVariable("code").toString(); //questa variabile è impostata da acmesky quando manda il messaggio
+		String username = execution.getVariable("username").toString(); //questa variabile è impostata da acmesky quando manda il messaggio
+		int contatore = 0;
+		for(Transazione t: StaticValues.transazioni) {
+			if (t.username.contentEquals(username)) {
+				t.acmesky_code = code;
+				StaticValues.transazioni.remove(contatore);
+				StaticValues.transazioni.add(contatore, t);
+				break;
+			}
+			contatore++;
+		}
+		
+		
+		
 		runtimeService.createMessageCorrelation("GetCode")
 		.setVariable("code2check", code)
 		.correlateAll();	
