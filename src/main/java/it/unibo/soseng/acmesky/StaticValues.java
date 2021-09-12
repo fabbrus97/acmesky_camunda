@@ -30,6 +30,7 @@ public class StaticValues {
 	public static String paymentUrl = "";
 	public static HashMap<String, String> codes2delete = new HashMap<String, String>(); //payment_link, code2delete
 	public static String geoproviderUrl = "";
+	public static String prontogramUrl = "";
 
 	
 }

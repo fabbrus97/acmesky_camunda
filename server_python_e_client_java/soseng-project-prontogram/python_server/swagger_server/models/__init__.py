@@ -20,5 +20,7 @@ from swagger_server.models.inline_response200_links1 import InlineResponse200Lin
 from swagger_server.models.inline_response200_message import InlineResponse200Message
 from swagger_server.models.maps_v1_credentials import MapsV1Credentials
 from swagger_server.models.message import Message
+from swagger_server.models.message_item import MessageItem
+from swagger_server.models.message_list import MessageList
 from swagger_server.models.offer_message import OfferMessage
 from swagger_server.models.register_body import RegisterBody

@@ -18,7 +18,10 @@ public class SendPayment implements JavaDelegate{
 	public void execute(DelegateExecution execution) throws Exception {
 		// TODO Auto-generated method stub
 		
-		sendPaymentService.service(execution.getVariable("paymentLink").toString(), StaticValues.paymentUrl, execution.getVariable("username").toString()); 
+		String paymentLink = execution.getVariable("paymentLink").toString(); //TODO Null pointer exception
+		String username = execution.getVariable("username").toString();
+		
+		sendPaymentService.service(paymentLink, StaticValues.paymentUrl, username); 
 		
 	}
 

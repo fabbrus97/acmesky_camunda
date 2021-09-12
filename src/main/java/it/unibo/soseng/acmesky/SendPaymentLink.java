@@ -15,8 +15,10 @@ public class SendPaymentLink implements JavaDelegate {
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 
+		//TODO questa classe deve anche mandare la notifica al cliente di codice offerta acmesky errato
+		
 		sendPaymentLinkService.service(execution.getProcessEngine().getRuntimeService(), 
-				execution.getVariable("paymentLink").toString(), execution.getVariable("code2check").toString());
+				 execution.getVariable("code2check").toString());
 	}
 
 }

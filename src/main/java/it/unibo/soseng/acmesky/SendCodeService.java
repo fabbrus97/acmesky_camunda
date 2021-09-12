@@ -3,6 +3,7 @@ package it.unibo.soseng.acmesky;
 import prontogramprovider.*;
 import prontogramprovider.auth.*;
 
+
 import io.swagger.client.model.*;
 import it.unibo.soseng.acmesky.Json.Codes;
 import prontogramprovider.prontogram_client.DefaultApi;
@@ -40,9 +41,46 @@ public class SendCodeService {
 	
 	private static void sendCodes() {
 		Codes codes = GenerateCodesService.deserialize_file();
-		codes.getCodes().forEach(code -> {
+		
+		InlineResponse2003 token = login();
+		ApiClient defaultClient = Configuration.getDefaultApiClient();
+		defaultClient.setBasePath(url);
+        RisorseApi apiInstance = new RisorseApi();
+
+        if (token != null && token.getToken() != null) {
+        	defaultClient.setAccessToken(token.getToken());    		    	
+        	        	
+        	MessageList body = new MessageList();
+
+        	
+        	
+        	codes.getCodes().forEach(code -> {
+        		MessageItem mi = new MessageItem(); 
+        		mi.setReceiver(code.getUser());
+        		
+        		OfferMessage offer = new OfferMessage();
+        		offer.setCode(code.getCode());
+        		offer.setDescription(code.getFly_code()); //TODO crea descrizione con volo andata, ritorno, costo e data
+        		mi.setOffer(offer);
+        		
+        		body.addMessagesItem(mi);
+        	});
+        	
+        	
+        	try {
+        		System.out.println(" ACMESKY SendCodeService: provo a inviare dei messaggi; i messaggi sono " + body.getMessages().size());
+				apiInstance.postCreatemessages(body);
+				System.out.println("Invio avvenuto correttamente");
+			} catch (ApiException e) {
+				// TODO Auto-generated catch block	
+				//e.printStackTrace();
+				System.out.println("Eccezione mandando codice a prontogram da acmesky");
+			}
+        }
+		
+		/*codes.getCodes().forEach(code -> {
 			sendMessage(code.getCode(), code.getUser());
-		});
+		});*/
 	
 	}
 	

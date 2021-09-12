@@ -51,6 +51,10 @@ public class InitListener implements ExecutionListener {
 				StaticValues.geoproviderUrl = url;
 			}
 			
+			if (varName.equals("prontograms")) {
+				StaticValues.prontogramUrl = url;
+			}
+			
 			urlList.add(url);
 			System.out.println("Eseguo init listener per " + varName + ": " + url);
 			url = bufferedReader.readLine();

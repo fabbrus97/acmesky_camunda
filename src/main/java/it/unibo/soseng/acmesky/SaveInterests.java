@@ -28,6 +28,7 @@ public class SaveInterests implements JavaDelegate{
 		 * e vengono qui reperiti
 		*/
 		
+		
 		String departure_airport = execution.getVariable("departure_airport").toString();
 		String arrival_airport = execution.getVariable("arrival_airport").toString();
 		

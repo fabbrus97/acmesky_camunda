@@ -6,9 +6,11 @@
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/GetLinkService.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/SaveInterestService.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/cliente/SendInterestService.java
+/home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/SendClientCodeError.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/Json/Offers.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/gen/Indirizzo.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/SendNotification.java
+/home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/cliente/RestoreInternalState.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/cliente/SendCode.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/InitListener.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/Json/Client.java
@@ -25,9 +27,11 @@
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/FindMatch.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/cliente/ManageTransportOfferService.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/gen/package-info.java
+/home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/RestoreInternalStateService.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/gen/NoleggioPortService.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/cliente/SendCodeService.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/cliente/SendInterests.java
+/home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/cliente/RestoreInternalStateService.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/Transazione.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/RemoveCodeService.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/CheckCodeService.java
@@ -40,6 +44,7 @@
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/SaveOffersLM.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/GetOffersService.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/cliente/Transazione.java
+/home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/SendClientCodeErrorService.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/cliente/SendPaymentService.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/GenerateCodesService.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/cliente/ManageTransportOffer.java
@@ -52,6 +57,7 @@
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/cliente/Cliente.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/ForwardLink.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/SendCodes.java
+/home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/RestoreInternalState.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/SaveInterests.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/cliente/StaticValues.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/DatiTransazione.java

@@ -3,7 +3,9 @@ it/unibo/soseng/acmesky/SendPaymentLink.class
 it/unibo/soseng/acmesky/BookTransportService.class
 it/unibo/soseng/cliente/SendInterests.class
 it/unibo/soseng/acmesky/DepRetFlights.class
+it/unibo/soseng/acmesky/RestoreInternalStateService.class
 it/unibo/soseng/acmesky/SaveCodes.class
+it/unibo/soseng/cliente/RestoreInternalState.class
 it/unibo/soseng/cliente/ManageTransportOfferService.class
 it/unibo/soseng/acmesky/Json/Codes.class
 it/unibo/soseng/acmesky/Json/Interest.class
@@ -48,10 +50,14 @@ it/unibo/soseng/cliente/Transazione.class
 it/unibo/soseng/acmesky/SaveInterests.class
 it/unibo/soseng/acmesky/AskClientTransportService.class
 it/unibo/soseng/acmesky/ProcessConstants.class
+it/unibo/soseng/cliente/RestoreInternalStateService.class
 it/unibo/soseng/acmesky/GenerateCodes.class
 it/unibo/soseng/cliente/StaticValues.class
 it/unibo/soseng/cliente/Cliente.class
 it/unibo/soseng/acmesky/FindMatch.class
+it/unibo/soseng/acmesky/SendClientCodeErrorService.class
+it/unibo/soseng/acmesky/SendClientCodeError.class
+it/unibo/soseng/acmesky/RestoreInternalState.class
 it/unibo/soseng/acmesky/GetOffers.class
 it/unibo/soseng/acmesky/SendPaymentLinkService.class
 it/unibo/soseng/acmesky/RemoveCode.class

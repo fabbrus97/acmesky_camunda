@@ -138,7 +138,7 @@ public class SaveInterestService {
 			client.interests.forEach(interest -> {
 				LocalDateTime ld = LocalDateTime.from(dtf.parse(interest.getDeparture_time_max()));
 				
-				if (ld.isAfter(LocalDateTime.now())){
+				if (ld.isBefore(LocalDateTime.now())){
 					System.out.println("Trovato volo scaduto per cliente " + username);
 					elements2delete.add(interest);
 				}

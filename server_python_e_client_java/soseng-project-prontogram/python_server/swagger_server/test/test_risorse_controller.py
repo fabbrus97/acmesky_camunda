@@ -10,6 +10,7 @@ from swagger_server.models.inline_response2001 import InlineResponse2001  # noqa
 from swagger_server.models.inline_response2002 import InlineResponse2002  # noqa: E501
 from swagger_server.models.inline_response2003 import InlineResponse2003  # noqa: E501
 from swagger_server.models.message import Message  # noqa: E501
+from swagger_server.models.message_list import MessageList  # noqa: E501
 from swagger_server.test import BaseTestCase
 
 
@@ -68,6 +69,20 @@ class TestRisorseController(BaseTestCase):
         body = Message()
         response = self.client.open(
             '/mocks/soseng-unibo/soseng-project-documentation/6636887/createmessage',
+            method='POST',
+            data=json.dumps(body),
+            content_type='application/vnd.api+json')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_post_createmessages(self):
+        """Test case for post_createmessages
+
+        Invia messaggi
+        """
+        body = MessageList()
+        response = self.client.open(
+            '/mocks/soseng-unibo/soseng-project-documentation/6636887/createmessages',
             method='POST',
             data=json.dumps(body),
             content_type='application/vnd.api+json')

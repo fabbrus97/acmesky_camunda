@@ -44,9 +44,11 @@ public class FindMatchService {
 		 * il volo di andata viene cancellato
 		*/
 		
-		findInterests(true);
-		findInterests(false);
-		
+		Clients clients = SaveInterestService.deserialize_file();
+		if (clients != null && clients.getClients() != null) {
+			findInterests(true);
+			findInterests(false);
+		}
 		ArrayList<String[]> matches = new ArrayList<String[]>(); 
 		
 		userFlights.forEach((user, flights) -> {			
@@ -73,10 +75,13 @@ public class FindMatchService {
 		});
 		
 		//ora che abbiamo generato i match, rimuoviamo gli interessi altrimenti acmesky li rimanda sempre
-		Clients clients = SaveInterestService.deserialize_file();
+		//Clients clients = SaveInterestService.deserialize_file();
 		clients.getClients().forEach((name, client) -> {
-			client.getInterests().removeAll(interests2delete.get(name));
-			clients.getClients().put(name, client);
+			if (interests2delete.get(name) != null) {
+				client.getInterests().removeAll(interests2delete.get(name));
+				clients.getClients().put(name, client);
+			}
+			
 		});
 		SaveInterestService.serialize_json(clients);
 		
@@ -87,7 +92,6 @@ public class FindMatchService {
 		Offers o = GetOffersService.getJSON();
 		Clients clients = SaveInterestService.deserialize_file();
 		
-				
 		clients.getClients().forEach( (name, client) -> {
 
 			client.getInterests().forEach(interest -> {

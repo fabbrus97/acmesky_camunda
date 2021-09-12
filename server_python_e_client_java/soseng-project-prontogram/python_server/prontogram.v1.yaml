@@ -194,6 +194,62 @@ paths:
         description: Il body della richiesta HTTP è di tipo `application/vnd.api+json` in quanto l'API prontogramAPI è al livello 3 di modello di maturità di Richardson.
       tags:
         - Risorse
+
+  /createmessages:
+    post:
+      summary: Invia messaggi
+      operationId: post-createmessages
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+          headers: {}
+        '406':
+          description: Not Acceptable
+        '415':
+          description: Unsupported Media Type
+      description: 'È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un `token` identificativo valido, invia un messaggio il cui corpo e destinatario sono quelli specificati nel body della richiesta HTTP.'
+      security:
+        - tokenSessione: []
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              description: ''
+              type: object
+              title: message_list
+              properties:
+                messages:
+                  type: array
+                  items:
+                    title: message_item
+                    type: object
+                    properties:
+                      receiver:
+                        type: string
+                      offer:
+                        $ref: '#/components/schemas/offerMessage'
+            examples:
+              Esempio:
+                value:
+                  message_list:
+                    - message_item:
+                        receiver: Mario Neri
+                        offer:
+                          description: 'Roma - Berlino'
+                          code: '1234'
+                    - message_item:
+                        receiver: Mario Bianchi
+                        offer:
+                          description: 'Bologna - Madrid'
+                          code: '7890'
+        description: Il body della richiesta HTTP è di tipo `application/vnd.api+json` in quanto l'API prontogramAPI è al livello 3 di modello di maturità di Richardson.
+      tags:
+        - Risorse
+
   '/message/{username}':
     parameters:
       - schema:
@@ -437,7 +493,7 @@ paths:
           description: Internal Server Error
       description: È la risorsa che permette al cliente o ad ACMESky di ottenere il token temporaneo tramite cui potranno essere identificati e autorizzati da Prontogram.
       requestBody:
-        
+
       tags:
         - Risorse
       security:

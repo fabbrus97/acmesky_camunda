@@ -18,11 +18,12 @@ public class FindMatch implements JavaDelegate{
 		//restituisce una lista di coppie formate da <id_cliente, codice_volo>
 		ArrayList<String[]> matches = findMatchService.service();
 		
-		if (matches != null) {
+		if (matches != null && matches.size() > 0) {
 			execution.setVariable("matchFound", true);
 			execution.setVariable("matches", matches);
 		} else {
 			execution.setVariable("matchFound", false);
+			System.out.println("Non ho trovato alcun match");
 		}
 		
 	}

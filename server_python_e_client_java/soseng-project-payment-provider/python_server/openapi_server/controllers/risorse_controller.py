@@ -117,7 +117,7 @@ def post_paymentdata(inline_object=None):  # noqa: E501
                         #pay_people(p, inline_object) TODO
                         active_payment_links.remove(p)
                         return #successo
-    simpleCamundaRESTPost.sendMessage("ConfirmPaymentSuccessfull", {"paymLink": {"value": inline_object.transaction.id, "type": "String"}, "paymSucc": {"value": False, "type": "Boolean"}}) #acmesky
+    simpleCamundaRESTPost.sendMessage("ConfirmPaymentSuccessfull", {"paymLink": {"value": inline_object.transaction.id, "type": "String"}, "paymSucc": {"value": False, "type": "Boolean"}}) #conferma pagamento per acmesky - fallimento
     simpleCamundaRESTPost.sendMessage("ClientPaymentConfirmed", {"paymCorrect": {"value": False, "type": "Boolean"}}) #conferma pagamento per cliente - fallimento
     
     return 'Error in payment data', 400

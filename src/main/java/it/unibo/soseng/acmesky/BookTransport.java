@@ -18,7 +18,6 @@ public class BookTransport implements JavaDelegate {
 	
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		// TODO Auto-generated method stub
 		
 		//la variabile acmesky_code viene impostata dal messaggio dell'utente quando ci contatta
 	    BookTransportService.service(execution.getVariable("acmesky_code").toString());

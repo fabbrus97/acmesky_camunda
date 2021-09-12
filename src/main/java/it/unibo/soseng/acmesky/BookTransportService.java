@@ -35,6 +35,7 @@ public class BookTransportService {
 				//(perché in Indirizzo potremmo inserire molti più campi, come il cap e il numero civico)
 				i.setVia(t.home_address.split(",")[0]);
 				i.setComune(t.home_address.split(",")[1]);
+				
 				luoghi.setPartenza(i);
 				
 				LocalDateTime ldt = LocalDateTime.from(dtf_flights.parse(t.flight.getTakeoff()));
