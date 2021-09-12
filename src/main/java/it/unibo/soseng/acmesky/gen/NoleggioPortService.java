@@ -16,14 +16,14 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "NoleggioPortService", targetNamespace = "it.unibo.soseng.acmesky.wsdl", wsdlLocation = "/prenotazione_trasporto.wsdl")
+@WebServiceClient(name = "NoleggioPortService", targetNamespace = "it.unibo.soseng.acmesky.wsdl.wsdl", wsdlLocation = "/prenotazione_trasporto.wsdl")
 public class NoleggioPortService
     extends Service
 {
 
     private final static URL NOLEGGIOPORTSERVICE_WSDL_LOCATION;
     private final static WebServiceException NOLEGGIOPORTSERVICE_EXCEPTION;
-    private final static QName NOLEGGIOPORTSERVICE_QNAME = new QName("it.unibo.soseng.acmesky.wsdl", "NoleggioPortService");
+    private final static QName NOLEGGIOPORTSERVICE_QNAME = new QName("it.unibo.soseng.acmesky.wsdl.wsdl", "NoleggioPortService");
 
     static {
         NOLEGGIOPORTSERVICE_WSDL_LOCATION = it.unibo.soseng.acmesky.gen.NoleggioPortService.class.getResource("/prenotazione_trasporto.wsdl");
@@ -65,7 +65,7 @@ public class NoleggioPortService
      */
     @WebEndpoint(name = "NoleggioPortServicePort")
     public NoleggioPort getNoleggioPortServicePort() {
-        return super.getPort(new QName("it.unibo.soseng.acmesky.wsdl", "NoleggioPortServicePort"), NoleggioPort.class);
+        return super.getPort(new QName("it.unibo.soseng.acmesky.wsdl.wsdl", "NoleggioPortServicePort"), NoleggioPort.class);
     }
 
     /**
@@ -77,7 +77,7 @@ public class NoleggioPortService
      */
     @WebEndpoint(name = "NoleggioPortServicePort")
     public NoleggioPort getNoleggioPortServicePort(WebServiceFeature... features) {
-        return super.getPort(new QName("it.unibo.soseng.acmesky.wsdl", "NoleggioPortServicePort"), NoleggioPort.class, features);
+        return super.getPort(new QName("it.unibo.soseng.acmesky.wsdl.wsdl", "NoleggioPortServicePort"), NoleggioPort.class, features);
     }
 
     private static URL __getWsdlLocation() {

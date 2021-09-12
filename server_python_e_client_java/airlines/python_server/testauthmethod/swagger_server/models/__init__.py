@@ -1,0 +1,15 @@
+# coding: utf-8
+
+# flake8: noqa
+from __future__ import absolute_import
+# import models into model package
+from swagger_server.models.inline_response200 import InlineResponse200
+from swagger_server.models.inline_response2001 import InlineResponse2001
+from swagger_server.models.l_mflight_flight import LMflightFlight
+from swagger_server.models.l_mflight_flight_price import LMflightFlightPrice
+from swagger_server.models.lmflight import Lmflight
+from swagger_server.models.maps_v1_credentials import MapsV1Credentials
+from swagger_server.models.notifypayment_amount_payed import NotifypaymentAmountPayed
+from swagger_server.models.notifypayment_body import NotifypaymentBody
+from swagger_server.models.notifypayment_customer import NotifypaymentCustomer
+from swagger_server.models.notifypayment_transaction import NotifypaymentTransaction

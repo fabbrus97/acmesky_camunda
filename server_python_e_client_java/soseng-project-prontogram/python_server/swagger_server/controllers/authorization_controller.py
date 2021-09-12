@@ -22,7 +22,7 @@ def check_basicAuth(username, password, required_scopes):
 def check_tokenSessione(token):
     with open("tokens.json") as tokens_file:
         tokens = json.load(tokens_file)
-        for t in tokens.values():
+        for user,t in tokens.items():
             
             if t["token"] == token :
                 if (datetime.datetime.now().timestamp() - float(t["issued"]))/60 < 60 :
@@ -31,7 +31,7 @@ def check_tokenSessione(token):
                     return {'uid': t["token"]}
                 else :
                     print("Il token è scaduto")
-                    token.remove(token)
+                    tokens.pop(user)
                     return
 
     return

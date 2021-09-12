@@ -1,22 +1,22 @@
-/home/simone/github/acmesky_camunda/server_python_e_client_java/roba di gian/Maps 19_7/src/main/java/io/swagger/client/Pair.java
-/home/simone/github/acmesky_camunda/server_python_e_client_java/roba di gian/Maps 19_7/src/main/java/io/swagger/client/ApiClient.java
-/home/simone/github/acmesky_camunda/server_python_e_client_java/roba di gian/Maps 19_7/src/main/java/io/swagger/client/ApiResponse.java
-/home/simone/github/acmesky_camunda/server_python_e_client_java/roba di gian/Maps 19_7/src/main/java/io/swagger/client/ApiException.java
-/home/simone/github/acmesky_camunda/server_python_e_client_java/roba di gian/Maps 19_7/src/main/java/io/swagger/client/auth/ApiKeyAuth.java
-/home/simone/github/acmesky_camunda/server_python_e_client_java/roba di gian/Maps 19_7/src/main/java/io/swagger/client/model/DistanceResult.java
-/home/simone/github/acmesky_camunda/server_python_e_client_java/roba di gian/Maps 19_7/src/main/java/io/swagger/client/auth/Authentication.java
-/home/simone/github/acmesky_camunda/server_python_e_client_java/roba di gian/Maps 19_7/src/main/java/io/swagger/client/api/RisorseApi.java
-/home/simone/github/acmesky_camunda/server_python_e_client_java/roba di gian/Maps 19_7/src/main/java/io/swagger/client/JSON.java
-/home/simone/github/acmesky_camunda/server_python_e_client_java/roba di gian/Maps 19_7/src/main/java/io/swagger/client/ApiCallback.java
-/home/simone/github/acmesky_camunda/server_python_e_client_java/roba di gian/Maps 19_7/src/main/java/io/swagger/client/auth/HttpBasicAuth.java
-/home/simone/github/acmesky_camunda/server_python_e_client_java/roba di gian/Maps 19_7/src/main/java/io/swagger/client/model/RegisterMaps.java
-/home/simone/github/acmesky_camunda/server_python_e_client_java/roba di gian/Maps 19_7/src/main/java/io/swagger/client/StringUtil.java
-/home/simone/github/acmesky_camunda/server_python_e_client_java/roba di gian/Maps 19_7/src/main/java/io/swagger/client/model/Credentials.java
-/home/simone/github/acmesky_camunda/server_python_e_client_java/roba di gian/Maps 19_7/src/main/java/io/swagger/client/auth/OAuthFlow.java
-/home/simone/github/acmesky_camunda/server_python_e_client_java/roba di gian/Maps 19_7/src/main/java/io/swagger/client/auth/OAuth.java
-/home/simone/github/acmesky_camunda/server_python_e_client_java/roba di gian/Maps 19_7/src/main/java/io/swagger/client/model/GeoBody.java
-/home/simone/github/acmesky_camunda/server_python_e_client_java/roba di gian/Maps 19_7/src/main/java/io/swagger/client/ProgressRequestBody.java
-/home/simone/github/acmesky_camunda/server_python_e_client_java/roba di gian/Maps 19_7/src/main/java/io/swagger/client/ProgressResponseBody.java
-/home/simone/github/acmesky_camunda/server_python_e_client_java/roba di gian/Maps 19_7/src/main/java/io/swagger/client/GzipRequestInterceptor.java
-/home/simone/github/acmesky_camunda/server_python_e_client_java/roba di gian/Maps 19_7/src/main/java/io/swagger/client/Configuration.java
-/home/simone/github/acmesky_camunda/server_python_e_client_java/roba di gian/Maps 19_7/src/main/java/io/swagger/client/model/DistanceResultDistance.java
+/home/simone/github/acmesky_camunda/server_python_e_client_java/soseng-project-geographical-distances-provider/java_client/src/main/java/io/swagger/client/Configuration.java
+/home/simone/github/acmesky_camunda/server_python_e_client_java/soseng-project-geographical-distances-provider/java_client/src/main/java/io/swagger/client/ApiException.java
+/home/simone/github/acmesky_camunda/server_python_e_client_java/soseng-project-geographical-distances-provider/java_client/src/main/java/io/swagger/client/model/DistanceResultDistance.java
+/home/simone/github/acmesky_camunda/server_python_e_client_java/soseng-project-geographical-distances-provider/java_client/src/main/java/io/swagger/client/JSON.java
+/home/simone/github/acmesky_camunda/server_python_e_client_java/soseng-project-geographical-distances-provider/java_client/src/main/java/io/swagger/client/auth/OAuth.java
+/home/simone/github/acmesky_camunda/server_python_e_client_java/soseng-project-geographical-distances-provider/java_client/src/main/java/io/swagger/client/GzipRequestInterceptor.java
+/home/simone/github/acmesky_camunda/server_python_e_client_java/soseng-project-geographical-distances-provider/java_client/src/main/java/io/swagger/client/ApiClient.java
+/home/simone/github/acmesky_camunda/server_python_e_client_java/soseng-project-geographical-distances-provider/java_client/src/main/java/io/swagger/client/ApiCallback.java
+/home/simone/github/acmesky_camunda/server_python_e_client_java/soseng-project-geographical-distances-provider/java_client/src/main/java/io/swagger/client/ProgressRequestBody.java
+/home/simone/github/acmesky_camunda/server_python_e_client_java/soseng-project-geographical-distances-provider/java_client/src/main/java/io/swagger/client/Pair.java
+/home/simone/github/acmesky_camunda/server_python_e_client_java/soseng-project-geographical-distances-provider/java_client/src/main/java/io/swagger/client/StringUtil.java
+/home/simone/github/acmesky_camunda/server_python_e_client_java/soseng-project-geographical-distances-provider/java_client/src/main/java/io/swagger/client/auth/ApiKeyAuth.java
+/home/simone/github/acmesky_camunda/server_python_e_client_java/soseng-project-geographical-distances-provider/java_client/src/main/java/io/swagger/client/api/RisorseApi.java
+/home/simone/github/acmesky_camunda/server_python_e_client_java/soseng-project-geographical-distances-provider/java_client/src/main/java/io/swagger/client/ProgressResponseBody.java
+/home/simone/github/acmesky_camunda/server_python_e_client_java/soseng-project-geographical-distances-provider/java_client/src/main/java/io/swagger/client/model/DistanceResult.java
+/home/simone/github/acmesky_camunda/server_python_e_client_java/soseng-project-geographical-distances-provider/java_client/src/main/java/io/swagger/client/auth/Authentication.java
+/home/simone/github/acmesky_camunda/server_python_e_client_java/soseng-project-geographical-distances-provider/java_client/src/main/java/io/swagger/client/ApiResponse.java
+/home/simone/github/acmesky_camunda/server_python_e_client_java/soseng-project-geographical-distances-provider/java_client/src/main/java/io/swagger/client/auth/OAuthFlow.java
+/home/simone/github/acmesky_camunda/server_python_e_client_java/soseng-project-geographical-distances-provider/java_client/src/main/java/io/swagger/client/model/Credentials.java
+/home/simone/github/acmesky_camunda/server_python_e_client_java/soseng-project-geographical-distances-provider/java_client/src/main/java/io/swagger/client/model/RegisterMaps.java
+/home/simone/github/acmesky_camunda/server_python_e_client_java/soseng-project-geographical-distances-provider/java_client/src/main/java/io/swagger/client/model/GeoBody.java
+/home/simone/github/acmesky_camunda/server_python_e_client_java/soseng-project-geographical-distances-provider/java_client/src/main/java/io/swagger/client/auth/HttpBasicAuth.java

@@ -17,7 +17,7 @@ import javax.xml.ws.ResponseWrapper;
  * Generated source version: 2.2
  * 
  */
-@WebService(name = "NoleggioPort", targetNamespace = "it.unibo.soseng.acmesky.wsdl")
+@WebService(name = "NoleggioPort", targetNamespace = "it.unibo.soseng.acmesky.wsdl.wsdl")
 @XmlSeeAlso({
     ObjectFactory.class
 })
@@ -33,7 +33,7 @@ public interface NoleggioPort {
      */
     @WebMethod(action = "richiesta")
     @Oneway
-    @RequestWrapper(localName = "richiesta", targetNamespace = "it.unibo.soseng.acmesky.xsd", className = "it.unibo.soseng.acmesky.gen.Richiesta")
+    @RequestWrapper(localName = "richiesta", targetNamespace = "it.unibo.soseng.acmesky.wsdl.xsd", className = "it.unibo.soseng.acmesky.gen.Richiesta")
     public void richiesta(
         @WebParam(name = "luoghi", targetNamespace = "")
         it.unibo.soseng.acmesky.gen.Richiesta.Luoghi luoghi,
@@ -53,8 +53,8 @@ public interface NoleggioPort {
      */
     @WebMethod(action = "login")
     @WebResult(name = "sid", targetNamespace = "")
-    @RequestWrapper(localName = "login", targetNamespace = "it.unibo.soseng.acmesky.xsd", className = "it.unibo.soseng.acmesky.gen.Login")
-    @ResponseWrapper(localName = "loginResponse", targetNamespace = "it.unibo.soseng.acmesky.xsd", className = "it.unibo.soseng.acmesky.gen.LoginResponse")
+    @RequestWrapper(localName = "login", targetNamespace = "it.unibo.soseng.acmesky.wsdl.xsd", className = "it.unibo.soseng.acmesky.gen.Login")
+    @ResponseWrapper(localName = "loginResponse", targetNamespace = "it.unibo.soseng.acmesky.wsdl.xsd", className = "it.unibo.soseng.acmesky.gen.LoginResponse")
     public String login(
         @WebParam(name = "password", targetNamespace = "")
         String password,
@@ -70,8 +70,8 @@ public interface NoleggioPort {
      */
     @WebMethod(action = "registrazione")
     @WebResult(name = "text", targetNamespace = "")
-    @RequestWrapper(localName = "registrazione", targetNamespace = "it.unibo.soseng.acmesky.xsd", className = "it.unibo.soseng.acmesky.gen.Registrazione")
-    @ResponseWrapper(localName = "registrazioneResponse", targetNamespace = "it.unibo.soseng.acmesky.xsd", className = "it.unibo.soseng.acmesky.gen.RegistrazioneResponse")
+    @RequestWrapper(localName = "registrazione", targetNamespace = "it.unibo.soseng.acmesky.wsdl.xsd", className = "it.unibo.soseng.acmesky.gen.Registrazione")
+    @ResponseWrapper(localName = "registrazioneResponse", targetNamespace = "it.unibo.soseng.acmesky.wsdl.xsd", className = "it.unibo.soseng.acmesky.gen.RegistrazioneResponse")
     public String registrazione(
         @WebParam(name = "password", targetNamespace = "")
         String password,

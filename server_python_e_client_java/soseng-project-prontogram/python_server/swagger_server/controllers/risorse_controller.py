@@ -1,6 +1,7 @@
 import connexion
 import six
 
+from swagger_server.models.createmessage_data import CreatemessageData  # noqa: E501
 from swagger_server.models.inline_response200 import InlineResponse200  # noqa: E501
 from swagger_server.models.inline_response200_links import InlineResponse200Links  # noqa: E501
 from swagger_server.models.inline_response200_data import InlineResponse200Data  # noqa: E501
@@ -225,24 +226,25 @@ def post_createmessage(token_info=None, body=None):  # noqa: E501
 
     #TODO devi aggiornare il valore next del messaggio precedente 
     
+    username = get_username_from_uid(token_info["uid"])
     msg = {}
     if (body["data"]["offer"].get("description")): #la descrizione è opzionale
         msg = {
             "receiver": body["data"]["receiver"],
             "from": get_username_from_uid(token_info["uid"]),
             "data": {
-                "offer": Message(body["data"]["offer"]["code"], body["data"]["offer"]["description"] ).to_dict(), 
+                "offer": Message( CreatemessageData(body["data"]["offer"]["code"], body["data"]["offer"]["description"]) ).to_dict(),  #TODO TypeError: __init__() takes from 1 to 2 positional arguments but 3 were given
                 "date": "{}".format(datetime.date.today()), 
                 "id_snd": id_snd, 
                 "id_rcv": id_rcv
             }, 
             "link": {
-                "self_snd": "/{get_username_from_uid(token_info['uid'])}/{id_snd}".format(id_snd), 
-                "prev_snd": "/{get_username_from_uid(token_info['uid'])}/{prev_snd}".format(prev_snd), 
-                "next_snd": "/{get_username_from_uid(token_info['uid'])}/{id_snd}".format(id_snd), 
-                "self_rcv": "/{body['data']['receiver']}/{id_rcv}".format(id_rcv), 
-                "prev_rcv": "/{body['data']['receiver']}/{prev_rcv}".format(prev_rcv), 
-                "next_rcv": "/{body['data']['receiver']}/{id_rcv}".format(id_rcv)
+                "self_snd": '/{}/{}'.format(username, id_snd), 
+                "prev_snd": '/{}/{}'.format(username, prev_snd), 
+                "next_snd": '/{}/{}'.format(username, id_snd), 
+                "self_rcv": "/{}/{}".format(body['data']['receiver'], id_rcv), 
+                "prev_rcv": "/{}/{}".format(body['data']['receiver'], prev_rcv), 
+                "next_rcv": "/{}/{}".format(body['data']['receiver'], id_rcv)
             }
         }
     else:
@@ -266,7 +268,7 @@ def post_createmessage(token_info=None, body=None):  # noqa: E501
         }
     db_message.append(msg)     
     # simpleCamundaRESTPost.sendMessage("CodeMessage", {"msgBody": {"value": msg, "type": "Body1"}}) #TODO controlla che il tipo sia Body1
-    simpleCamundaRESTPost.sendMessage("CodeMessage", {"code": {"value": body["data"]["offer"]["code"], "type": "String"}}) #TODO controlla che il tipo sia Body1
+    simpleCamundaRESTPost.sendMessage("CodeMessage", {"code": {"value": body["data"]["offer"]["code"], "type": "String"}, "username": {"value": body['data']['receiver'], "type": "String"}}) #TODO controlla che il tipo sia Body1
 
 
 '''
@@ -356,3 +358,28 @@ def post_login(token_info=None):
             return {"token": new_token, "expiration_date": (tokens[token_info["user"]]["issued"] + 60)} #TODO supponiamo che il token scada in 60 secondi
         
     return None
+
+
+def post_createmessages(token_info=None, body=None):  # noqa: E501
+    """Invia messaggi
+
+    È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, invia un messaggio il cui corpo e destinatario sono quelli specificati nel body della richiesta HTTP. # noqa: E501
+
+    :param body: Il body della richiesta HTTP è di tipo &#x60;application/vnd.api+json&#x60; in quanto l&#x27;API prontogramAPI è al livello 3 di modello di maturità di Richardson.
+    :type body: list | bytes
+
+    :rtype: None
+    """
+    
+    print("======== DEBUG ========")
+    print(body)
+
+    if connexion.request.is_json:
+        #body = [CreatemessageData.from_dict(d) for d in connexion.request.get_json()]  # noqa: E501
+        for message in body["messages"]: 
+            #TODO probabilmente sarà da sistemare
+            post_createmessage(token_info, {"data": message}) 
+    
+    return 200, "ok"
+
+

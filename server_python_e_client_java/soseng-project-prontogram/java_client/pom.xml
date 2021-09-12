@@ -2,9 +2,9 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.swagger</groupId>
-  <artifactId>prontogramprovider.prontogram-client</artifactId>
+  <artifactId>swagger-java-client</artifactId>
   <packaging>jar</packaging>
-  <name>prontogramprovider.prontogram-client</name>
+  <name>swagger-java-client</name>
   <version>1.0.0</version>
   <url>https://github.com/swagger-api/swagger-codegen</url>
   <description>Swagger Java</description>

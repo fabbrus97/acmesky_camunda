@@ -28,6 +28,7 @@ public class SaveInterests implements JavaDelegate{
 		 * e vengono qui reperiti
 		*/
 		
+		
 		String departure_airport = execution.getVariable("departure_airport").toString();
 		String arrival_airport = execution.getVariable("arrival_airport").toString();
 		
@@ -42,12 +43,14 @@ public class SaveInterests implements JavaDelegate{
 		
 		String client_id = execution.getVariable("client_id").toString(); 
 		
+		String clientAddress = execution.getVariable("clientAddress").toString();
+		
 		int cost = (int) execution.getVariable("cost");
 		
 		System.out.println("Chiamo il servizio per salvare gli interessi");
 		
 		saveInterestService.service(departure_airport, arrival_airport, departure_time_min, departure_time_max,
-				arrival_time_min, arrival_time_max, client_id, cost);
+				arrival_time_min, arrival_time_max, client_id, clientAddress, cost);
 		
 	}
 

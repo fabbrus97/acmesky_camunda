@@ -9,7 +9,7 @@ public class Interest{
 	String returnHome_time_max;
 	
 	int cost;
-	
+		
 	public String getDeparture_airport() {
 		return departure_airport;
 	}

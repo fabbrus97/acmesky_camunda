@@ -12,20 +12,17 @@ public class RemoveCode implements JavaDelegate{
 	
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		// TODO Auto-generated method stub
-		//nota: code2delete è salvato in it.unibo.soseng.acmesky.CheckCode
-		Object link = execution.getVariable("paymLink");
-		if (link != null) {
-			String code = StaticValues.codes2delete.get(link.toString());
-			if (code != null) {
-				removeCodeService.service(code);
-			} else {
-				System.out.println("ATTENZIONE!!! CODE è null");
-			}
-		} else {
-			System.out.println("ATTENZIONE!!! LINK è null");
-		}
+			
+		removeCodeService.service(execution);
 		
+		
+		/*String link = StaticValues.transazioni.getFirst().paymentLink; // execution.getVariable("paymLink");
+		if (link != null) {
+			String code = StaticValues.transazioni.getFirst().acmesky_offer_code; //StaticValues.codes2delete.get(link);
+			if (code != null) {
+				removeCodeService.service(execution, code);
+			} 
+		}*/
 	}
 
 }

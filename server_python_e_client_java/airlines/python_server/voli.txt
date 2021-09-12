@@ -1,15 +1,2 @@
-FCO BLQ 10/09/2021 20:01 PM 801 japanairl japanairl482
-JFK LIS 28/08/2021 17:59 PM 1383 emirates emirates468
-MOW AUH 07/09/2021 23:05 PM 61 rayanair rayanair370
-CTA JFK 26/08/2021 05:05 AM 411 rayanair rayanair382
-CTA FCO 04/09/2021 11:32 AM 226 rayanair rayanair15
-LIS VRN 10/09/2021 01:07 AM 137 rayanair rayanair318
-FCO FRA 06/09/2021 12:26 PM 1040 emirates emirates260
-MOW ORY 03/09/2021 19:04 PM 732 japanairl japanairl313
-BLQ BCN 30/08/2021 22:21 PM 1156 emirates emirates349
-LGW BCN 03/09/2021 04:57 AM 280 britishaw britishaw67
 TYO BGY 29/09/2021 23:38 PM 1303 emirates emirates249
-ORY PEK 06/09/2021 03:05 AM 693 japanairl japanairl230
-AUH CTA 10/09/2021 02:19 AM 1204 emirates emirates207
-BOG PEK 04/09/2021 14:56 PM 745 japanairl japanairl202
 FCO AUH 24/09/2021 23:59 PM 1146 emirates emirates243

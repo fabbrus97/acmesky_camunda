@@ -8,13 +8,24 @@ public class SendPaymentLinkService {
 		
 	}
 	
-	public static void service(RuntimeService runtimeService, String link, String code) {
+	public static void service(RuntimeService runtimeService, String code) {
+		
+		String link = "";
+		
+		String username = "";
+		for(Transazione t : StaticValues.transazioni) {
+			if (t.acmesky_offer_code.contentEquals(code)) {
+				username = t.username;
+				link = t.paymentLink;
+				break;
+			}
+		}
 		
 		StaticValues.codes2delete.put(link, code);
 		
 		runtimeService.createMessageCorrelation("PaymentLink")
 		.setVariable("paymentLink", link)
-		.setVariable("codeCorrect", true)
+		.setVariable("username", username)
 		.correlateAll();
 		
 		

@@ -1,8 +1,8 @@
-# prontogramprovider.prontogram-client
+# swagger-java-client
 
 prontogramAPI
-- API version: 1.0.0
-  - Build date: 2021-07-19T19:09:52.075194+02:00[Europe/Rome]
+- API version: 1.0
+  - Build date: 2021-09-12T15:56:28.985+02:00[Europe/Rome]
 
 È l'API Restful offerta dall'applicazione di messaggistica *Prontogram* che vi racchiude la capability di inoltrare i messaggi circa le offerte inviate da ACMESky ai clienti interessati.
 
@@ -39,7 +39,7 @@ Add this dependency to your project's POM:
 ```xml
 <dependency>
   <groupId>io.swagger</groupId>
-  <artifactId>prontogramprovider.prontogram-client</artifactId>
+  <artifactId>swagger-java-client</artifactId>
   <version>1.0.0</version>
   <scope>compile</scope>
 </dependency>
@@ -50,7 +50,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "io.swagger:prontogramprovider.prontogram-client:1.0.0"
+compile "io.swagger:swagger-java-client:1.0.0"
 ```
 
 ### Others
@@ -63,7 +63,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/prontogramprovider.prontogram-client-1.0.0.jar`
+* `target/swagger-java-client-1.0.0.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -71,10 +71,10 @@ Then manually install the following JARs:
 Please follow the [installation](#installation) instruction and execute the following Java code:
 
 ```java
-import prontogramprovider.*;
-import prontogramprovider.auth.*;
+import io.swagger.client.*;
+import io.swagger.client.auth.*;
 import io.swagger.client.model.*;
-import prontogramprovider.prontogram_client.DefaultApi;
+import io.swagger.client.api.DefaultApi;
 
 import java.io.File;
 import java.util.*;
@@ -107,6 +107,7 @@ Class | Method | HTTP request | Description
 *RisorseApi* | [**getMessageUsernameMessageid**](docs/RisorseApi.md#getMessageUsernameMessageid) | **GET** /message/{username}/{messageid} | Restituisci il messaggio del cliente
 *RisorseApi* | [**postAllmessage**](docs/RisorseApi.md#postAllmessage) | **GET** /message | Restituisci tutti i messaggi
 *RisorseApi* | [**postCreatemessage**](docs/RisorseApi.md#postCreatemessage) | **POST** /createmessage | Invia messaggio
+*RisorseApi* | [**postCreatemessages**](docs/RisorseApi.md#postCreatemessages) | **POST** /createmessages | Invia messaggi
 *RisorseApi* | [**postLogin**](docs/RisorseApi.md#postLogin) | **POST** /login | Autentica un cliente
 
 ## Documentation for Models
@@ -128,6 +129,8 @@ Class | Method | HTTP request | Description
  - [InlineResponse200Message](docs/InlineResponse200Message.md)
  - [MapsV1Credentials](docs/MapsV1Credentials.md)
  - [Message](docs/Message.md)
+ - [MessageItem](docs/MessageItem.md)
+ - [MessageList](docs/MessageList.md)
  - [OfferMessage](docs/OfferMessage.md)
  - [RegisterBody](docs/RegisterBody.md)
 

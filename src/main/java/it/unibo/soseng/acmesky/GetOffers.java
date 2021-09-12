@@ -5,11 +5,6 @@ import javax.inject.Inject;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
-/*import io.swagger.airline.*; TODO
-import io.swagger.airline.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.airline.airline_client.RisorseApi;
-*/
 
 public class GetOffers implements JavaDelegate {
 

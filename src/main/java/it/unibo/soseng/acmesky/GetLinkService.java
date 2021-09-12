@@ -29,21 +29,27 @@ public class GetLinkService {
 	private static String offer_code = "";
 	private static String company_name = "";
 	
-	public static String service(String code) {
-		offer_code = code;
+	//public static String service(String code) {
+	public static void service() {
+		offer_code = StaticValues.transazioni.getFirst().acmesky_offer_code;
+		//offer_code = code;
 		
 		//if key
 		if (StaticValues.payment_provider_key != "") {
 			// chiedi link
 			
 			String link = askLink();
-			return link;
+			//return link;
+	
+			Transazione t = StaticValues.transazioni.getFirst(); 
+			StaticValues.transazioni.removeFirst();
+			t.paymentLink = link;
+			StaticValues.transazioni.addFirst(t);
 		} 
 		// else register
 		else {
 			ApiClient defaultClient = Configuration.getDefaultApiClient();
 			defaultClient.setBasePath(StaticValues.paymentUrl);
-			
 			
 			RisorseApi apiInstance = new RisorseApi();
 	        MapsV1Credentials body = new MapsV1Credentials(); // MapsV1Credentials |
@@ -54,12 +60,13 @@ public class GetLinkService {
 	            System.out.println(result);
 	            StaticValues.payment_provider_key = result.getToken() ;
 	            
-	            return askLink();
+	            askLink();
+	            return;
 	            
 	        } catch (ApiException e) {
 	            System.err.println("Exception when calling RisorseApi#postRegistration");
 	            e.printStackTrace();
-	            return null;
+	            return;
 	        }
 		}
 	}
@@ -85,7 +92,7 @@ public class GetLinkService {
         amount.setCurrency("eur");
         amount.setValue(BigDecimal.valueOf(f.getPrice().getAmount()));
         body.setAmount(amount);
-        body.setOfferCode(offer_code); //TODO non ricordo se è offer_code - cioè offerta cliente - oppure codice del volo
+        body.setOfferCode(offer_code); 
         try {
             ActiveLink result = apiInstance.getLink(body);
             System.out.println(result);
@@ -98,6 +105,14 @@ public class GetLinkService {
 	}
 	
 	private static Flight get_flight(String user_code) {
+		for (Transazione transazione : StaticValues.transazioni) {
+			if (transazione.acmesky_offer_code.contentEquals(user_code)) {
+				company_name = transazione.company_name;
+				return transazione.flight;
+			}
+		}
+		
+		/*
 		Codes c = GenerateCodesService.deserialize_file();
 		String flight_code = "";
 		for (Code code : c.getCodes()) {
@@ -117,7 +132,7 @@ public class GetLinkService {
 				}
 			}
 			
-		}
+		}*/
 		
 		return null;
 	}

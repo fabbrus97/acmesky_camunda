@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.jar.Attributes.Name;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonWriter;
@@ -19,6 +20,7 @@ import it.unibo.soseng.acmesky.Json.Clients;
 import it.unibo.soseng.acmesky.Json.Code;
 import it.unibo.soseng.acmesky.Json.Codes;
 import it.unibo.soseng.acmesky.Json.Flight;
+import it.unibo.soseng.acmesky.Json.Interest;
 import it.unibo.soseng.acmesky.Json.Offers;
 
 public class FindMatchService {
@@ -26,11 +28,11 @@ public class FindMatchService {
 	private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 	private static DateTimeFormatter dtf_flights = DateTimeFormatter.ofPattern("dd/MM/yyyy, HH:mma, 'CET'");
 	private static HashMap<String, DepRetFlights> userFlights = new HashMap<String, DepRetFlights>();
+	private static HashMap<String, ArrayList<Interest>> interests2delete = new HashMap<String, ArrayList<Interest>>(); //nome utente, interesse
 	
 	public FindMatchService() {
 		
 	}
-
 
 	public static ArrayList<String[]> service() {
 		
@@ -42,9 +44,11 @@ public class FindMatchService {
 		 * il volo di andata viene cancellato
 		*/
 		
-		findInterests(true);
-		findInterests(false);
-		
+		Clients clients = SaveInterestService.deserialize_file();
+		if (clients != null && clients.getClients() != null) {
+			findInterests(true);
+			findInterests(false);
+		}
 		ArrayList<String[]> matches = new ArrayList<String[]>(); 
 		
 		userFlights.forEach((user, flights) -> {			
@@ -70,6 +74,17 @@ public class FindMatchService {
 			
 		});
 		
+		//ora che abbiamo generato i match, rimuoviamo gli interessi altrimenti acmesky li rimanda sempre
+		//Clients clients = SaveInterestService.deserialize_file();
+		clients.getClients().forEach((name, client) -> {
+			if (interests2delete.get(name) != null) {
+				client.getInterests().removeAll(interests2delete.get(name));
+				clients.getClients().put(name, client);
+			}
+			
+		});
+		SaveInterestService.serialize_json(clients);
+		
 		return matches;
 	}
 	
@@ -77,7 +92,6 @@ public class FindMatchService {
 		Offers o = GetOffersService.getJSON();
 		Clients clients = SaveInterestService.deserialize_file();
 		
-				
 		clients.getClients().forEach( (name, client) -> {
 
 			client.getInterests().forEach(interest -> {
@@ -104,6 +118,17 @@ public class FindMatchService {
 							boolean isArrivalOk = within(departure_min, departure_max, takeoff);
 							
 							if (isArrivalOk && isPriceOk && isDepartureOk && isDestinationOk) {
+								ArrayList<Interest> tmp;
+								if (interests2delete.containsKey(name)) {
+									tmp = interests2delete.get(name);
+									tmp.add(interest);
+									
+								} else {
+									tmp = new ArrayList<Interest>();
+									tmp.add(interest);
+								}
+								interests2delete.put(name, tmp);
+								
 								if (userFlights.containsKey(name)) {
 									((DepRetFlights)userFlights.get(name)).departureFlights.add(flight);
 								} else {
@@ -145,9 +170,16 @@ public class FindMatchService {
 														boolean isPriceReallyOk = departure_flight.getPrice().getAmount() + flight.getPrice().getAmount() <= interest.getCost();  
 														
 														if (isReturnHomeOk && isPriceReallyOk && isDepartureOk && isDestinationOk) {
+															
+															
 															((DepRetFlights)userFlights.get(name)).returnFlights.add(flight);
 														} else {
+															ArrayList<Interest> tmp = interests2delete.get(name);
+															tmp.remove(interest);
+															interests2delete.put(name, tmp);
+															
 															flights2remove.add(departure_flight);
+															
 														}
 													}
 												}

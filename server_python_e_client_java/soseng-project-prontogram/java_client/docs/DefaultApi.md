@@ -17,8 +17,8 @@ Registra un nuovo utente; prende in input solo un nome utente e una password
 ### Example
 ```java
 // Import classes:
-//import prontogramprovider.ApiException;
-//import prontogramprovider.prontogram_client.DefaultApi;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.api.DefaultApi;
 
 
 DefaultApi apiInstance = new DefaultApi();

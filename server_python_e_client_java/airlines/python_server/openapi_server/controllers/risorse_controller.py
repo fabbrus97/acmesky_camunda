@@ -17,8 +17,22 @@ from openapi_server.models.inline_response200_flights import InlineResponse200Fl
 from openapi_server import util
 from random import randint, seed
 
+import simpleCamundaRESTPost
+
 def add_flight():
-    sources = ["BLQ","BGY","CTA","MXP","VRN","FCO","TYO","PEK","JFK","LGW","FRA","BCN","LIS","BOG","AUH","MOW","ORY"]
+    sources = ["airport BLQ",
+               "airport BGY",
+               "airport CTA",
+               "airport MXP",
+               "airport VRN",
+               "airport FCO",
+               "airport LGW",
+               "airport FRA",
+               "airport BCN",
+               "airport LIS",
+               "airport AUH",
+               "airport SVO", 
+               "airport ORY"]
 
     now = datetime.datetime.now()
 
@@ -140,6 +154,7 @@ def post_lmflight(lmflight=None):  # noqa: E501
     :rtype: None
     """
     simpleCamundaRESTPost.sendMessage("LM_Offers", {"lmflights": {"value": lmflight, "type": "Lmflight"}})
+    #TODO se non va "type": "Lmflight", prova "type": "Object"
 
 
 def post_notifypayment(inline_object=None):  # noqa: E501
@@ -153,15 +168,15 @@ def post_notifypayment(inline_object=None):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        #inline_object = InlineObject.from_dict(connexion.request.get_json())  # noqa: E501
-        #simpleCamundaRESTPost.sendMessage("getTicket")
+        inline_object = InlineObject.from_dict(connexion.request.get_json())  # noqa: E501
+        simpleCamundaRESTPost.sendMessage("getTicket", variables={"username": {"value": inline_object.customer["username"], "type": "String"}, "offer_code": {"value": inline_object.offer_code, "type": "String"} })
         '''
         esempio: simplecamundarestpost.sendMessage("LM_Offer", {	
 		    "aVariable" : {"value" : "aNewValue", "type": "String"},
 		    "anotherVariable" : {"value" : true, "type": "Boolean"}	
 	        })
         '''
-    return 'do some magic!'
+    return "notify payment ok", 200
 
     #invio del biglietto aereo al cliente
 

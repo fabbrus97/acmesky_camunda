@@ -18,15 +18,10 @@ public class BookTransport implements JavaDelegate {
 	
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		// TODO Auto-generated method stub
 		
-		
-	    BookTransportService.service((Luoghi) execution.getVariable("luoghi"), (Data) execution.getVariable("data"), (Ora) execution.getVariable("ora"));
+		//la variabile acmesky_code viene impostata dal messaggio dell'utente quando ci contatta
+	    BookTransportService.service(execution.getVariable("acmesky_code").toString());
 	    
-	    
-	    
-	    //String greet = ws.hello((String)execution.getVariable("customerId"));
-	    //execution.setVariable("greet", greet);
 		
 	}
 

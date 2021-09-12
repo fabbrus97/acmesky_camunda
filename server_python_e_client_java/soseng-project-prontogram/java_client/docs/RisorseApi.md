@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**getMessageUsernameMessageid**](RisorseApi.md#getMessageUsernameMessageid) | **GET** /message/{username}/{messageid} | Restituisci il messaggio del cliente
 [**postAllmessage**](RisorseApi.md#postAllmessage) | **GET** /message | Restituisci tutti i messaggi
 [**postCreatemessage**](RisorseApi.md#postCreatemessage) | **POST** /createmessage | Invia messaggio
+[**postCreatemessages**](RisorseApi.md#postCreatemessages) | **POST** /createmessages | Invia messaggi
 [**postLogin**](RisorseApi.md#postLogin) | **POST** /login | Autentica un cliente
 
 <a name="getMessageUsername"></a>
@@ -22,11 +23,11 @@ Restituisci i primi 10 messaggi del cliente
 ### Example
 ```java
 // Import classes:
-//import prontogramprovider.ApiClient;
-//import prontogramprovider.ApiException;
-//import prontogramprovider.Configuration;
-//import prontogramprovider.auth.*;
-//import prontogramprovider.prontogram_client.RisorseApi;
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.RisorseApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -71,11 +72,11 @@ Restituisci 10 messaggi del cliente
 ### Example
 ```java
 // Import classes:
-//import prontogramprovider.ApiClient;
-//import prontogramprovider.ApiException;
-//import prontogramprovider.Configuration;
-//import prontogramprovider.auth.*;
-//import prontogramprovider.prontogram_client.RisorseApi;
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.RisorseApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -123,11 +124,11 @@ Restituisci il messaggio del cliente
 ### Example
 ```java
 // Import classes:
-//import prontogramprovider.ApiClient;
-//import prontogramprovider.ApiException;
-//import prontogramprovider.Configuration;
-//import prontogramprovider.auth.*;
-//import prontogramprovider.prontogram_client.RisorseApi;
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.RisorseApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -175,11 +176,11 @@ Restituisci tutti i messaggi
 ### Example
 ```java
 // Import classes:
-//import prontogramprovider.ApiClient;
-//import prontogramprovider.ApiException;
-//import prontogramprovider.Configuration;
-//import prontogramprovider.auth.*;
-//import prontogramprovider.prontogram_client.RisorseApi;
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.RisorseApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -221,11 +222,11 @@ Invia messaggio
 ### Example
 ```java
 // Import classes:
-//import prontogramprovider.ApiClient;
-//import prontogramprovider.ApiException;
-//import prontogramprovider.Configuration;
-//import prontogramprovider.auth.*;
-//import prontogramprovider.prontogram_client.RisorseApi;
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.RisorseApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -259,6 +260,55 @@ null (empty response body)
  - **Content-Type**: application/vnd.api+json
  - **Accept**: Not defined
 
+<a name="postCreatemessages"></a>
+# **postCreatemessages**
+> postCreatemessages(body)
+
+Invia messaggi
+
+È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, invia un messaggio il cui corpo e destinatario sono quelli specificati nel body della richiesta HTTP.
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.RisorseApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+
+RisorseApi apiInstance = new RisorseApi();
+MessageList body = new MessageList(); // MessageList | Il body della richiesta HTTP è di tipo `application/vnd.api+json` in quanto l'API prontogramAPI è al livello 3 di modello di maturità di Richardson.
+try {
+    apiInstance.postCreatemessages(body);
+} catch (ApiException e) {
+    System.err.println("Exception when calling RisorseApi#postCreatemessages");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**MessageList**](MessageList.md)| Il body della richiesta HTTP è di tipo &#x60;application/vnd.api+json&#x60; in quanto l&#x27;API prontogramAPI è al livello 3 di modello di maturità di Richardson. | [optional]
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[tokenSessione](../README.md#tokenSessione)
+
+### HTTP request headers
+
+ - **Content-Type**: application/vnd.api+json
+ - **Accept**: Not defined
+
 <a name="postLogin"></a>
 # **postLogin**
 > InlineResponse2003 postLogin()
@@ -270,11 +320,11 @@ Autentica un cliente
 ### Example
 ```java
 // Import classes:
-//import prontogramprovider.ApiClient;
-//import prontogramprovider.ApiException;
-//import prontogramprovider.Configuration;
-//import prontogramprovider.auth.*;
-//import prontogramprovider.prontogram_client.RisorseApi;
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.RisorseApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 // Configure HTTP basic authorization: basicAuth
