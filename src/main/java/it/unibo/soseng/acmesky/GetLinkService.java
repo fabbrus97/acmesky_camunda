@@ -33,18 +33,14 @@ public class GetLinkService {
 	public static void service() {
 		offer_code = StaticValues.transazioni.getFirst().acmesky_offer_code;
 		//offer_code = code;
-		
+		String link; 
 		//if key
 		if (StaticValues.payment_provider_key != "") {
 			// chiedi link
 			
-			String link = askLink();
+			link = askLink();
 			//return link;
-	
-			Transazione t = StaticValues.transazioni.getFirst(); 
-			StaticValues.transazioni.removeFirst();
-			t.paymentLink = link;
-			StaticValues.transazioni.addFirst(t);
+			
 		} 
 		// else register
 		else {
@@ -60,7 +56,7 @@ public class GetLinkService {
 	            System.out.println(result);
 	            StaticValues.payment_provider_key = result.getToken() ;
 	            
-	            askLink();
+	            link = askLink();
 	            return;
 	            
 	        } catch (ApiException e) {
@@ -69,6 +65,17 @@ public class GetLinkService {
 	            return;
 	        }
 		}
+		
+		Transazione tmp = new Transazione(""); 
+		for (Transazione t : StaticValues.transazioni) { 
+			if (t.acmesky_offer_code.contentEquals(offer_code)) {
+				tmp = t;
+				break;
+			}
+		}
+		StaticValues.transazioni.remove(tmp);
+		tmp.paymentLink = link;
+		StaticValues.transazioni.add(tmp);
 	}
 	
 	private static String askLink() {

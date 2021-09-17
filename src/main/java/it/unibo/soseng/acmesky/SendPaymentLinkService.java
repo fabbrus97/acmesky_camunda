@@ -22,7 +22,7 @@ public class SendPaymentLinkService {
 		}
 		
 		StaticValues.codes2delete.put(link, code);
-		
+		System.out.println("ACMESKY: sto per mandare all'utente il link " + link);
 		runtimeService.createMessageCorrelation("PaymentLink")
 		.setVariable("paymentLink", link)
 		.setVariable("username", username)
