@@ -61,14 +61,14 @@ public class SaveInterestService {
 			interest.setCost(cost);
 		
 			//cerchiamo se esiste già una entry per il client_id
-			if (clients.clients.get(client_id) != null){
-				clients.clients.get(client_id).setClientAddress(clientAddress);
+			if (clients.clients.get(client_id) != null){ 
 				clients.clients.get(client_id).interests.add(interest);
 			} else { //crea nuovo client
 				Client c = new Client();
 				ArrayList<Interest> interests = new ArrayList<Interest>();
 				interests.add(interest);
 				c.setInterests(interests);
+				c.setClientAddress(clientAddress);
 				clients.clients.put(client_id, c);
 			}
 			

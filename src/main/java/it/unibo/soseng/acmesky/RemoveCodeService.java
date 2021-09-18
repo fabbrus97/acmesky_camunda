@@ -15,14 +15,16 @@ public class RemoveCodeService {
 	
 	public static void service(DelegateExecution execution) {
 		String link = execution.getVariable("paymLink").toString();
-		String code2delete = "";
+		
+		Transazione trans = null;
 		for (Transazione t: StaticValues.transazioni) {
 			if (t.paymentLink.contentEquals(link)) {
-				code2delete = t.acmesky_offer_code;
+				trans = t; 
+				break;
 			}
 		}
 		//String code2delete = //StaticValues.codes2delete.get(link);
-		final String code2deletefinal = code2delete;
+		final String code2deletefinal = trans.acmesky_offer_code;
 		Codes codes = GenerateCodesService.deserialize_file();
 		
 		/*codes.getCodes().forEach( code -> {
@@ -45,6 +47,10 @@ public class RemoveCodeService {
 		});*/
 		codes.getCodes().removeIf( code -> code.getCode().equals(code2deletefinal) );
 		GenerateCodesService.serialize_json(codes);	
+		
+		//Setto la variabile cost che serve per il proseguimento del processo 
+		execution.setVariable("cost", trans.flight.getPrice().getAmount());
+		System.out.println("ACMESKY: ho impostato come prezzo " + trans.flight.getPrice().getAmount());
 		
 
 		

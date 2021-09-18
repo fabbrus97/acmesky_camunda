@@ -25,7 +25,7 @@ import java.io.IOException;
  * Body della richiesta di registrazione
  */
 @Schema(description = "Body della richiesta di registrazione")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2021-09-12T15:56:28.985+02:00[Europe/Rome]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2021-09-17T11:29:46.465+02:00[Europe/Rome]")
 public class RegisterBody {
   @SerializedName("username")
   private String username = null;

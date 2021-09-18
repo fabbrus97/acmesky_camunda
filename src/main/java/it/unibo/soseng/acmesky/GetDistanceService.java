@@ -21,7 +21,8 @@ public class GetDistanceService {
 
     public static void service(DelegateExecution execution){
 
-        RisorseApi apiInstance = new RisorseApi();
+        System.out.println("ACMESKY: cerco le distanze casa utente - aeroporto");
+    	RisorseApi apiInstance = new RisorseApi();
 
         if (StaticValues.distance_token == ""){
 
@@ -78,13 +79,15 @@ public class GetDistanceService {
         String client_home_address = "";
         String departure_airport = "";
         
-        String link = execution.getVariable("paymLink").toString();
-        for (Transazione t : StaticValues.transazioni) {
-        	if (t.paymentLink.equals(link)) { 
+        String id = execution.getVariable("paymLink").toString();
+        	
+    	for (Transazione t : StaticValues.transazioni) {
+        	if (t.paymentLink != null && t.paymentLink.equals(id)) { 
         		client_home_address = t.home_address;
         		departure_airport = t.flight.getDepartureFrom();
         	}
         }
+    
         
         body2.setPointA(client_home_address);
         ArrayList<String> airport = new ArrayList<String>();
@@ -102,7 +105,9 @@ public class GetDistanceService {
             //System.out.println("Risultato della richiesta delle distanze tra " + execution.getVariable("clientAddress").toString() + " e " + execution.getVariable("airport").toString() + ": " + result);
 
             execution.setVariable("distance",(int)dist);
-            execution.setVariable("unit",unit);
+            
+            System.out.println("ACMESKY: ricerca distanze completata, distanze settate: " + dist);
+            
         } catch (ApiException e) {
             System.err.println("Exception when calling RisorseApi#postDistance");
             e.printStackTrace();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.9.0" camunda:diagramRelationId="24f5ba53-f1a6-4a06-9aa5-be1aba879c9c">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.5.0" camunda:diagramRelationId="24f5ba53-f1a6-4a06-9aa5-be1aba879c9c">
   <bpmn:collaboration id="soseng-project">
     <bpmn:participant id="Participant_06e7d9m" name="ACMESky" processRef="acmesky" />
     <bpmn:participant id="Participant_1o1fr4k" name="Compagnia trasporti vicina" processRef="Process_07wgrty" />
@@ -104,10 +104,10 @@
       <bpmn:incoming>Flow_0dadaex</bpmn:incoming>
       <bpmn:outgoing>Flow_1u1vlmt</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:sendTask id="Activity_11nr53t" name="Chiedi al cliente se vuole servizio di trasporto" camunda:type="external" camunda:topic="askTransportClient">
+    <bpmn:sendTask id="Activity_11nr53t" name="Chiedi al cliente se vuole servizio di trasporto" camunda:class="it.unibo.soseng.acmesky.AskClientTransport">
       <bpmn:incoming>Flow_092jnmi</bpmn:incoming>
     </bpmn:sendTask>
-    <bpmn:serviceTask id="Activity_1izhf7m" name="Richiedi e ottieni distanze" camunda:class="GetDistance">
+    <bpmn:serviceTask id="Activity_1izhf7m" name="Richiedi e ottieni distanze" camunda:class="it.unibo.soseng.acmesky.GetDistance">
       <bpmn:incoming>Flow_01yvahn</bpmn:incoming>
       <bpmn:outgoing>Flow_0pwa5fs</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -251,7 +251,7 @@
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_172zm0j" sourceRef="Event_00hma59" targetRef="Gateway_1wl7c9j" />
     <bpmn:sequenceFlow id="Flow_0jk6i25" name="Vero" sourceRef="Gateway_1wl7c9j" targetRef="Activity_0zmnvlt">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${bookTransport == false}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${bookTransport == true}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_09ch4md" name="No" sourceRef="Gateway_03qoalq" targetRef="Event_1eaujzi">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${paymSucc == false}</bpmn:conditionExpression>
@@ -261,14 +261,14 @@
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1kycib0" sourceRef="Activity_1tvvo21" targetRef="Gateway_0xxsic8" />
     <bpmn:sequenceFlow id="Flow_0ckyeo5" name="Falso" sourceRef="Gateway_0jtes1g" targetRef="Event_1eaujzi">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{distance &lt; 30}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{distance &gt; 30}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0pwa5fs" sourceRef="Activity_1izhf7m" targetRef="Gateway_0jtes1g" />
     <bpmn:sequenceFlow id="Flow_01yvahn" name="Vero" sourceRef="Gateway_0xxsic8" targetRef="Activity_1izhf7m">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${cost &gt;= 1000}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_092jnmi" name="Vero" sourceRef="Gateway_0jtes1g" targetRef="Activity_11nr53t">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{distance &gt;= 30}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{distance &lt;= 30}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1u1vlmt" sourceRef="Activity_0v4xxn4" targetRef="Event_1gklf2v" />
     <bpmn:sequenceFlow id="Flow_0dadaex" sourceRef="Activity_0zmnvlt" targetRef="Activity_0v4xxn4" />

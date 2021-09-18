@@ -13,19 +13,22 @@ public class SendPaymentLinkService {
 		String link = "";
 		
 		String username = "";
+		
+		System.out.println("ACMESKY: Scorro le transazioni, cerco codcie offerta " + code);
+		
 		for(Transazione t : StaticValues.transazioni) {
+			System.out.println(t.username + " " + t.paymentLink);
 			if (t.acmesky_offer_code.contentEquals(code)) {
-				username = t.username;
 				link = t.paymentLink;
 				break;
 			}
 		}
 		
 		StaticValues.codes2delete.put(link, code);
-		System.out.println("ACMESKY: sto per mandare all'utente il link " + link);
+		System.out.println("ACMESKY: sto per mandare all'utente il link " + link + " per lo username " + username);
 		runtimeService.createMessageCorrelation("PaymentLink")
 		.setVariable("paymentLink", link)
-		.setVariable("username", username)
+		.setVariable("code", code)
 		.correlateAll();
 		
 		

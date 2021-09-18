@@ -17,8 +17,8 @@ public class BookTransportService {
 	
 	private final static String RESPONSE_OK = "Nuovo utente creato";
 	private final static String USER_REGISTERED = "Username esistente";
-	private static DateTimeFormatter dtf_flights = DateTimeFormatter.ofPattern("dd/MM/yyyy, hh:mma, 'CET'");
-	
+	private static DateTimeFormatter dtf_flights = DateTimeFormatter.ofPattern("dd/MM/yyyy, HH:mma, 'CET'");
+	//Nota: il formato dell'ora va da 1 a 23 - cioè ad esempio l'ora 23:15 è legale -, però viene comunque specificato dopo se è AM o PM anche se non necessario
 	public BookTransportService() {
 		
 	}
@@ -37,7 +37,9 @@ public class BookTransportService {
 				i.setComune(t.home_address.split(",")[1]);
 				
 				luoghi.setPartenza(i);
+				luoghi.setArrivo(i); //TODO dev'essere un aeroporto
 				
+				System.out.println("ACMESKY: provo a formattare " + t.flight.getTakeoff());
 				LocalDateTime ldt = LocalDateTime.from(dtf_flights.parse(t.flight.getTakeoff()));
 				data.setGiorno(ldt.getDayOfMonth()); data.setMese(ldt.getMonthValue()); data.setAnno(ldt.getYear());
 				ora.setHh(ldt.getHour()); ora.setMm(ldt.getMinute());
@@ -56,7 +58,9 @@ public class BookTransportService {
 	    NoleggioPort noleggioPort = myService.getPort(qname, NoleggioPort.class);
 	    
 		String r;
+		System.out.println("ACMESKY: richiesta per compagnia trasporti...");
 	    if (StaticValues.token_compagnia_trasporti.isEmpty()) {
+	    	System.out.println("ACMESKY: richiesta registrazione compagnia trasporti");
 	    	r = noleggioPort.registrazione(StaticValues.prontogram_password, StaticValues.prontogram_username); //possiamo usare le stesse credenziali
 	    	/*if (r.contentEquals(RESPONSE_OK)) {
 	    		System.out.println("Acmesky: richiesta prenotazione dopo registrazione servizio trasporto navette");
@@ -65,8 +69,8 @@ public class BookTransportService {
 		    	richiesta(noleggioPort, luoghi, data, ora);
 		    }*/
 	    } //else {
-	    	
-	    	richiesta(noleggioPort, luoghi, data, ora);
+    	
+    	richiesta(noleggioPort, luoghi, data, ora);
 	    //}
 	    	    
 	}
@@ -74,7 +78,12 @@ public class BookTransportService {
 	private static void richiesta(NoleggioPort noleggioPort, Luoghi luoghi, Data data, Ora ora) {
 		
 		String sid = noleggioPort.login(StaticValues.prontogram_password, StaticValues.prontogram_username);
-		if (!sid.isEmpty())
+		if (!sid.isEmpty()) {
+			System.out.println("ACMESKY: sid non è vuoto, faccio la richiesta per navetta");
 			noleggioPort.richiesta(luoghi, data, ora, sid);
+			System.out.println("ACMESKY: richiesta effettuata");
+		} else {
+			System.out.println("ACMESKY: sid è vuoto, non faccio la richiesta");
+		}
 	}
 }

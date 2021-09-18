@@ -1,6 +1,6 @@
 include "compagnie_noleggio_interface.iol"
 include "console.iol"
-include "string_utils.iol" 
+include "string_utils.iol"
 
 
 inputPort NoleggioPort {
@@ -10,7 +10,7 @@ inputPort NoleggioPort {
         .wsdl.port = "NoleggioPortServicePort";
         .dropRootValue = true
     }
-    Interfaces: prenotazione_trasporto 
+    Interfaces: prenotazione_trasporto
 }
 
 cset{
@@ -18,19 +18,14 @@ cset{
 }
 
 main {
-    println@Console("Server avviato")()
+    println@Console("Server avviato")();
 
     while(true){
-        [richiesta(dati_richiesta)] {
-            //TODO controlla dati e restituisci ok <=> se ci sono tutti i dati
-            println@Console("Richiesta prenotazione compagnia di noleggio effettuata")()
-        
-        }
 
         [registrazione(dati_registrazione)(response) {
-            
+
             synchronized( id ){
-                
+
                 newuser = dati_registrazione.username;
                 println@Console("Ricevuto username " + newuser)();
                 //controlla che nome utente sia univoco
@@ -40,14 +35,14 @@ main {
                     println@Console("controllo " + global.users[i].user.username)()
                     if (newuser == global.users[i].user.username){
                         ok = false
-                    } 
+                    }
                 }
-                if (ok){
+                if (!ok){
                     println@Console("Username esistente")()
                     response.text = "Username esistente"
                 }
                 else {
-            
+
                     length@StringUtils( dati_registrazione.password )( pwdlength );
                     //controlla che password sia lunga almeno 6
                     if (pwdlength < 7 ){
@@ -57,7 +52,7 @@ main {
 
                         println@Console("Creo nuovo utente  " + newuser)();
                         response.text = "Nuovo utente creato"
-                            
+
                         //aggiungi nuovo utente
                         println@Console("#global.users: " + #global.users)()
                         global.users[#global.users].user.username = newuser;
@@ -67,7 +62,7 @@ main {
                     }
                 }
             }
-            
+
         }]
 
         [login(dati_login)(nuovosid) {
@@ -88,12 +83,19 @@ main {
                                 nuovosid.sid = csets.sid = new
                                 println@Console("Login effettuato con successo!")()
                             }
-                        } 
+                        }
                     }
 
-                    
-                    
+
+
             }
         }]
+
+        [richiesta(dati_richiesta)] {
+            //TODO controlla dati e restituisci ok <=> se ci sono tutti i dati
+            println@Console("Richiesta prenotazione compagnia di noleggio effettuata")()
+
+        }
+
     }
 }
