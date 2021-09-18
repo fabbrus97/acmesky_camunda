@@ -28,7 +28,7 @@ public class SendPaymentService {
 		
 	}
 	
-	public static void service(String payment, String url, String username) {
+	public static void service(String payment, String url, String code) {
 		//payment è il link/codice al quale dobbiamo pagare - non l'indirizzo del server del servizio -, non
 		//so quale dei due sarà - o se sarà una stringa
 		
@@ -37,8 +37,10 @@ public class SendPaymentService {
 		
 		Transazione current_trans = null; 
 		
+		System.out.println("CLIENTE: scorro le transazioni correnti alla ricerca di offerta acmesky: " + code);
 		for (Transazione t: StaticValues.transazioni) {
-			if (t.username.contentEquals(username)) {
+			System.out.println(t.username + " " + t.acmesky_code);
+			if (t.acmesky_code.contentEquals(code)) {
 				current_trans = t; 
 				break;
 			}
@@ -52,7 +54,7 @@ public class SendPaymentService {
 		if (c.payment_token == null || c.payment_token.length() == 0) {
 			System.out.println("Mi registro");
 			c.payment_token = register(c.payment_username, c.payment_password);
-			StaticValues.clienti.put(username, c);
+			StaticValues.clienti.put(current_trans.username, c);
 		} 
 		
 		ask_link(c.payment_token);

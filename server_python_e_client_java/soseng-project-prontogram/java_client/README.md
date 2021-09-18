@@ -1,8 +1,8 @@
-# swagger-java-client
+# prontogramprovider.prontogram-client
 
 prontogramAPI
 - API version: 1.0
-  - Build date: 2021-09-12T15:56:28.985+02:00[Europe/Rome]
+  - Build date: 2021-09-17T11:29:46.465+02:00[Europe/Rome]
 
 È l'API Restful offerta dall'applicazione di messaggistica *Prontogram* che vi racchiude la capability di inoltrare i messaggi circa le offerte inviate da ACMESky ai clienti interessati.
 
@@ -39,7 +39,7 @@ Add this dependency to your project's POM:
 ```xml
 <dependency>
   <groupId>io.swagger</groupId>
-  <artifactId>swagger-java-client</artifactId>
+  <artifactId>prontogramprovider.prontogram-client</artifactId>
   <version>1.0.0</version>
   <scope>compile</scope>
 </dependency>
@@ -50,7 +50,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "io.swagger:swagger-java-client:1.0.0"
+compile "io.swagger:prontogramprovider.prontogram-client:1.0.0"
 ```
 
 ### Others
@@ -63,7 +63,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/swagger-java-client-1.0.0.jar`
+* `target/prontogramprovider.prontogram-client-1.0.0.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -71,10 +71,10 @@ Then manually install the following JARs:
 Please follow the [installation](#installation) instruction and execute the following Java code:
 
 ```java
-import io.swagger.client.*;
-import io.swagger.client.auth.*;
+import prontogramprovider.*;
+import prontogramprovider.auth.*;
 import io.swagger.client.model.*;
-import io.swagger.client.api.DefaultApi;
+import prontogramprovider.prontogram_client.DefaultApi;
 
 import java.io.File;
 import java.util.*;
@@ -129,7 +129,6 @@ Class | Method | HTTP request | Description
  - [InlineResponse200Message](docs/InlineResponse200Message.md)
  - [MapsV1Credentials](docs/MapsV1Credentials.md)
  - [Message](docs/Message.md)
- - [MessageItem](docs/MessageItem.md)
  - [MessageList](docs/MessageList.md)
  - [OfferMessage](docs/OfferMessage.md)
  - [RegisterBody](docs/RegisterBody.md)

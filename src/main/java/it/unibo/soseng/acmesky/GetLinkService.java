@@ -30,21 +30,17 @@ public class GetLinkService {
 	private static String company_name = "";
 	
 	//public static String service(String code) {
-	public static void service() {
-		offer_code = StaticValues.transazioni.getFirst().acmesky_offer_code;
-		//offer_code = code;
+	public static void service(String code) {
 		
+		offer_code = code;
+		String link; 
 		//if key
 		if (StaticValues.payment_provider_key != "") {
 			// chiedi link
 			
-			String link = askLink();
+			link = askLink();
 			//return link;
-	
-			Transazione t = StaticValues.transazioni.getFirst(); 
-			StaticValues.transazioni.removeFirst();
-			t.paymentLink = link;
-			StaticValues.transazioni.addFirst(t);
+			
 		} 
 		// else register
 		else {
@@ -60,14 +56,38 @@ public class GetLinkService {
 	            System.out.println(result);
 	            StaticValues.payment_provider_key = result.getToken() ;
 	            
-	            askLink();
-	            return;
+	            link = askLink();
 	            
 	        } catch (ApiException e) {
 	            System.err.println("Exception when calling RisorseApi#postRegistration");
 	            e.printStackTrace();
 	            return;
 	        }
+		}
+		
+		Transazione tmp = new Transazione("");
+		
+		System.out.println("ACMESKY: scorro le transazioni prima di aggiungere il link, cerco il codice offerta " + offer_code);
+		for (Transazione t : StaticValues.transazioni) { 
+			
+			System.out.println(t.username + " " + t.paymentLink);
+			if (t.acmesky_offer_code.contentEquals(offer_code)) {
+				System.out.println("ACMESKY: ho trovato la transazione a cui bisogna aggiungere il link");
+				tmp = t;
+				break;
+			}
+		}
+		if (StaticValues.transazioni.remove(tmp)) {
+			System.out.println("ACMESKY: ho rimosso la transazione da riaggiungere modificata");
+		} else {
+			System.out.println("ACMESKY: NON ho rimosso la transazione da riaggiungere modificata");
+		}
+		tmp.paymentLink = link;
+		StaticValues.transazioni.addFirst(tmp);
+		
+		System.out.println("ACMESKY: ho aggiunto il link " + link + " per l'utente " + tmp.username + " alla lista delle transazioni attive");
+		for(Transazione t : StaticValues.transazioni) {
+			System.out.println(t.username + " " + t.paymentLink);
 		}
 	}
 	
@@ -94,11 +114,13 @@ public class GetLinkService {
         body.setAmount(amount);
         body.setOfferCode(offer_code); 
         try {
+        	System.out.println("ACMESKY: sto per chiedere il link  (che poi è un codice...?) alla banca");
             ActiveLink result = apiInstance.getLink(body);
+            System.out.println("ACMESKY: Ottenuto link dalla banca");
             System.out.println(result);
             return result.getLink();
         } catch (ApiException e) {
-            System.err.println("Exception when calling RisorseApi#getLink");
+            System.err.println("ACMESKY: Exception when calling RisorseApi#getLink");
             e.printStackTrace();
             return null;
         }

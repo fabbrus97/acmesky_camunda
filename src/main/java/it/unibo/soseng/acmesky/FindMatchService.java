@@ -85,6 +85,9 @@ public class FindMatchService {
 		});
 		SaveInterestService.serialize_json(clients);
 		
+		userFlights.clear();
+		interests2delete.clear();
+		
 		return matches;
 	}
 	

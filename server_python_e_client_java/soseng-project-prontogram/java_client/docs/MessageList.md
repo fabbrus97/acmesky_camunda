@@ -3,4 +3,4 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**messages** | [**List&lt;MessageItem&gt;**](MessageItem.md) |  |  [optional]
+**messages** | [**List&lt;CreatemessageData&gt;**](CreatemessageData.md) |  |  [optional]

@@ -10,10 +10,12 @@ public class AskClientTransportService {
 
 	public static void service(DelegateExecution execution) {
 		
+		System.out.println("ACMESKY: chiedo al cliente se vuole la navetta");
+		
 		String code = "";
 		
 		for(Transazione t: StaticValues.transazioni) {
-			if (t.paymentLink.equals(execution.getVariable("paymLink").toString())) {
+			if (t.paymentLink != null && t.paymentLink.equals(execution.getVariable("paymLink").toString())) {
 				code = t.acmesky_offer_code;
 			}
 		}

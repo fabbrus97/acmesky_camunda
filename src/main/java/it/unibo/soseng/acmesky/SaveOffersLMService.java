@@ -13,12 +13,19 @@ public class SaveOffersLMService {
 		
 	}
 	
-	
-	
-	
 	public static void service(String partenza, String data) {
 		
+		/*
 		Offers o = GetOffersService.getJSON();
+		
+		Flight LMOffer = new Flight();
+		//TODO LMOffer.setPrice()...
+		
+		
+		o.getOffers().put("ryanair", o.getOffers().get("ryanair").add(LMOffer));
+		
+		GetOffersService.saveJSON(o);
+		*/
 		//TODO dovrebbe farlo gian...?
 		/*for (Lmflight lmflight : lmflights) {
 
@@ -33,7 +40,7 @@ public class SaveOffersLMService {
 			o.getOffers().get(lmflight.getCompanyname()).add(flight);
 		}*/
 		
-		GetOffersService.saveJSON(o);
+		
 		
 	}
 }

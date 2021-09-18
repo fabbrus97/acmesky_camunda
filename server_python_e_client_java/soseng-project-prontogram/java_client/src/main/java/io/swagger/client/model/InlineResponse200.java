@@ -29,7 +29,7 @@ import java.util.List;
  * InlineResponse200
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2021-09-12T15:56:28.985+02:00[Europe/Rome]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2021-09-17T11:29:46.465+02:00[Europe/Rome]")
 public class InlineResponse200 {
   @SerializedName("links")
   private InlineResponse200Links links = null;

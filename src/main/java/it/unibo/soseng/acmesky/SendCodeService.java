@@ -55,7 +55,7 @@ public class SendCodeService {
         	
         	
         	codes.getCodes().forEach(code -> {
-        		MessageItem mi = new MessageItem(); 
+        		CreatemessageData mi = new CreatemessageData(); 
         		mi.setReceiver(code.getUser());
         		
         		OfferMessage offer = new OfferMessage();

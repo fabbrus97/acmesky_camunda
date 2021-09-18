@@ -23,11 +23,11 @@ Restituisci i primi 10 messaggi del cliente
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.RisorseApi;
+//import prontogramprovider.ApiClient;
+//import prontogramprovider.ApiException;
+//import prontogramprovider.Configuration;
+//import prontogramprovider.auth.*;
+//import prontogramprovider.prontogram_client.RisorseApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -72,11 +72,11 @@ Restituisci 10 messaggi del cliente
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.RisorseApi;
+//import prontogramprovider.ApiClient;
+//import prontogramprovider.ApiException;
+//import prontogramprovider.Configuration;
+//import prontogramprovider.auth.*;
+//import prontogramprovider.prontogram_client.RisorseApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -124,11 +124,11 @@ Restituisci il messaggio del cliente
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.RisorseApi;
+//import prontogramprovider.ApiClient;
+//import prontogramprovider.ApiException;
+//import prontogramprovider.Configuration;
+//import prontogramprovider.auth.*;
+//import prontogramprovider.prontogram_client.RisorseApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -176,11 +176,11 @@ Restituisci tutti i messaggi
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.RisorseApi;
+//import prontogramprovider.ApiClient;
+//import prontogramprovider.ApiException;
+//import prontogramprovider.Configuration;
+//import prontogramprovider.auth.*;
+//import prontogramprovider.prontogram_client.RisorseApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -222,11 +222,11 @@ Invia messaggio
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.RisorseApi;
+//import prontogramprovider.ApiClient;
+//import prontogramprovider.ApiException;
+//import prontogramprovider.Configuration;
+//import prontogramprovider.auth.*;
+//import prontogramprovider.prontogram_client.RisorseApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -271,11 +271,11 @@ Invia messaggi
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.RisorseApi;
+//import prontogramprovider.ApiClient;
+//import prontogramprovider.ApiException;
+//import prontogramprovider.Configuration;
+//import prontogramprovider.auth.*;
+//import prontogramprovider.prontogram_client.RisorseApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -320,11 +320,11 @@ Autentica un cliente
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.RisorseApi;
+//import prontogramprovider.ApiClient;
+//import prontogramprovider.ApiException;
+//import prontogramprovider.Configuration;
+//import prontogramprovider.auth.*;
+//import prontogramprovider.prontogram_client.RisorseApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 // Configure HTTP basic authorization: basicAuth
