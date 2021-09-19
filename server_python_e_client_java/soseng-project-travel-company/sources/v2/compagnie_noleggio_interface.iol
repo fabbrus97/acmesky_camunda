@@ -10,8 +10,8 @@ type aeroporto:void {
 type dati_richiesta:void{
 
     .luoghi:void {
-        .partenza:indirizzo
-        .arrivo:aeroporto
+        .partenza: indirizzo
+        .arrivo: aeroporto
     }
 
     .data:void {

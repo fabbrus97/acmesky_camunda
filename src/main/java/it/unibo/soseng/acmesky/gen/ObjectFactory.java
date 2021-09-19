@@ -94,6 +94,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Aeroporto }
+     * 
+     */
+    public Aeroporto createAeroporto() {
+        return new Aeroporto();
+    }
+
+    /**
      * Create an instance of {@link Indirizzo }
      * 
      */

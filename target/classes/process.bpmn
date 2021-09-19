@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.5.0" camunda:diagramRelationId="24f5ba53-f1a6-4a06-9aa5-be1aba879c9c">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.9.0" camunda:diagramRelationId="24f5ba53-f1a6-4a06-9aa5-be1aba879c9c">
   <bpmn:collaboration id="soseng-project">
     <bpmn:participant id="Participant_06e7d9m" name="ACMESky" processRef="acmesky" />
     <bpmn:participant id="Participant_1o1fr4k" name="Compagnia trasporti vicina" processRef="Process_07wgrty" />
@@ -309,7 +309,7 @@
       </bpmn:endEvent>
     </bpmn:subProcess>
     <bpmn:sequenceFlow id="Flow_1kvk9j9" sourceRef="Activity_1ar2bck" targetRef="Event_1gklf2v" />
-    <bpmn:serviceTask id="Activity_1ar2bck" name="TODO ripristina stato interno" camunda:class="it.unibo.soseng.acmesky.RestoreInternalStateService">
+    <bpmn:serviceTask id="Activity_1ar2bck" name="Ripristina stato interno" camunda:class="it.unibo.soseng.acmesky.RestoreInternalStateService">
       <bpmn:incoming>Flow_183dud3</bpmn:incoming>
       <bpmn:outgoing>Flow_1kvk9j9</bpmn:outgoing>
     </bpmn:serviceTask>

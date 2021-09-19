@@ -17,10 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="cap" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="comune" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="civico" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
- *         &lt;element name="provincia" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="via" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -32,38 +29,15 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "indirizzo", propOrder = {
-    "cap",
     "comune",
-    "civico",
-    "provincia",
     "via"
 })
 public class Indirizzo {
 
-    protected int cap;
     @XmlElement(required = true)
     protected String comune;
-    protected int civico;
-    @XmlElement(required = true)
-    protected String provincia;
     @XmlElement(required = true)
     protected String via;
-
-    /**
-     * Recupera il valore della proprietà cap.
-     * 
-     */
-    public int getCap() {
-        return cap;
-    }
-
-    /**
-     * Imposta il valore della proprietà cap.
-     * 
-     */
-    public void setCap(int value) {
-        this.cap = value;
-    }
 
     /**
      * Recupera il valore della proprietà comune.
@@ -87,46 +61,6 @@ public class Indirizzo {
      */
     public void setComune(String value) {
         this.comune = value;
-    }
-
-    /**
-     * Recupera il valore della proprietà civico.
-     * 
-     */
-    public int getCivico() {
-        return civico;
-    }
-
-    /**
-     * Imposta il valore della proprietà civico.
-     * 
-     */
-    public void setCivico(int value) {
-        this.civico = value;
-    }
-
-    /**
-     * Recupera il valore della proprietà provincia.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getProvincia() {
-        return provincia;
-    }
-
-    /**
-     * Imposta il valore della proprietà provincia.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setProvincia(String value) {
-        this.provincia = value;
     }
 
     /**
