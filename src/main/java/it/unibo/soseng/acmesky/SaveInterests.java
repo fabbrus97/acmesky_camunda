@@ -47,6 +47,8 @@ public class SaveInterests implements JavaDelegate{
 		
 		int cost = (int) execution.getVariable("cost");
 		
+		System.out.println("ACMESKY: ricevuto da cliente interesse " + departure_airport + " - " + arrival_airport);
+		
 		System.out.println("Chiamo il servizio per salvare gli interessi");
 		
 		saveInterestService.service(departure_airport, arrival_airport, departure_time_min, departure_time_max,

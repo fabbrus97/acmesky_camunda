@@ -6,6 +6,8 @@ import java.util.Date;
 
 import javax.xml.namespace.QName;
 import javax.xml.ws.soap.SOAPBinding;
+
+import it.unibo.soseng.acmesky.gen.Aeroporto;
 import it.unibo.soseng.acmesky.gen.Indirizzo;
 import it.unibo.soseng.acmesky.gen.NoleggioPort;
 import it.unibo.soseng.acmesky.gen.NoleggioPortService;
@@ -36,8 +38,11 @@ public class BookTransportService {
 				i.setVia(t.home_address.split(",")[0]);
 				i.setComune(t.home_address.split(",")[1]);
 				
+				Aeroporto aeroporto = new Aeroporto();
+				aeroporto.setAeroporto(t.flight.getDepartureFrom());
+				
 				luoghi.setPartenza(i);
-				luoghi.setArrivo(i); //TODO dev'essere un aeroporto
+				luoghi.setArrivo(aeroporto); 
 				
 				System.out.println("ACMESKY: provo a formattare " + t.flight.getTakeoff());
 				LocalDateTime ldt = LocalDateTime.from(dtf_flights.parse(t.flight.getTakeoff()));
@@ -80,7 +85,7 @@ public class BookTransportService {
 		String sid = noleggioPort.login(StaticValues.prontogram_password, StaticValues.prontogram_username);
 		if (!sid.isEmpty()) {
 			System.out.println("ACMESKY: sid non è vuoto, faccio la richiesta per navetta");
-			noleggioPort.richiesta(luoghi, data, ora, sid);
+			noleggioPort.richiesta(luoghi, data, ora, sid); 
 			System.out.println("ACMESKY: richiesta effettuata");
 		} else {
 			System.out.println("ACMESKY: sid è vuoto, non faccio la richiesta");

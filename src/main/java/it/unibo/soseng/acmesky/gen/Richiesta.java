@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent&gt;
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *                 &lt;sequence&gt;
- *                   &lt;element name="arrivo" type="{it.unibo.soseng.acmesky.wsdl.xsd}indirizzo"/&gt;
+ *                   &lt;element name="arrivo" type="{it.unibo.soseng.acmesky.wsdl.xsd}aeroporto"/&gt;
  *                   &lt;element name="partenza" type="{it.unibo.soseng.acmesky.wsdl.xsd}indirizzo"/&gt;
  *                 &lt;/sequence&gt;
  *               &lt;/restriction&gt;
@@ -274,7 +274,7 @@ public class Richiesta {
      *   &lt;complexContent&gt;
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
      *       &lt;sequence&gt;
-     *         &lt;element name="arrivo" type="{it.unibo.soseng.acmesky.wsdl.xsd}indirizzo"/&gt;
+     *         &lt;element name="arrivo" type="{it.unibo.soseng.acmesky.wsdl.xsd}aeroporto"/&gt;
      *         &lt;element name="partenza" type="{it.unibo.soseng.acmesky.wsdl.xsd}indirizzo"/&gt;
      *       &lt;/sequence&gt;
      *     &lt;/restriction&gt;
@@ -292,7 +292,7 @@ public class Richiesta {
     public static class Luoghi {
 
         @XmlElement(required = true)
-        protected Indirizzo arrivo;
+        protected Aeroporto arrivo;
         @XmlElement(required = true)
         protected Indirizzo partenza;
 
@@ -301,10 +301,10 @@ public class Richiesta {
          * 
          * @return
          *     possible object is
-         *     {@link Indirizzo }
+         *     {@link Aeroporto }
          *     
          */
-        public Indirizzo getArrivo() {
+        public Aeroporto getArrivo() {
             return arrivo;
         }
 
@@ -313,10 +313,10 @@ public class Richiesta {
          * 
          * @param value
          *     allowed object is
-         *     {@link Indirizzo }
+         *     {@link Aeroporto }
          *     
          */
-        public void setArrivo(Indirizzo value) {
+        public void setArrivo(Aeroporto value) {
             this.arrivo = value;
         }
 

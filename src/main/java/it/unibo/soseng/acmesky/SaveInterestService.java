@@ -67,6 +67,7 @@ public class SaveInterestService {
 				Client c = new Client();
 				ArrayList<Interest> interests = new ArrayList<Interest>();
 				interests.add(interest);
+				System.out.println("ACMESKY: sto aggiungengo l'interesse " + interest.getDeparture_airport() + " - " + interest.getArrival_airport());
 				c.setInterests(interests);
 				c.setClientAddress(clientAddress);
 				clients.clients.put(client_id, c);

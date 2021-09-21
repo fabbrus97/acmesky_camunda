@@ -37,11 +37,12 @@ public class SendInterestService {
 		
 		Cliente c = new Cliente("");
 		c.payment_password = "1234567890";
+		String username = "";
 				
 		if (execution.getVariable("customInterest") != null) {
 			try {
 				
-				String username = execution.getVariable("username").toString();
+				username = execution.getVariable("username").toString();
 				t.username = username;
 				c.payment_username = username;
 			    
@@ -78,6 +79,7 @@ public class SendInterestService {
 		} else {
 		
 			t.username = "mariorossi".concat(String.valueOf(StaticValues.contatore_mario_rossi));
+			username = t.username;
 			c.payment_username = "mariorossi".concat(String.valueOf(StaticValues.contatore_mario_rossi++));
 			
 			RuntimeService runtimeService = execution.getProcessEngine().getRuntimeService();
@@ -158,7 +160,7 @@ public class SendInterestService {
 			
 		}
 	
-		StaticValues.clienti.put(execution.getVariable("username").toString(), c);
+		StaticValues.clienti.put(username, c);
 		StaticValues.transazioni.add(t);
 
 	}

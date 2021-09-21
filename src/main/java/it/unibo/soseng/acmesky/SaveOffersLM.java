@@ -16,7 +16,7 @@ public class SaveOffersLM implements JavaDelegate{
 	public void execute(DelegateExecution execution) throws Exception {
 		// TODO Auto-generated method stub
 		
-		saveOffersLMService.service(execution.getVariable("partenza").toString(), execution.getVariable("destinazione"), execution.getVariable("data").toString(), exec);
+		saveOffersLMService.service(execution.getVariable("lmoffer").toString());
 		
 	}
 
