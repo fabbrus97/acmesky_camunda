@@ -145,7 +145,7 @@ def get_flights():  # noqa: E501
 
 def post_lmflight(lmflight=None):  # noqa: E501
     """crea un volo last minute
-
+     #converti json a stringa
      # noqa: E501
 
     :param lmflight: 
@@ -153,7 +153,20 @@ def post_lmflight(lmflight=None):  # noqa: E501
 
     :rtype: None
     """
-    simpleCamundaRESTPost.sendMessage("LM_Offers", {"lmflights": {"value": lmflight, "type": "Lmflight"}})
+
+    if lmflight is None:
+        return "empty body", 400
+
+    simpleCamundaRESTPost.sendMessage("LM_Offers", {"lmflights": {"value": lmflight, "type": "String"}})
+    lmf = json.loads(lmflight)
+    company=lmf["offc"]
+    only_alpha = ""
+    for char in company:
+        if char.isalpha():
+            only_alpha += char
+
+    filew = open("voli.txt", "a")
+    filew.write(lmf["part"] + " " + lmf["dest"] + " " + lmf["data"] + " " + lmf["pric"] + " " + only_alpha + " " + lmf["offc"] + "\n")
     #TODO se non va "type": "Lmflight", prova "type": "Object"
 
 
