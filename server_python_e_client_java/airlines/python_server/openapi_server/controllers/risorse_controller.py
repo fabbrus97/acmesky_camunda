@@ -14,6 +14,8 @@ from openapi_server.models.maps_v1_credentials import MapsV1Credentials  # noqa:
 from openapi_server.models.inline_response200_price import InlineResponse200Price
 from openapi_server.models.inline_response200_flights import InlineResponse200Flights
 
+from openapi_server.models.lmflight import Lmflight
+
 from openapi_server import util
 from random import randint, seed
 
@@ -154,21 +156,37 @@ def post_lmflight(lmflight=None):  # noqa: E501
     :rtype: None
     """
 
-    if lmflight is None:
-        return "empty body", 400
+    if connexion.request.is_json:
 
-    simpleCamundaRESTPost.sendMessage("LM_Offers", {"lmflights": {"value": lmflight, "type": "String"}})
-    lmf = json.loads(lmflight)
-    company=lmf["offc"]
-    only_alpha = ""
-    for char in company:
-        if char.isalpha():
-            only_alpha += char
+        lmflight = Lmflight.from_dict(connexion.request.get_json())
 
-    filew = open("voli.txt", "a")
-    filew.write(lmf["part"] + " " + lmf["dest"] + " " + lmf["data"] + " " + lmf["pric"] + " " + only_alpha + " " + lmf["offc"] + "\n")
-    #TODO se non va "type": "Lmflight", prova "type": "Object"
+        """
+        f = {"flight": {
+    "departure-from": "BLQ",
+    "takeoff": "10/10/2021",
+    "destination": "BGY",
+    "price": {
+        "amount": 123,
+        "currency": "$"
+    },
+    "offer_code": "abcdefg"
+}, "companyname": "testcompany"
+}"""
 
+
+        lmjson= lmflight.to_str().replace("\'", "\"")
+        lmf = json.loads(lmjson)
+
+        filew = open("voli.txt", "a")
+        filew.write(lmf["flight"]["departure_from"] + " " + lmf["flight"]["destination"] + " " + lmf["flight"]["takeoff"] + " " + str(int(lmf["flight"]["price"]["amount"])) + " " + lmf["companyname"] + " " + lmf["flight"]["offer_code"] + "\n")
+        filew.close()
+
+        try:
+            simpleCamundaRESTPost.sendMessage("LM_Offers", {"lmflights": {"value": lmf, "type": "String"}})
+            return 201
+        except:
+            return "Error", 400
+    #return "empty body", 400
 
 def post_notifypayment(inline_object=None):  # noqa: E501
     """Ricevi pagamento

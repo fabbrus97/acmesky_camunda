@@ -1,9 +1,9 @@
 package it.unibo.soseng.acmesky;
 
-import javax.inject.Inject;
-
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
+
+import javax.inject.Inject;
 
 public class SaveInterests implements JavaDelegate{
 
