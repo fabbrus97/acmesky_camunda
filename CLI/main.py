@@ -55,18 +55,17 @@ def insert_data():
         if secondi == 'e' or secondi == 'E':
             return ""
 
-        giorno = int(giorno)
-        mese = int(mese)
-        anno = int(anno)
-        ora = int(ora)
-        minuti = int(minuti)
-        secondi = int(secondi)
-
-
         try:
+            giorno = int(giorno)
+            mese = int(mese)
+            anno = int(anno)
+            ora = int(ora)
+            minuti = int(minuti)
+            secondi = int(secondi)
+
             tmp = datetime.datetime(year=anno, month=mese, day=giorno, hour=ora, minute=minuti, second=secondi)
             correctDate = True
-        except ValueError:
+        except:
             correctDate = False
 
         if correctDate == True:
