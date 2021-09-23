@@ -31,6 +31,8 @@ public class StaticValues {
 	public static HashMap<String, String> codes2delete = new HashMap<String, String>(); //payment_link, code2delete
 	public static String geoproviderUrl = "";
 	public static String prontogramUrl = "";
+	public static ArrayList<String[]> transports = new ArrayList<String[]>(); //lista di <url, indirizzo>
+	public static ArrayList<String> airlinesUrl = new ArrayList<String>();
 
 	
 }

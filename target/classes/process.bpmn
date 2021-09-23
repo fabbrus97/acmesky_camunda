@@ -107,7 +107,7 @@
     <bpmn:sendTask id="Activity_11nr53t" name="Chiedi al cliente se vuole servizio di trasporto" camunda:class="it.unibo.soseng.acmesky.AskClientTransport">
       <bpmn:incoming>Flow_092jnmi</bpmn:incoming>
     </bpmn:sendTask>
-    <bpmn:serviceTask id="Activity_1izhf7m" name="Richiedi e ottieni distanze" camunda:class="it.unibo.soseng.acmesky.GetDistance">
+    <bpmn:serviceTask id="Activity_1izhf7m" name="Richiedi e ottieni distanze" camunda:class="it.unibo.soseng.acmesky.GetDistanceAirline">
       <bpmn:incoming>Flow_01yvahn</bpmn:incoming>
       <bpmn:outgoing>Flow_0pwa5fs</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -126,7 +126,7 @@
       <bpmn:incoming>Flow_0ckyeo5</bpmn:incoming>
       <bpmn:incoming>Flow_09ch4md</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:serviceTask id="Activity_0zmnvlt" name="Ottieni distanze compagnie trasp. - domicilio utente" camunda:class="it.unibo.soseng.acmesky.GetDistance">
+    <bpmn:serviceTask id="Activity_0zmnvlt" name="Ottieni distanze compagnie trasp. - domicilio utente" camunda:class="it.unibo.soseng.acmesky.GetDistanceTransport">
       <bpmn:incoming>Flow_0jk6i25</bpmn:incoming>
       <bpmn:outgoing>Flow_0dadaex</bpmn:outgoing>
     </bpmn:serviceTask>

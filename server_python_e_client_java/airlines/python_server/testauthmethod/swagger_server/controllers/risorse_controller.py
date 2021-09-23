@@ -161,14 +161,19 @@ def post_lmflight(lmflight=None):  # noqa: E501
 
     """crea un volo last minute
 
-     # noqa: E501
+    noqa: E501
 
     :param lmflight: 
     :type lmflight: dict | bytes
 
     :rtype: None
     """
-    simpleCamundaRESTPost.sendMessage("LM_Offers", {"lmflights": {"value": lmflight, "type": "Lmflight"}})
+
+    print("LMFLight:")
+    print(lmflight)
+    return
+
+    #simpleCamundaRESTPost.sendMessage("LM_Offers", {"lmflights": {"value": lmflight, "type": "Lmflight"}})
     #TODO se non va "type": "Lmflight", prova "type": "Object"
 
 

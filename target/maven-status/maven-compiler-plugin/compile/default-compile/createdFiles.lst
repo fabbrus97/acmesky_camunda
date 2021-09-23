@@ -20,8 +20,10 @@ it/unibo/soseng/cliente/SendPaymentService.class
 it/unibo/soseng/acmesky/Json/Price.class
 it/unibo/soseng/acmesky/GetDistanceService.class
 it/unibo/soseng/acmesky/SaveInterestService.class
+it/unibo/soseng/acmesky/GetDistanceTransport.class
 it/unibo/soseng/acmesky/gen/LoginResponse.class
 it/unibo/soseng/acmesky/gen/Richiesta.class
+it/unibo/soseng/acmesky/GetDistanceAirline.class
 it/unibo/soseng/cliente/SendCodeService.class
 it/unibo/soseng/acmesky/gen/Login.class
 it/unibo/soseng/cliente/ThinkAboutOffer.class
@@ -73,6 +75,5 @@ it/unibo/soseng/acmesky/GetLinkService.class
 it/unibo/soseng/acmesky/CheckCodeService.class
 it/unibo/soseng/acmesky/gen/NoleggioPort.class
 it/unibo/soseng/acmesky/Json/Clients.class
-it/unibo/soseng/acmesky/GetDistance.class
 it/unibo/soseng/acmesky/GetLink.class
 it/unibo/soseng/acmesky/Json/Flight.class

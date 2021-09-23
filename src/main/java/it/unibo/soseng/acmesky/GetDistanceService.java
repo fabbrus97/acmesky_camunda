@@ -19,7 +19,10 @@ public class GetDistanceService {
     public GetDistanceService() {
     }
 
-    public static void service(DelegateExecution execution){
+    public static void service(DelegateExecution execution, boolean findNearestTransport){
+    	//Nota: possiamo usare questo servizio per due motivi, sapere qual è la distanza casa utente - aeroporto
+    	//oppure sapere qual è la compagina dei trasporti più vicina all'utente. Nel primo caso la variabile
+    	//findNearestTransport sarà false, nel secondo true. 
 
         System.out.println("ACMESKY: cerco le distanze casa utente - aeroporto");
     	RisorseApi apiInstance = new RisorseApi();
@@ -90,23 +93,41 @@ public class GetDistanceService {
     
         
         body2.setPointA(client_home_address);
-        ArrayList<String> airport = new ArrayList<String>();
+        ArrayList<String> pointsB = new ArrayList<String>();
         //airport.add(execution.getVariable("airport").toString());
-
-        airport.add(departure_airport);
-        body2.setPointsB(airport);
+        if (!findNearestTransport)
+        	pointsB.add(departure_airport);
+        else {
+        	for (String[] server: StaticValues.transports) //ogni elemento è una coppia <url, indirizzo>
+        		pointsB.add(server[1]); 
+        }
+        body2.setPointsB(pointsB);
         try {	
             DistanceResult result = apiInstance.postDistance(body2);
-            int dist = result.getDistance().get(0).getValue().intValue();
-            String unit = result.getDistance().get(0).getUnit();
-            if (unit.equals("m")){
-                dist= (int) dist / 1000;
+            if (!findNearestTransport) {
+	            int dist = result.getDistance().get(0).getValue().intValue();
+	            String unit = result.getDistance().get(0).getUnit();
+	            if (unit.equals("m")){
+	                dist= (int) dist / 1000;
+	            }
+	            //System.out.println("Risultato della richiesta delle distanze tra " + execution.getVariable("clientAddress").toString() + " e " + execution.getVariable("airport").toString() + ": " + result);
+	
+	            execution.setVariable("distance",(int)dist);
+	            
+	            System.out.println("ACMESKY: ricerca distanze completata, distanze settate: " + dist);
+            } else {
+            	int least_distant = 0; // indice del servizio di trasporti meno distante
+            	int value = result.getDistance().get(0).getValue().intValue();
+            	int index = 0;
+            	for (DistanceResultDistance res: result.getDistance()) {
+            		if (res.getValue().intValue() < value) {
+            			least_distant = index;
+            			value = res.getValue().intValue();
+            		}
+            		index++;
+            	}
+            	execution.setVariable("transportCompanyUrl", StaticValues.transports.get(least_distant)[0]);
             }
-            //System.out.println("Risultato della richiesta delle distanze tra " + execution.getVariable("clientAddress").toString() + " e " + execution.getVariable("airport").toString() + ": " + result);
-
-            execution.setVariable("distance",(int)dist);
-            
-            System.out.println("ACMESKY: ricerca distanze completata, distanze settate: " + dist);
             
         } catch (ApiException e) {
             System.err.println("Exception when calling RisorseApi#postDistance");

@@ -29,14 +29,24 @@ public class SaveOffersLMService {
 		lmOffer.setOfferCode(lmflight.getOffc());
 		String price = lmflight.getPric(); 
 		String currency = price.substring(price.length()-1);
-		int amount = Integer.valueOf(price.substring(price.length()-1));
+		int amount = Integer.valueOf(price.substring(0, price.length()-1));
 		lmOffer.setPrice(currency, amount);
-		lmOffer.setTakeoff(lmflight.getData()); //TODO è da parsare? no se gian modifica main.py
+		lmOffer.setTakeoff(lmflight.getData());
+		
+		System.out.println("ACMESKY: ho ricevuto la data " + lmflight.getData());
 		
 		String companyName = getCompanyName(lmflight.getOffc());
 		
-		o.getOffers().get(companyName).add(lmOffer);
-		o.getOffers().put(companyName, o.getOffers().get(companyName));
+		ArrayList<Flight> offers; 
+		
+		if (o.getOffers().containsKey(companyName)) {
+			offers = o.getOffers().get(companyName); 
+		} else {
+			offers = new ArrayList<Flight>();
+		}
+		
+		offers.add(lmOffer);
+		o.getOffers().put(companyName, offers);
 		
 		GetOffersService.saveJSON(o);
 	
@@ -57,6 +67,7 @@ public class SaveOffersLMService {
 	
 	private static String getCompanyName(String offcode) {
 		
+		System.out.println("ACMESKY: controllo offcode per LM " + offcode);
 		
 		if (offcode.contains("emirates")) {
 			return "emirates";
@@ -66,7 +77,11 @@ public class SaveOffersLMService {
 			return "britishaw";
 		} else if (offcode.contains("japanairl")) {
 			return "japanairl";
-		} else return null;
+		} 
+		
+		System.out.println("ACMESKY: controllo fallito, restituisco null");
+		
+		return null;
 		
 		
 	}

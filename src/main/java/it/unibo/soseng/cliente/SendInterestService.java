@@ -16,19 +16,19 @@ public class SendInterestService {
 		
 	}
 	
-	private static String[] airports = {"airport BLQ",
-            "airport BGY",
-            "airport CTA",
-            "airport MXP",
-            "airport VRN",
-            "airport FCO",
-            "airport LGW",
-            "airport FRA",
-            "airport BCN",
-            "airport LIS",
-            "airport AUH",
-            "airport SVO", 
-            "airport ORY"};
+	private static String[] airports = {"BLQ",
+            "BGY",
+            "CTA",
+            "MXP",
+            "VRN",
+            "FCO",
+            "LGW",
+            "FRA",
+            "BCN",
+            "LIS",
+            "AUH",
+            "SVO", 
+            "ORY"};
 
 	public static void service(DelegateExecution execution) {
 		
@@ -103,9 +103,9 @@ public class SendInterestService {
 	        calendar.setLenient(false);
 	        while(true) {
 	        	try {
-		            int rand_day = (int)(Math.random() * day_range) + min_day;
+		            /*int rand_day = (int)(Math.random() * day_range) + min_day;
 		            int rand_month = (int)(Math.random() * month_range) + min_month;
-		            calendar.set(year, rand_month, rand_day);
+		            calendar.set(year, rand_month, rand_day);*/
 		            firstDate = calendar.getTime();
 		            
 		            int rand_period = (int)(Math.random() * period_range) + min_period;
@@ -150,8 +150,8 @@ public class SendInterestService {
 				.setVariable("departure_airport", first_airport)
 				.setVariable("arrival_airport", second_airport)
 				.setVariable("departure_time_min", sdt.format(firstDate)) 
-				.setVariable("departure_time_max", sdt.format(secondDateInterval))
-				.setVariable("arrival_time_min", sdt.format(firstDate))
+				.setVariable("departure_time_max", sdt.format(firstDateInterval))
+				.setVariable("arrival_time_min", sdt.format(secondDate))
 				.setVariable("arrival_time_max", sdt.format(secondDateInterval))
 				.setVariable("client_id", t.username )
 				.setVariable("clientAddress", "via indipendenza 1, bologna, italia")

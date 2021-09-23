@@ -13,6 +13,7 @@
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/cliente/RestoreInternalState.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/cliente/SendCode.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/InitListener.java
+/home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/GetDistanceTransport.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/Json/Client.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/Json/Code.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/FindMatchService.java
@@ -23,6 +24,7 @@
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/Json/Flight.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/BookTransportService.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/StaticValues.java
+/home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/GetDistanceAirline.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/AskClientTransport.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/FindMatch.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/cliente/ManageTransportOfferService.java
@@ -48,7 +50,6 @@
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/cliente/SendPaymentService.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/GenerateCodesService.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/cliente/ManageTransportOffer.java
-/home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/GetDistance.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/Json/Codes.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/Json/Price.java
 /home/simone/github/acmesky_camunda/src/main/java/it/unibo/soseng/acmesky/SendCodeService.java

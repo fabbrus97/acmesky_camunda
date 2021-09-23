@@ -14,6 +14,8 @@ from openapi_server.models.maps_v1_credentials import MapsV1Credentials  # noqa:
 from openapi_server.models.inline_response200_price import InlineResponse200Price
 from openapi_server.models.inline_response200_flights import InlineResponse200Flights
 
+from openapi_server.models.lmflight import Lmflight
+
 from openapi_server import util
 from random import randint, seed
 
@@ -153,9 +155,13 @@ def post_lmflight(lmflight=None):  # noqa: E501
 
     :rtype: None
     """
-    simpleCamundaRESTPost.sendMessage("LM_Offers", {"lmflights": {"value": lmflight, "type": "Lmflight"}})
+    
+    print("POST_LMFLIGHT:")
+    print(Lmflight.from_dict(connexion.request.get_json()))
+    
+    #simpleCamundaRESTPost.sendMessage("LM_Offers", {"lmflights": {"value": lmflight, "type": "Lmflight"}})
     #TODO se non va "type": "Lmflight", prova "type": "Object"
-
+    return
 
 def post_notifypayment(inline_object=None):  # noqa: E501
     """Ricevi pagamento
