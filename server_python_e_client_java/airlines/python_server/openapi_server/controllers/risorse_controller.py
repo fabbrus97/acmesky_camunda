@@ -173,16 +173,23 @@ def post_lmflight(lmflight=None):  # noqa: E501
 }, "companyname": "testcompany"
 }"""
 
+        print("Devo inviare l'offerta last minute: ")
+        print(lmflight.to_str())
 
         lmjson= lmflight.to_str().replace("\'", "\"")
         lmf = json.loads(lmjson)
 
         filew = open("voli.txt", "a")
-        filew.write(lmf["flight"]["departure_from"] + " " + lmf["flight"]["destination"] + " " + lmf["flight"]["takeoff"] + " " + str(int(lmf["flight"]["price"]["amount"])) + " " + lmf["companyname"] + " " + lmf["flight"]["offer_code"] + "\n")
+        
+        takeoff =  lmf["flight"]["takeoff"]
+        takeoff = datetime.datetime.strptime(takeoff, "%d/%m/%Y, %H:%M%p, CET")
+        takeoff = takeoff.strftime("%d/%m/%Y %H:%M %p")
+
+        filew.write(lmf["flight"]["departure_from"] + " " + lmf["flight"]["destination"] + " " + takeoff + " " + str(int(lmf["flight"]["price"]["amount"])) + " " + lmf["companyname"] + " " + lmf["flight"]["offer_code"] + "\n")
         filew.close()
 
         try:
-            simpleCamundaRESTPost.sendMessage("LM_Offers", {"lmflights": {"value": lmf, "type": "String"}})
+            simpleCamundaRESTPost.sendMessage("LM_offers", {"lmflights": {"value": json.dumps(lmf), "type": "String"}})
             return 201
         except:
             return "Error", 400

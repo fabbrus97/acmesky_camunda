@@ -261,14 +261,14 @@
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1kycib0" sourceRef="Activity_1tvvo21" targetRef="Gateway_0xxsic8" />
     <bpmn:sequenceFlow id="Flow_0ckyeo5" name="Falso" sourceRef="Gateway_0jtes1g" targetRef="Event_1eaujzi">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{distance &gt; 30}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${distance &gt; 30}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0pwa5fs" sourceRef="Activity_1izhf7m" targetRef="Gateway_0jtes1g" />
     <bpmn:sequenceFlow id="Flow_01yvahn" name="Vero" sourceRef="Gateway_0xxsic8" targetRef="Activity_1izhf7m">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${cost &gt;= 1000}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_092jnmi" name="Vero" sourceRef="Gateway_0jtes1g" targetRef="Activity_11nr53t">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{distance &lt;= 30}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${distance &lt;= 30}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1u1vlmt" sourceRef="Activity_0v4xxn4" targetRef="Event_1gklf2v" />
     <bpmn:sequenceFlow id="Flow_0dadaex" sourceRef="Activity_0zmnvlt" targetRef="Activity_0v4xxn4" />

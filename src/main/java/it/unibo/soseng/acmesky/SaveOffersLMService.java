@@ -18,35 +18,28 @@ public class SaveOffersLMService {
 	
 	public static void service(String lmoffer) {
 		
+		//Nota: brutto fix per non rigenerare il server delle airlines e non dover creare una nuova classe per LMFLight
+		lmoffer = lmoffer.replace("offer_code", "offerCode");
+		lmoffer = lmoffer.replace("departure_from", "departureFrom");
+		
 		Gson gson = new Gson();
+		System.out.println(lmoffer);
 		LMFlight lmflight = gson.fromJson(lmoffer, LMFlight.class);
 		
 		Offers o = GetOffersService.getJSON();
 		
-		Flight lmOffer = new Flight();
-		lmOffer.setDepartureFrom(lmflight.getPart());
-		lmOffer.setDestination(lmflight.getDest());
-		lmOffer.setOfferCode(lmflight.getOffc());
-		String price = lmflight.getPric(); 
-		String currency = price.substring(price.length()-1);
-		int amount = Integer.valueOf(price.substring(0, price.length()-1));
-		lmOffer.setPrice(currency, amount);
-		lmOffer.setTakeoff(lmflight.getData());
-		
-		System.out.println("ACMESKY: ho ricevuto la data " + lmflight.getData());
-		
-		String companyName = getCompanyName(lmflight.getOffc());
+		System.out.println("ACMESKY: ho ricevuto l'offerta" + lmflight.getFlight().getOfferCode());
 		
 		ArrayList<Flight> offers; 
 		
-		if (o.getOffers().containsKey(companyName)) {
-			offers = o.getOffers().get(companyName); 
+		if (o.getOffers().containsKey(lmflight.getCompanyname())) {
+			offers = o.getOffers().get(lmflight.getCompanyname()); 
 		} else {
 			offers = new ArrayList<Flight>();
 		}
 		
-		offers.add(lmOffer);
-		o.getOffers().put(companyName, offers);
+		offers.add(lmflight.getFlight());
+		o.getOffers().put(lmflight.getCompanyname(), offers);
 		
 		GetOffersService.saveJSON(o);
 	

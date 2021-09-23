@@ -161,7 +161,8 @@ public class FindMatchService {
 									tmp = new ArrayList<Interest>();
 									tmp.add(interest);
 								}
-								interests2delete.put(name, tmp);
+								if (interest.getReturnHome_time_min() == null || interest.getReturnHome_time_min().isEmpty())
+									interests2delete.put(name, tmp);
 								
 								System.out.println("Ho aggiunto il volo " + flight.getOfferCode() + " all'interesse " + interest.getDeparture_airport() + " - " + interest.getArrival_airport() + " per l'utente " + name);
 								((DepRetFlights)userFlights.get(name)).flights.get(interest.myHashCode()).add(flight);
@@ -292,9 +293,24 @@ public class FindMatchService {
 															
 															//((DepRetFlights)userFlights.get(name)).returnFlights.add(flight);
 															tmpFlights.add(flight);
+															
+															//se c'è un match, allora siccome invieremo un codice all'utente, l'interesse va cancellato dal db di acmesky altrimenti
+															//continueremo a fare lo stesso match e inviare un codice all'utente per lo stesso interesse
+															//quindi l'interesse va cancellato; per fare ciò, si aggiunge l'interesse alla lista degli interessi da cancellare. 
+															if (interests2delete.containsValue(name))
+																interests2delete.get(name).add(interest);
+															else {
+																ArrayList<Interest> interests = new ArrayList<Interest>();
+																interests.add(interest);
+																interests2delete.put(name, interests);
+															}
+															
 															//((DepRetFlights)userFlights.get(name)).flights.get(interest.myHashCode()).add(flight); 
 														} else {
 															System.out.println("Il volo " + departure_flight.getOfferCode() + " non è compatibile, lo aggiungo ai voli da rimuovere...");
+															
+															//Se non c'è il match, l'interesse va preservato per il futuro e quindi l'interesse va tolto dalla lista
+															//degli interessi che verranno cancellati. 
 															ArrayList<Interest> tmp = interests2delete.get(name);
 															tmp.remove(interest);
 															interests2delete.put(name, tmp);

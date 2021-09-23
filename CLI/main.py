@@ -214,7 +214,7 @@ if __name__ == '__main__':
                             "companyname": company,
                             "flight": {
                                 "departure-from": partenza,
-                                "takeoff": data.strftime("%Y/%m/%d %H:%M:%S"),
+                                "takeoff": data.strftime("%d/%m/%Y, %H:%m%p, CET"),
                                 "destination": destinazione,
                                 "price": {
                                     "amount": prezzo,

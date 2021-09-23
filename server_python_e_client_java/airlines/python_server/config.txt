@@ -1,2 +1,2 @@
-companyname:emirates
+companyname:rayanair
 #company names: britishaw,emirates,japanairl,rayanair
