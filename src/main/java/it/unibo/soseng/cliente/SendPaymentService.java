@@ -40,7 +40,7 @@ public class SendPaymentService {
 		System.out.println("CLIENTE: scorro le transazioni correnti alla ricerca di offerta acmesky: " + code);
 		for (Transazione t: StaticValues.transazioni) {
 			System.out.println(t.username + " " + t.acmesky_code);
-			if (t.acmesky_code.contentEquals(code)) {
+			if (t.acmesky_code != null && t.acmesky_code.contentEquals(code)) {
 				current_trans = t; 
 				break;
 			}
@@ -91,9 +91,9 @@ public class SendPaymentService {
         body.expiration(expiration);
         
         try {
-            System.out.println("Provo a pagare al link " + paymentLink);
+            System.out.println("CLIENTE: Provo a pagare al link " + paymentLink);
             apiInstance.postPaymentdata(body);
-            System.out.println("Pagamento riuscito");
+            System.out.println("CLIENTE: Pagamento riuscito");
             
         } catch (ApiException e) {
             System.err.println("Exception when calling RisorseApi#postPaymentdata");

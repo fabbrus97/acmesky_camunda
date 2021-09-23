@@ -72,4 +72,10 @@ public class Interest{
 	public Interest() {
 		
 	}
+	
+	public String myHashCode() {
+		return this.departure_airport + this.arrival_airport + this.departure_time_min + this.returnHome_time_min + String.valueOf(this.cost);
+	}
+	
+	
 }

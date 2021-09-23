@@ -21,6 +21,8 @@ public class SendPayment implements JavaDelegate{
 		String paymentLink = execution.getVariable("paymentLink").toString();
 		String code = execution.getVariable("code").toString();
 		
+		System.out.println("CLIENTE: ho ricevuto un codice da acmesky " + code);
+		
 		sendPaymentService.service(paymentLink, StaticValues.paymentUrl, code); 
 		
 	}

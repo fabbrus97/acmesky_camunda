@@ -29,6 +29,7 @@ public class InitListener implements ExecutionListener {
 		setVariable(execution, "server_list/geo-distance-provider.list", "geoproviders");
 		setVariable(execution, "server_list/payment-provider.list", "payments");
 		setVariable(execution, "server_list/prontogram.list", "prontograms");
+		setVariable(execution, "server_list/transport.list", "transports");
 		
 	}
 	
@@ -42,6 +43,10 @@ public class InitListener implements ExecutionListener {
 		String url = bufferedReader.readLine();
 		while(url != null) {
 			
+			if (varName.equals("airlines")) {
+				StaticValues.airlinesUrl.add(url); //TODO forse dev'essere una hashmap e non una lista, nel caso dobbiamo distinguere le compagnie aeree - tipo per mandare notifiche?
+			}
+			
 			if (varName.equals("payments")) {
 				System.out.println("HO IMPOSTATO UN URL PER PAYMENTS: " + url);
 				StaticValues.paymentUrl = url;
@@ -53,6 +58,11 @@ public class InitListener implements ExecutionListener {
 			
 			if (varName.equals("prontograms")) {
 				StaticValues.prontogramUrl = url;
+			}
+			
+			if (varName.contentEquals("transports")){
+				//l'elenco dei server dei trasporti differisce in quanto è composto da due parti separate da uno spazio: url + indirizzo
+				StaticValues.transports.add(new String[] {url.split(" ")[0], url.split(" ")[1]});
 			}
 			
 			urlList.add(url);

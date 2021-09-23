@@ -5,7 +5,7 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 import javax.inject.Inject;
 
-public class GetDistance implements JavaDelegate{
+public class GetDistanceTransport implements JavaDelegate{
 
 	@Inject
 	private GetDistanceService getDistanceService;
@@ -13,7 +13,7 @@ public class GetDistance implements JavaDelegate{
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 
-		getDistanceService.service(execution);
+		getDistanceService.service(execution, true);
 		
 	}
 
