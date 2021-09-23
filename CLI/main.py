@@ -6,7 +6,7 @@ import json
 from datetime import date
 
 compagnie = {
-        "rayanair": "http://localhost:8081/mocks/soseng-unibo/soseng-project-documentation/7424067",
+        "rayanair": "",
         "britishaw": "",
         "japanairl": "",
         "emirates": ""
@@ -21,14 +21,16 @@ def inizializza_compagnie():
 
         r = requests.get(x+"/flights")
 
+        print("emirates" in r.text)
+
         if "rayanair" in r.text:
-            compagnie["rayanair"]:x
+            compagnie["rayanair"] = x
         if "britishaw" in r.text:
-            compagnie["britishaw"]:x
+            compagnie["britishaw"] = x
         if "japanairl" in r.text:
-            compagnie["japanairl"]:x
+            compagnie["japanairl"] = x
         if "emirates" in r.text:
-            compagnie["emirates"]:x
+            compagnie["emirates"] = x
 
 def insert_data():
 
@@ -53,18 +55,17 @@ def insert_data():
         if secondi == 'e' or secondi == 'E':
             return ""
 
-        giorno = int(giorno)
-        mese = int(mese)
-        anno = int(anno)
-        ora = int(ora)
-        minuti = int(minuti)
-        secondi = int(secondi)
-
-
         try:
+            giorno = int(giorno)
+            mese = int(mese)
+            anno = int(anno)
+            ora = int(ora)
+            minuti = int(minuti)
+            secondi = int(secondi)
+
             tmp = datetime.datetime(year=anno, month=mese, day=giorno, hour=ora, minute=minuti, second=secondi)
             correctDate = True
-        except ValueError:
+        except:
             correctDate = False
 
         if correctDate == True:
@@ -78,7 +79,7 @@ if __name__ == '__main__':
     actualLink = ""
 
     print("Inizializzazione in corso, attendere prego...")
-    #inizializza_compagnie()
+    inizializza_compagnie()
 
     print("Benvenuto")
     while True:
