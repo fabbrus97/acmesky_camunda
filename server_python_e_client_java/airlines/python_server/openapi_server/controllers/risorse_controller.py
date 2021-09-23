@@ -147,7 +147,7 @@ def get_flights():  # noqa: E501
 
 def post_lmflight(lmflight=None):  # noqa: E501
     """crea un volo last minute
-
+     #converti json a stringa
      # noqa: E501
 
     :param lmflight: 
@@ -155,13 +155,38 @@ def post_lmflight(lmflight=None):  # noqa: E501
 
     :rtype: None
     """
-    
-    print("POST_LMFLIGHT:")
-    print(Lmflight.from_dict(connexion.request.get_json()))
-    
-    #simpleCamundaRESTPost.sendMessage("LM_Offers", {"lmflights": {"value": lmflight, "type": "Lmflight"}})
-    #TODO se non va "type": "Lmflight", prova "type": "Object"
-    return
+
+    if connexion.request.is_json:
+
+        lmflight = Lmflight.from_dict(connexion.request.get_json())
+
+        """
+        f = {"flight": {
+    "departure-from": "BLQ",
+    "takeoff": "10/10/2021",
+    "destination": "BGY",
+    "price": {
+        "amount": 123,
+        "currency": "$"
+    },
+    "offer_code": "abcdefg"
+}, "companyname": "testcompany"
+}"""
+
+
+        lmjson= lmflight.to_str().replace("\'", "\"")
+        lmf = json.loads(lmjson)
+
+        filew = open("voli.txt", "a")
+        filew.write(lmf["flight"]["departure_from"] + " " + lmf["flight"]["destination"] + " " + lmf["flight"]["takeoff"] + " " + str(int(lmf["flight"]["price"]["amount"])) + " " + lmf["companyname"] + " " + lmf["flight"]["offer_code"] + "\n")
+        filew.close()
+
+        try:
+            simpleCamundaRESTPost.sendMessage("LM_Offers", {"lmflights": {"value": lmf, "type": "String"}})
+            return 201
+        except:
+            return "Error", 400
+    #return "empty body", 400
 
 def post_notifypayment(inline_object=None):  # noqa: E501
     """Ricevi pagamento
