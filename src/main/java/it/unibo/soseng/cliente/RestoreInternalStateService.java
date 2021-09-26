@@ -13,6 +13,8 @@ public class RestoreInternalStateService {
 		//acmesky manda il codice offerta associato all'utente e noi dobbiamo rimandarglielo con la risposta
 		// - se accettiamo o rifiutiamo il trasporto -, quindi non dobbiamo inviargli alcun dato nella Transazione
 		
+		System.out.println("CLIENTE: ripristino stato interno per il volo " + flight_code);
+		
 		StaticValues.transazioni.removeIf( t -> t.flight.getOfferCode().contentEquals(username) && t.flight.getOfferCode().contentEquals(username));
 		
 	}

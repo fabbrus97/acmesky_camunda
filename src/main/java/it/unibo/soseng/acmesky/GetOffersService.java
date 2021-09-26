@@ -41,7 +41,6 @@ public class GetOffersService {
 
             try {
                 InlineResponse2001 result = apiInstance.postRegistration(body);
-                System.out.println(result);
                 StaticValues.airline_token = result.getToken();
             } catch (airline.ApiException e) {
                 System.err.println("Exception when calling RisorseApi#postRegistration");
@@ -53,7 +52,7 @@ public class GetOffersService {
         try {
             InlineResponse200 result = apiInstance.getFlights();
             
-            Offers offers = new Offers();
+            Offers offers = getJSON();
             System.out.println(result);
             ArrayList <LMflightFlight> flights = (ArrayList<LMflightFlight>) result.getFlights();
             ArrayList<Flight> voli = new ArrayList<Flight>();
@@ -74,10 +73,19 @@ public class GetOffersService {
                     System.out.println("Ricevuto il volo " + f.getDepartureFrom() + " - " + f.getDestination());
                 }
                 
+                System.out.println("Al momento offers contiene:");
+                for (String company : offers.getOffers().keySet()) {
+                	System.out.println(company);
+                }
+                
         		offers.getOffers().put(result.getCompanyname(), voli);
+        		
+        		System.out.println("Ma ora offers contiene:");
+                for (String company : offers.getOffers().keySet()) {
+                	System.out.println(company);
+                }
+        		
         		System.out.println("Ok, posso salvare i voli su file");
-            }else{
-                System.out.println("vecchio è stra vuota");
             }
             //offers.setFlights(voli);
             saveJSON(offers);

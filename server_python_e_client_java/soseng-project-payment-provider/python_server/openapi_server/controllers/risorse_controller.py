@@ -19,6 +19,33 @@ import simpleCamundaRESTPost
 active_payment_links = []
 token_comp_aerea = ""
 
+compagnie = {
+        "rayanair": "",
+        "britishaw": "",
+        "japanairl": "",
+        "emirates": ""
+    }
+
+def inizializza_compagnie():
+    f = open("airline.list", "r")
+    print("inizializzo compagnie...")
+    for x in f:
+        print("Sto esaminando l'url", x.replace("\n", "")+"/flights")
+        r = requests.get(x.replace("\n", "")+"/flights")
+
+        print(r.text)
+
+        if "rayanair" in r.text:
+            print("Trovato ryanair")
+            compagnie["rayanair"] = x
+        if "britishaw" in r.text:
+            compagnie["britishaw"] = x
+        if "japanairl" in r.text:
+            compagnie["japanairl"] = x
+        if "emirates" in r.text:
+            print("Trovato emirates")
+            compagnie["emirates"] = x
+
 def get_link(inline_object1=None):  # noqa: E501
     """Genera link di pagamento
 
@@ -52,37 +79,44 @@ def get_link(inline_object1=None):  # noqa: E501
 
     return ret
 
-def pay_people(payment_data_link, payment_data): 
+def pay_company(payment_data_link, payment_data): 
+
+    inizializza_compagnie()
+
     '''
     Il pagamento è andato bene, diamo una percentuale 
     ad acmesky e una alla compagnia aerea 
     '''
-    #manda_notifica_pagamento_acmesky(payment_data.data.offer_code) 
-    simpleCamundaRESTPost.sendMessage("PaymentSuccessfull")
-    #notifica pagamento compagnia aerea
-    url = "" #TODO
+    
 
-    global token_comp_aerea
+    #notifica pagamento compagnia aerea
+
+    url = compagnie[payment_data_link["data"]["airline"]].replace("\n", "")
+    
+    print("url airline: ", url)
+
+    global token_comp_aerea 
 
     if len(token_comp_aerea) == 0:
-        r = requests.post(url+"/registration", data={"username": "serv_bancari", "password": "12345abcde"})
-        token_comp_aerea = (json.loads(r.text)).token #TODO non sono sicuro sia così
+        r = requests.post(url+"/registration", json={"username": "serv_bancari", "password": "12345abcde"})
+        print("r: ", r)
+        token_comp_aerea = (json.loads(r.text))["token"] #TODO non sono sicuro sia così
     notifica_comp_aerea = {
-        "offer_code": payment_data_link.data.offer_code,
+        "offer_code": payment_data_link["data"]["offer_code"],
         "customer": {
             "name": "", #TODO non sono richiesti nei dati di pagamento, richiedili
             "email": ""
         }, 
         "amount_payed": {
-            "value": payment_data_link.data.amout.value,
-            "currency": payment_data_link.data.amout.currency
+            "value": payment_data_link["data"]["amount"]["value"],
+            "currency": payment_data_link["data"]["amount"]["currency"]
         },
         "transaction": {
             "date": datetime.date.today(),
-            "id": int(payment_data_link.link)
+            "id": int(payment_data_link["link"])
         }    
     }
-    headers = {"www-authenticate": "Token " + token_comp_aerea} #TODO
+    headers = {"abcd12!": token_comp_aerea} #TODO
     requests.post(url+"/notifypayment", data=notifica_comp_aerea, headers=headers)
     
 
@@ -114,7 +148,7 @@ def post_paymentdata(inline_object=None):  # noqa: E501
                     if inline_object.circuit in ["visa", "mastercard"]:
                         simpleCamundaRESTPost.sendMessage("ClientPaymentConfirmed", {"paymCorrect": {"value": True, "type": "Boolean"}}) #conferma pagamento per cliente - successo
                         simpleCamundaRESTPost.sendMessage("ConfirmPaymentSuccessfull", {"paymLink": {"value": inline_object.transaction.id, "type": "String"}, "paymSucc": {"value": True, "type": "Boolean"}}) #acmesky
-                        #pay_people(p, inline_object) TODO
+                        pay_company(p, inline_object)
                         active_payment_links.remove(p)
                         return #successo
     simpleCamundaRESTPost.sendMessage("ConfirmPaymentSuccessfull", {"paymLink": {"value": inline_object.transaction.id, "type": "String"}, "paymSucc": {"value": False, "type": "Boolean"}}) #conferma pagamento per acmesky - fallimento

@@ -413,7 +413,7 @@
     <bpmn:endEvent id="Event_1oypkan">
       <bpmn:incoming>Flow_1sr0wyt</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:serviceTask id="Activity_0yig9ma" name="Ripristina stato interno" camunda:class="it.">
+    <bpmn:serviceTask id="Activity_0yig9ma" name="Ripristina stato interno" camunda:class="it.unibo.soseng.cliente.RestoreInternalState">
       <bpmn:incoming>Flow_03wnix9</bpmn:incoming>
       <bpmn:outgoing>Flow_1sr0wyt</bpmn:outgoing>
     </bpmn:serviceTask>
