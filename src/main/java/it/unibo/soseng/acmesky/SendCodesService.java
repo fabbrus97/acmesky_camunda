@@ -13,11 +13,11 @@ import prontogramprovider.ApiClient;
 import prontogramprovider.ApiException;
 import prontogramprovider.Configuration;
 
-public class SendCodeService {
+public class SendCodesService {
 	
 	private static String url = "";
 	
-	public SendCodeService() {
+	public SendCodesService() {
 		
 	}
 	
@@ -55,6 +55,8 @@ public class SendCodeService {
         	
         	
         	codes.getCodes().forEach(code -> {
+        		System.out.println("ACMESKY: invio codice " + code.getCode());
+        		
         		CreatemessageData mi = new CreatemessageData(); 
         		mi.setReceiver(code.getUser());
         		

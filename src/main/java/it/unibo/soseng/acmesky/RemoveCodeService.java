@@ -52,6 +52,10 @@ public class RemoveCodeService {
 		execution.setVariable("cost", trans.flight.getPrice().getAmount());
 		System.out.println("ACMESKY: ho impostato come prezzo " + trans.flight.getPrice().getAmount());
 		
+		if (trans.flight.getPrice().getAmount() < 1000) {
+			RestoreInternalStateService.service(trans.acmesky_offer_code);
+		}
+		
 
 		
 	}

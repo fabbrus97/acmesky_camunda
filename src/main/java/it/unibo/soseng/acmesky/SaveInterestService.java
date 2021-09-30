@@ -2,6 +2,7 @@ package it.unibo.soseng.acmesky;
 
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -85,6 +86,7 @@ public class SaveInterestService {
 		
 		Clients c = null;
 		File file = new File(StaticValues.client_interests_file_path);
+		System.out.println("ACMESKY: debug: StaticValues.client_interests_file_path " + file.getAbsolutePath());
 		
 		try {
 			if (!file.exists()) {
@@ -97,6 +99,9 @@ public class SaveInterestService {
 				
 			Gson j = new Gson();
 			FileReader fileReader = new FileReader(file);
+			
+			
+			
 			c = j.fromJson(fileReader, Clients.class);
 			
 			fileReader.close();
@@ -125,6 +130,12 @@ public class SaveInterestService {
 			
 			jsonWriter.flush();
 			System.out.println("Fatto");
+			
+			System.out.println("Se è davvero fatto, ora dovrei riuscire a leggere");
+			FileReader fr = new FileReader(new File(StaticValues.client_interests_file_path)); 
+			char[] buffer = new char[1024];
+			fr.read(buffer);
+			System.out.println(buffer);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

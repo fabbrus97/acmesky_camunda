@@ -14,6 +14,7 @@ public class SendCodeService {
 	static void service(RuntimeService runtimeService, DelegateExecution execution) {
 		
 		String code  = execution.getVariable("code").toString(); //questa variabile è impostata da acmesky quando manda il messaggio
+		System.out.println("CLIENTE: invio codice " + code);
 		String username = execution.getVariable("username").toString(); //questa variabile è impostata da acmesky quando manda il messaggio
 		int contatore = 0;
 		for(Transazione t: StaticValues.transazioni) {

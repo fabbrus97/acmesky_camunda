@@ -14,7 +14,7 @@ public class RestoreInternalState implements JavaDelegate{
 	public void execute(DelegateExecution execution) throws Exception {
 		
 		
-		restoreInternalStateService.service(execution.getVariable("username").toString(), execution.getVariable("flight_code").toString()); 		
+		restoreInternalStateService.service(execution.getVariable("transactionid").toString(), execution.getVariable("username").toString(), execution.getVariable("offer_code").toString()); 		
 	}
 
 }

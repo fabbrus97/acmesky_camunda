@@ -12,7 +12,7 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 public class SendCodes implements JavaDelegate{
 
 	@Inject
-	SendCodeService sendCodeService;
+	SendCodesService sendCodeService;
 	
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
