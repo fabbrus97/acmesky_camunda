@@ -30,20 +30,17 @@ def inizializza_compagnie():
     f = open("airline.list", "r")
     print("inizializzo compagnie...")
     for x in f:
-        print("Sto esaminando l'url", x.replace("\n", "")+"/flights")
         r = requests.get(x.replace("\n", "")+"/flights")
 
         print(r.text)
 
         if "rayanair" in r.text:
-            print("Trovato ryanair")
             compagnie["rayanair"] = x
         if "britishaw" in r.text:
             compagnie["britishaw"] = x
         if "japanairl" in r.text:
             compagnie["japanairl"] = x
         if "emirates" in r.text:
-            print("Trovato emirates")
             compagnie["emirates"] = x
 
 def get_link(inline_object1=None):  # noqa: E501
@@ -58,7 +55,6 @@ def get_link(inline_object1=None):  # noqa: E501
 
     :rtype: InlineResponse200
     """
-    print("sono in get_link")
     if connexion.request.is_json:
         inline_object1 = InlineObject1.from_dict(connexion.request.get_json())  # noqa: E501
         if inline_object1.amount.value <= 0:
@@ -69,7 +65,6 @@ def get_link(inline_object1=None):  # noqa: E501
             return "Currency non found", 400
     chars = '1234567890'
     link = ""
-    print("tutto ok, genero il link")
     for _ in range(0, 10):
         link += chars[random.randint(0, len(chars)-1)] 
     print("generato link ", link)
@@ -93,21 +88,16 @@ def pay_company(payment_data_link, payment_data):
 
     url = compagnie[payment_data_link["data"]["airline"]].replace("\n", "")
     
-    print("url airline: ", url)
-
     global token_comp_aerea 
 
     if len(token_comp_aerea) == 0:
         r = requests.post(url+"/registration", json={"username": "serv_bancari", "password": "12345abcde"})
         token_comp_aerea = (json.loads(r.text))["token"] 
 
-    print(payment_data_link)
-    #print(active_payment_links[0])
-    print(payment_data)
     notifica_comp_aerea = {
         "offer_code": payment_data_link['data']['offer_code'],
         "customer": {
-            "name": "", #TODO
+            "name": "", 
             "email": ""
         }, 
         "amount_payed": {
@@ -119,7 +109,7 @@ def pay_company(payment_data_link, payment_data):
             "id": int(payment_data_link['link'])
         }    
     }
-    headers = {"abcd12!": token_comp_aerea} #TODO
+    headers = {"abcd12!": token_comp_aerea} 
     requests.post(url+"/notifypayment", json=notifica_comp_aerea, headers=headers)
     
 
@@ -139,9 +129,7 @@ def post_paymentdata(inline_object=None):  # noqa: E501
     if connexion.request.is_json:
         inline_object = InlineObject.from_dict(connexion.request.get_json())  # noqa: E501
     for p in active_payment_links:
-        print("controllo il link: ", inline_object.transaction.id)
         if inline_object.transaction.id == p["link"]:
-            print("trovata corrispondenza!!!")
             if inline_object.card_number > 100000: #la carta ha almeno 6 cifre
                 #check expiration
                 today = datetime.date.today()
@@ -179,7 +167,7 @@ def post_registration(maps_v1_credentials=None):  # noqa: E501
     """
     if connexion.request.is_json:
         maps_v1_credentials = MapsV1Credentials.from_dict(connexion.request.get_json())  # noqa: E501
-    if len(maps_v1_credentials.username) > 0 and len(maps_v1_credentials.password) > 0: #TODO si potrebbe controllare che username/pwd siano univoci
+    if len(maps_v1_credentials.username) > 0 and len(maps_v1_credentials.password) > 0: 
         chars = string.ascii_letters + '1234567890'
         token = ""
         for _ in range(0, 20):

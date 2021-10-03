@@ -46,7 +46,7 @@ paths:
       description: |-
         È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un `token` identificativo valido, restituisce tutti i messaggi (in blocchi di cardinalità 20) accessibili al fruitore (utente o ACMESky) identificato da quel token: in dettaglio, l'utente ha accesso solo ai messaggi di cui è destinatario, mentre ACMESky ha accesso a tutti i messaggi che ha inoltrato ai suoi utenti mediante Prontogram (potrebbe richiederli per fini statistici, ad esempio).
 
-        l body della risposta HTTP è di tipo `application/vnd.api+json` in quanto l'API prontogramAPI è al livello 3 di modello di maturità di Richardson: con la risposta sono restituiti anche i campi `links` per permettere l'esplorazione dinamica, come richiesto da RMML3.
+        Il body della risposta HTTP è di tipo `application/vnd.api+json` in quanto l'API prontogramAPI è al livello 3 di modello di maturità di Richardson: con la risposta sono restituiti anche i campi `links` per permettere l'esplorazione dinamica, come richiesto da RMML3.
       security:
         - tokenSessione: []
       responses:
@@ -189,7 +189,7 @@ paths:
                   data:
                     receiver: Mario rossi
                     offer:
-                      description: 'Roma - Berlino, Classe Premium'
+                      description: 'Roma - Berlino, 20/12/2021, 200$, ryanair1234'
                       code: '1234'
         description: Il body della richiesta HTTP è di tipo `application/vnd.api+json` in quanto l'API prontogramAPI è al livello 3 di modello di maturità di Richardson.
       tags:
@@ -211,7 +211,7 @@ paths:
           description: Not Acceptable
         '415':
           description: Unsupported Media Type
-      description: 'È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un `token` identificativo valido, invia un messaggio il cui corpo e destinatario sono quelli specificati nel body della richiesta HTTP.'
+      description: 'È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un `token` identificativo valido, invia un messaggio il cui corpo e destinatario sono quelli specificati nel body della richiesta HTTP. A differenza di /createmessage, questo endpoint supporta l'invio di più messaggi alla volta'
       security:
         - tokenSessione: []
       requestBody:
@@ -239,12 +239,12 @@ paths:
                     - message_item:
                         receiver: Mario Neri
                         offer:
-                          description: 'Roma - Berlino'
+                          description: 'Roma - Berlino, 20/12/2021, 200$, ryanair123'
                           code: '1234'
                     - message_item:
                         receiver: Mario Bianchi
                         offer:
-                          description: 'Bologna - Madrid'
+                          description: 'Bologna - Madrid, 20/12/2021, 150$, ryanair456'
                           code: '7890'
         description: Il body della richiesta HTTP è di tipo `application/vnd.api+json` in quanto l'API prontogramAPI è al livello 3 di modello di maturità di Richardson.
       tags:
@@ -446,7 +446,7 @@ paths:
                     data:
                       sender: ACMEsky
                       offer:
-                        description: 'Roma - Berlino, Classe Premium'
+                        description: 'Roma - Berlino, 20/12/2021, 200$, ryanair1234'
                         code: '1234'
                       date: '2021-03-04, 21:25 CET'
                     links:

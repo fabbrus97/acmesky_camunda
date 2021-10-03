@@ -77,7 +77,6 @@ main {
                         println@Console("verifico se username corrisponde a " + global.users[i].user.username)()
                         if (newuser == global.users[i].user.username){
                             println@Console("verifico se la password corrisponde")()
-                            println@Console(dati_registrazione.password + "=?=" + global.users[i].user.password)()
 
                             if (dati_login.password == global.users[i].user.password){
                                 nuovosid.sid = csets.sid = new
@@ -92,7 +91,6 @@ main {
         }]
 
         [richiesta(dati_richiesta)] {
-            //TODO controlla dati e restituisci ok <=> se ci sono tutti i dati
             println@Console("Richiesta prenotazione compagnia di noleggio effettuata")()
 
         }

@@ -199,9 +199,7 @@ def post_createmessage(token_info=None, body=None):  # noqa: E501
 
     :rtype: None
     """
-    #if connexion.request.is_json:
-    #    body = body.from_dict(connexion.request.get_json()).to_dict()  # noqa: E501
-
+    
     id_snd = len(db_message) #ATTENZIONE! 
     # siccome tutti i messaggi sono inviati solo da acmesky, 
     # l'id associato ai suoi messaggi è semplicemente
@@ -219,12 +217,10 @@ def post_createmessage(token_info=None, body=None):  # noqa: E501
         if m["link"]["self_snd"] == m["link"]["next_snd"]:
                 m["link"]["next_snd"] = "/" + m["link"]["next_snd"].split("/")[1] + "/" + str(int(m["link"]["next_snd"].split("/")[2]) + 1)
     
-    #TODO nota: è possibile mandare messaggi ad utenti che non sono ancora registrati
+    #nota: è possibile mandare messaggi ad utenti che non sono ancora registrati
     prev_rcv = id_rcv
     if id_rcv > 0:
         prev_rcv -= 1
-
-    #TODO devi aggiornare il valore next del messaggio precedente 
     
     username = get_username_from_uid(token_info["uid"])
     msg = {}
@@ -233,7 +229,7 @@ def post_createmessage(token_info=None, body=None):  # noqa: E501
             "receiver": body["data"]["receiver"],
             "from": get_username_from_uid(token_info["uid"]),
             "data": {
-                "offer": Message( CreatemessageData(body["data"]["offer"]["code"], body["data"]["offer"]["description"]) ).to_dict(),  #TODO TypeError: __init__() takes from 1 to 2 positional arguments but 3 were given
+                "offer": Message( CreatemessageData(body["data"]["offer"]["code"], body["data"]["offer"]["description"]) ).to_dict(),  
                 "date": "{}".format(datetime.date.today()), 
                 "id_snd": id_snd, 
                 "id_rcv": id_rcv
@@ -267,64 +263,8 @@ def post_createmessage(token_info=None, body=None):  # noqa: E501
             }
         }
     db_message.append(msg)     
-    # simpleCamundaRESTPost.sendMessage("CodeMessage", {"msgBody": {"value": msg, "type": "Body1"}}) #TODO controlla che il tipo sia Body1
-    simpleCamundaRESTPost.sendMessage("CodeMessage", {"code": {"value": body["data"]["offer"]["code"], "type": "String"}, "username": {"value": body['data']['receiver'], "type": "String"}}) #TODO controlla che il tipo sia Body1
-
-
-'''
-def post_login(maps_v1_credentials=None):  # noqa: E501
-    """Autentica un cliente
-
-    È la risorsa che permette al cliente o ad ACMESky di ottenere il token temporaneo tramite cui potranno essere identificati e autorizzati da Prontogram. # noqa: E501
-
-    :param maps_v1_credentials: 
-    :type maps_v1_credentials: dict | bytes
-
-    :rtype: InlineResponse2003
-    """
-    if connexion.request.is_json:
-        maps_v1_credentials = MapsV1Credentials.from_dict(connexion.request.get_json())  # noqa: E501
-    if len(maps_v1_credentials.username) > 0 and len(maps_v1_credentials.password) > 0: 
-        #TODO non posso fare questo controllo perché non esiste un endpoint per registrarsi
-
-        with open("users.json", "w") as users_file:
-                try:
-                    db_registered_users = json.load(users_file)
-                except:
-                    return InlineResponse2003("Errore del server"), 500
-
-        for user in db_registered_users:
-            if maps_v1_credentials.username == user["user"] and maps_v1_credentials.password == user["password"]:
-                user = maps_v1_credentials.username
-                chars = string.ascii_letters + '1234567890'
-                token = ""
-                for _ in range(0, 20):
-                    token += chars[random.randint(0, len(chars))]
-                now = datetime.datetime.now() #per verificare se il tempo è scaduto, basta fare
-                # (datetime.datetime.now().timestamp() - now.timestamp())/60
-                # se il risultato è > 60, sono passati più di 60 minuti e il token è scaduto
-                with open("tokens.json", "w") as tokens_file:
-                    tokens = [] 
-                    try:
-                        tokens = json.load(tokens_file)
-                        for t in tokens:
-                            if t["user"] == maps_v1_credentials.username:
-                                #l'utente esiste già, aggiorniamo questi valori
-                                t["token"] = token
-                                t["exp"]   = now.timestamp()
-                    except:
-                        pass
-                    #l'utente non esiste nella lista degli utenti loggati, lo aggiungiamo
-                    tokens.append({"user": user, "token": token, "exp": now.timestamp(), "uid": len(tokens)})
-                    json.dump(tokens, tokens_file)
-                    tokens_file.close()
-                    
-                            
-                return InlineResponse2003(token=token) #TODO possiamo restituire anche expiration_date
-
-    return InlineResponse2003("Username or password wrong"), 400
-
-'''
+    
+    simpleCamundaRESTPost.sendMessage("CodeMessage", {"code": {"value": body["data"]["offer"]["code"], "type": "String"}, "username": {"value": body['data']['receiver'], "type": "String"}}) 
 
 def post_login(token_info=None):
     if token_info:
@@ -355,7 +295,7 @@ def post_login(token_info=None):
             tokens[token_info["user"]]["issued"] = datetime.datetime.now().timestamp()
             tokens_file.write(json.dumps(tokens))
             tokens_file.close()
-            return {"token": new_token, "expiration_date": (tokens[token_info["user"]]["issued"] + 60)} #TODO supponiamo che il token scada in 60 secondi
+            return {"token": new_token, "expiration_date": (tokens[token_info["user"]]["issued"] + 60)} # supponiamo che il token scada in un'ora
         
     return None
 
@@ -371,13 +311,8 @@ def post_createmessages(token_info=None, body=None):  # noqa: E501
     :rtype: None
     """
     
-    print("======== DEBUG ========")
-    print(body)
-
     if connexion.request.is_json:
-        #body = [CreatemessageData.from_dict(d) for d in connexion.request.get_json()]  # noqa: E501
         for message in body["messages"]: 
-            #TODO probabilmente sarà da sistemare
             post_createmessage(token_info, {"data": message}) 
     
     return "ok", 200

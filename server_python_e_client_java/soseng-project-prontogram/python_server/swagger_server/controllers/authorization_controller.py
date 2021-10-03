@@ -25,8 +25,8 @@ def check_tokenSessione(token):
         for user,t in tokens.items():
             
             if t["token"] == token :
-                if (datetime.datetime.now().timestamp() - float(t["issued"]))/60 < 60 :
-                    #supponiamo i token valgano un minuto
+                if (datetime.datetime.now().timestamp() - float(t["issued"]))/60 < 3600 :
+                    #supponiamo i token valgano un'ora
                     print("token valido")
                     return {'uid': t["token"]}
                 else :
