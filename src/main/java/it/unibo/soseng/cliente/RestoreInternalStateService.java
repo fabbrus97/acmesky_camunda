@@ -50,10 +50,45 @@ public class RestoreInternalStateService {
 			
 		}
 		
-		StaticValues.transazioni.removeIf( t -> t.acmesky_code == null);
+		StaticValues.transazioni.removeIf( t -> t.acmesky_code == null || t.username == null);
+		
+		
+		//Immaginiamo il seguente scenario: acmesky trova 2 offerte per un nostro interesse.
+		//Se noi completiamo il processo per l'acquisto della prima offerta, e rimuoviamo quindi 
+		//la transazione associata dalla lista delle transazioni, perdiamo tutti i dati a noi associati
+		//(nome utente, indirizzo) e quando acmesky ci manderà il nuovo codice offerta non potremmo associarlo
+		//a nessuna transazione (in particolare, a nessun indirizzo). 
+		
+		//Per questo, dopo aver pulito le transazioni, controlliamo che ce ne sia almeno una con i nostri dati utente
+		//e se non c'è la creiamo ad hoc.
+		
+		Transazione tmp = null;
+		for (Transazione t: StaticValues.transazioni) {
+			if (t.acmesky_code.contentEquals(acmesky_code)) {
+				System.out.println("Ho inizializzato tmp");
+				tmp = t; 
+				tmp.flight = null;
+				tmp.acmesky_code = "";
+				tmp.payment_link = "";
+				break;
+			}
+		}
+		
 		StaticValues.transazioni.removeIf( t -> t.acmesky_code.contentEquals(acmesky_code) );
 		System.out.println("CLIENTE: stato interno ripristinato, rimosso codice " + acmesky_code);
 		System.out.println("CLIENTE: stato interno attuale: ");
+		
+		boolean found = false;
+		for (Transazione t: StaticValues.transazioni) {
+			if (t.username.contentEquals(tmp.username)) {
+				found = true;
+				break;
+			}
+		}
+		
+		if (!found) {
+			StaticValues.transazioni.add(tmp);
+		}
 		
 		for (Transazione t: StaticValues.transazioni) {
 			if (t.username != null)

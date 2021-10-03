@@ -77,6 +77,7 @@ public class GenerateCodesService {
 		new_code.setCode(new_random_code);
 		new_code.setFly_code(fly_code);
 		new_code.setUser(user);
+		new_code.setSent(false);
 		  
 		LocalDateTime now = LocalDateTime.now();  
   		new_code.setCreation_date(dtf.format(now));
@@ -107,10 +108,12 @@ public class GenerateCodesService {
 			e.printStackTrace();
 			
 		}
+		System.out.println("ACMESKY: numero dei codici recuperati da file: " + c.getCodes().size());
 		return c; 
 	}
 	
 	protected static void serialize_json(Codes codes) {
+		System.out.println("ACMESKY: provo a salvare " + codes.getCodes().size() + " codici");
 		try {
 			Gson j = new Gson();
 			Writer writer;

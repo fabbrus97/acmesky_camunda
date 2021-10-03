@@ -18,10 +18,25 @@ public class SendCodeService {
 		String username = execution.getVariable("username").toString(); //questa variabile è impostata da acmesky quando manda il messaggio
 		int contatore = 0;
 		for(Transazione t: StaticValues.transazioni) {
+			System.out.println("CLIENTE: check transazioni in invio codice cliente: " + t.username);
 			if (t.username.contentEquals(username)) {
-				t.acmesky_code = code;
-				StaticValues.transazioni.remove(contatore);
-				StaticValues.transazioni.add(contatore, t);
+				//Possono avvenire due casi quando ricevo un codice:
+				// trovo una transazione col nome che mi ha inviato acmesky, ma senza nessun codice associato
+				// oppure trovo una transazione col nome che mi ha inviato acmesky, che ha già un codice associato
+				//Questo può accadere perché Acmesky può trovare più offerte compatibili con un interesse
+				//e nel secondo caso basta aggiungere una nuova transazione
+				if (t.acmesky_code == null || t.acmesky_code.isEmpty()) {
+					System.out.println("Associo nome utente a transazione cliente esistente (" + StaticValues.transazioni.size() + ")");
+					t.acmesky_code = code;
+					StaticValues.transazioni.remove(contatore);
+					StaticValues.transazioni.add(contatore, t);
+				} else {
+					System.out.println("Creo nuova transazione cliente");
+					Transazione e = new Transazione(username);
+					e.home_address = t.home_address;
+					e.acmesky_code = code;
+					StaticValues.transazioni.add(e);
+				}
 				break;
 			}
 			contatore++;

@@ -5,6 +5,7 @@ import prontogramprovider.auth.*;
 
 
 import io.swagger.client.model.*;
+import it.unibo.soseng.acmesky.Json.Code;
 import it.unibo.soseng.acmesky.Json.Codes;
 import prontogramprovider.prontogram_client.DefaultApi;
 import prontogramprovider.prontogram_client.RisorseApi;
@@ -53,9 +54,14 @@ public class SendCodesService {
         	MessageList body = new MessageList();
 
         	
-        	
-        	codes.getCodes().forEach(code -> {
+        	for(Code code: codes.getCodes()) {
+        		
+        		if (code.isSent())
+        			continue;
+        		
         		System.out.println("ACMESKY: invio codice " + code.getCode());
+        		System.out.println("ACMESKY: invio codiceper utente" + code.getCode() + " " + code.getUser() + " " + code.getFly_code());
+        		code.setSent(true);
         		
         		CreatemessageData mi = new CreatemessageData(); 
         		mi.setReceiver(code.getUser());
@@ -66,9 +72,10 @@ public class SendCodesService {
         		mi.setOffer(offer);
         		
         		body.addMessagesItem(mi);
-        	});
+        	}
         	
-        	
+        	GenerateCodesService.serialize_json(codes);
+
         	try {
         		System.out.println(" ACMESKY SendCodeService: provo a inviare dei messaggi; i messaggi sono " + body.getMessages().size());
 				apiInstance.postCreatemessages(body);
@@ -104,7 +111,7 @@ public class SendCodesService {
             return result;
         } catch (ApiException e) {
             System.err.println("Exception when calling RisorseApi#postLogin");
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         
         return null;
@@ -131,7 +138,7 @@ public class SendCodesService {
 	            //TODO come capire se il token è scaduto?
 	        } catch (ApiException e) {
 	            System.err.println("Exception when calling RisorseApi#postAllmessage");
-	            e.printStackTrace();
+	            //e.printStackTrace();
 	        }
         } else {
         	System.out.println("Errore di autenticazione col server di prontogram, messaggio non inviato");
@@ -154,7 +161,7 @@ public class SendCodesService {
 		} catch (ApiException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Eccezione registrandosi per prontogram");
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 	}

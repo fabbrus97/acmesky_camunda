@@ -37,7 +37,7 @@ public class SendPaymentService {
 		
 		Transazione current_trans = null; 
 		
-		System.out.println("CLIENTE: scorro le transazioni correnti alla ricerca di offerta acmesky: " + code);
+		System.out.println("CLIENTE: scorro le transazioni correnti alla ricerca di offerta acmesky (" + StaticValues.transazioni.size() + "): " + code);
 		for (Transazione t: StaticValues.transazioni) {
 			System.out.println(t.username + " " + t.acmesky_code);
 			if (t.acmesky_code != null && t.acmesky_code.contentEquals(code)) {
@@ -45,6 +45,10 @@ public class SendPaymentService {
 				break;
 			}
 			
+		}
+		if (current_trans == null) {
+			System.out.println("CLIENTE: errore fatale");
+			return;
 		}
 		
 		current_trans.payment_link = url;
@@ -97,7 +101,7 @@ public class SendPaymentService {
             
         } catch (ApiException e) {
             System.err.println("Exception when calling RisorseApi#postPaymentdata");
-            //e.printStackTrace();
+            e.printStackTrace();
         }
 					
 	}

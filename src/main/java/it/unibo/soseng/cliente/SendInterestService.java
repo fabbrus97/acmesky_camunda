@@ -45,13 +45,17 @@ public class SendInterestService {
 				username = execution.getVariable("username").toString();
 				t.username = username;
 				c.payment_username = username;
+				
+				StaticValues.clienti.put(username, c);
+				StaticValues.transazioni.add(t);
+				
 			    
 				if (execution.getVariable("secondDate") != null && !execution.getVariable("secondDate").toString().isEmpty()) {
 					execution.getProcessEngine().getRuntimeService().createMessageCorrelation("GetInterests")
 						.setVariable("departure_airport", execution.getVariable("first_airport"))
 						.setVariable("arrival_airport", execution.getVariable("second_airport"))	
 						.setVariable("departure_time_min", sdt.format(sdt.parse(execution.getVariable("firstDate").toString())))
-						.setVariable("departure_time_max", sdt.format(sdt.parse(execution.getVariable("secondDateInterval").toString())))
+						.setVariable("departure_time_max", sdt.format(sdt.parse(execution.getVariable("firstDateInterval").toString())))
 						.setVariable("arrival_time_min", sdt.format(sdt.parse(execution.getVariable("secondDate").toString())))
 						.setVariable("arrival_time_max", sdt.format(sdt.parse(execution.getVariable("secondDateInterval").toString())))
 						.setVariable("client_id", execution.getVariable("username")) 
@@ -78,9 +82,12 @@ public class SendInterestService {
 			
 		} else {
 		
-			t.username = "mariorossi".concat(String.valueOf(StaticValues.contatore_mario_rossi));
+			t.username = "mariorossi".concat(String.valueOf(StaticValues.contatore_mario_rossi));	
 			username = t.username;
 			c.payment_username = "mariorossi".concat(String.valueOf(StaticValues.contatore_mario_rossi++));
+			
+			StaticValues.clienti.put(username, c);
+			StaticValues.transazioni.add(t);
 			
 			RuntimeService runtimeService = execution.getProcessEngine().getRuntimeService();
 			
@@ -160,8 +167,11 @@ public class SendInterestService {
 			
 		}
 	
-		StaticValues.clienti.put(username, c);
-		StaticValues.transazioni.add(t);
+		
+		/*System.out.println("CLIENTE: invio interessi: aggiunta transazione, le transazioni ora sono:");
+		for(Transazione trans : StaticValues.transazioni) {
+			System.out.println(trans.username + " " + trans.acmesky_code);
+		}*/
 
 	}
 }

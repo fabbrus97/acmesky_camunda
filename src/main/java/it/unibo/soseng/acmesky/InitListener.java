@@ -35,6 +35,9 @@ public class InitListener implements ExecutionListener {
 	
 	void setVariable(DelegateExecution execution, String fileName, String varName) throws Exception {
 		
+		StaticValues.airlinesUrl.clear();
+		StaticValues.transports.clear(); 
+		
 		System.out.println("Leggo la lista dei server...");
 		
 		ArrayList<String> urlList = new ArrayList<String>();
@@ -62,7 +65,10 @@ public class InitListener implements ExecutionListener {
 			
 			if (varName.contentEquals("transports")){
 				//l'elenco dei server dei trasporti differisce in quanto è composto da due parti separate da uno spazio: url + indirizzo
-				StaticValues.transports.add(new String[] {url.split(" ")[0], url.split(" ")[1]});
+				String actual_url = url.split(" ")[0];
+				String address = url.replace(actual_url, "").substring(1);
+				StaticValues.transports.add(new String[] {actual_url, address});
+				System.out.println("Ho aggiunto server dei trasporti con indirizzo " + address);
 			}
 			
 			urlList.add(url);
