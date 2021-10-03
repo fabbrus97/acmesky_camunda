@@ -9,7 +9,7 @@ public class ManageTransportOfferService {
 	}
 	
 	public static void service(RuntimeService runtimeService, String acmesky_code) {
-		boolean accept = (int)(Math.random()*10) >= 1; //c'è una probabilità del 10% di rifiutare il trasporto
+		boolean accept = true; // TODO (int)(Math.random()*10) >= 1; //c'è una probabilità del 10% di rifiutare il trasporto 
 		
 		String tmp = "";
 		for(Transazione t: StaticValues.transazioni) {
@@ -38,7 +38,7 @@ public class ManageTransportOfferService {
 			.correlate();
 		}
 		
-		StaticValues.transazioni.removeIf( t -> t.payment_link == paym_link);
+		//StaticValues.transazioni.removeIf( t -> t.payment_link == paym_link); TODO faceva buggare tutto, ma è necessaria una pulizia qua? 
 		
 	}
 }

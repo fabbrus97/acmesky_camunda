@@ -20,7 +20,11 @@ public class BookTransport implements JavaDelegate {
 	public void execute(DelegateExecution execution) throws Exception {
 		
 		//la variabile acmesky_code viene impostata dal messaggio dell'utente quando ci contatta
-	    BookTransportService.service(execution.getVariable("acmesky_code").toString());
+		
+		System.out.println("L'utente ha accettato la navetta per il codice offerta " + execution.getVariable("acmesky_code"));
+		String acmesky_code = execution.getVariable("acmesky_code").toString();
+		String companyUrl = execution.getVariable("transportCompanyUrl").toString();
+	    BookTransportService.service(acmesky_code, companyUrl);
 	    
 		
 	}

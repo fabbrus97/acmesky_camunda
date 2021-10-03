@@ -36,11 +36,22 @@ public class Code {
 		this.user = user;
 	}
 
+	public boolean isSent() {
+		return sent;
+	}
+
+	public void setSent(boolean sent) {
+		this.sent = sent;
+	}
+
+
+
 
 	String code;
 	String creation_date;
 	String fly_code;
 	String user;
+	boolean sent; //booleano che indica se questo codice è già stato mandato all'utente - e quindi siamo in attesa di risposta dell'utente
 	
 	
 	public Code() {

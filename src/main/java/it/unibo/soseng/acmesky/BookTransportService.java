@@ -25,7 +25,7 @@ public class BookTransportService {
 		
 	}
 	
-	public static void service(String acmesky_offercode) {
+	public static void service(String acmesky_offercode, String companyUrl) {
 		
 		Luoghi luoghi = new Luoghi();
 		Data data = new Data();
@@ -57,7 +57,7 @@ public class BookTransportService {
 		NoleggioPortService myService = new NoleggioPortService();
 		
 		QName qname = new QName("http://localhost:8000", "NoleggioPortServicePort");
-		myService.addPort(qname, SOAPBinding.SOAP11HTTP_BINDING, "http://localhost:8000/NoleggioPortService");
+		myService.addPort(qname, SOAPBinding.SOAP11HTTP_BINDING, companyUrl+"/NoleggioPortService");
 		
 	    //NoleggioPort noleggioPort = myService.getNoleggioPortServicePort();
 	    NoleggioPort noleggioPort = myService.getPort(qname, NoleggioPort.class);
