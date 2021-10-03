@@ -380,6 +380,6 @@ def post_createmessages(token_info=None, body=None):  # noqa: E501
             #TODO probabilmente sarà da sistemare
             post_createmessage(token_info, {"data": message}) 
     
-    return 200, "ok"
+    return "ok", 200
 
 

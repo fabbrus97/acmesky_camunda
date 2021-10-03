@@ -102,22 +102,22 @@ def pay_company(payment_data_link, payment_data):
         print("r: ", r)
         token_comp_aerea = (json.loads(r.text))["token"] #TODO non sono sicuro sia così
     notifica_comp_aerea = {
-        "offer_code": payment_data_link["data"]["offer_code"],
+        "offer_code": payment_data_link['data']['offer_code'],
         "customer": {
-            "name": "", #TODO non sono richiesti nei dati di pagamento, richiedili
+            "name": "", #TODO
             "email": ""
         }, 
         "amount_payed": {
-            "value": payment_data_link["data"]["amount"]["value"],
-            "currency": payment_data_link["data"]["amount"]["currency"]
+            "value": payment_data_link['data']['amount']['value'],
+            "currency": payment_data_link['data']['amount']['currency']
         },
         "transaction": {
-            "date": datetime.date.today(),
-            "id": int(payment_data_link["link"])
+            "date": str(datetime.date.today()),
+            "id": int(payment_data_link['link'])
         }    
     }
     headers = {"abcd12!": token_comp_aerea} #TODO
-    requests.post(url+"/notifypayment", data=notifica_comp_aerea, headers=headers)
+    requests.post(url+"/notifypayment", json=notifica_comp_aerea, headers=headers)
     
 
 def post_paymentdata(inline_object=None):  # noqa: E501
