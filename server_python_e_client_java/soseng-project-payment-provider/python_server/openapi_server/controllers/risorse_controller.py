@@ -99,8 +99,11 @@ def pay_company(payment_data_link, payment_data):
 
     if len(token_comp_aerea) == 0:
         r = requests.post(url+"/registration", json={"username": "serv_bancari", "password": "12345abcde"})
-        print("r: ", r)
-        token_comp_aerea = (json.loads(r.text))["token"] #TODO non sono sicuro sia così
+        token_comp_aerea = (json.loads(r.text))["token"] 
+
+    print(payment_data_link)
+    #print(active_payment_links[0])
+    print(payment_data)
     notifica_comp_aerea = {
         "offer_code": payment_data_link['data']['offer_code'],
         "customer": {
@@ -144,13 +147,20 @@ def post_paymentdata(inline_object=None):  # noqa: E501
                 today = datetime.date.today()
                 year = today.year
                 month = today.month
-                if year <= inline_object.expiration.year and month < inline_object.expiration.month:
+                if year < inline_object.expiration.year or ( year == inline_object.expiration.year and month <= inline_object.expiration.month):
                     if inline_object.circuit in ["visa", "mastercard"]:
                         simpleCamundaRESTPost.sendMessage("ClientPaymentConfirmed", {"paymCorrect": {"value": True, "type": "Boolean"}}) #conferma pagamento per cliente - successo
                         simpleCamundaRESTPost.sendMessage("ConfirmPaymentSuccessfull", {"paymLink": {"value": inline_object.transaction.id, "type": "String"}, "paymSucc": {"value": True, "type": "Boolean"}}) #acmesky
                         pay_company(p, inline_object)
                         active_payment_links.remove(p)
+                        print("Pagamento avvenuto con successo!")
                         return #successo
+                    else:
+                        print("Circuito carta sconosciuto")
+                else:
+                    print("Carta scaduta")
+            else:
+                print("Numero carta errato")
     simpleCamundaRESTPost.sendMessage("ConfirmPaymentSuccessfull", {"paymLink": {"value": inline_object.transaction.id, "type": "String"}, "paymSucc": {"value": False, "type": "Boolean"}}) #conferma pagamento per acmesky - fallimento
     simpleCamundaRESTPost.sendMessage("ClientPaymentConfirmed", {"paymCorrect": {"value": False, "type": "Boolean"}}) #conferma pagamento per cliente - fallimento
     

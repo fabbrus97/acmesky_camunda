@@ -205,9 +205,15 @@ def post_notifypayment(inline_object=None):  # noqa: E501
 
     :rtype: None
     """
+    print("INVIO NOTIFICA PAGAMENTO")
+
     if connexion.request.is_json:
         inline_object = InlineObject.from_dict(connexion.request.get_json())  # noqa: E501
-        simpleCamundaRESTPost.sendMessage("getTicket", variables={"username": {"value": inline_object.customer["username"], "type": "String"}, "offer_code": {"value": inline_object.offer_code, "type": "String"} })
+        print(inline_object)
+        simpleCamundaRESTPost.sendMessage("getTicket", variables={
+		"username": {"value": inline_object.customer.name, "type": "String"}, 
+                "transactionid": {"value": str(inline_object.transaction.id), "type": "String"}, 
+		"offer_code": {"value": inline_object.offer_code, "type": "String"} })
         '''
         esempio: simplecamundarestpost.sendMessage("LM_Offer", {	
 		    "aVariable" : {"value" : "aNewValue", "type": "String"},
