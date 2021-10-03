@@ -26,12 +26,10 @@ public class SendCodeService {
 				//Questo può accadere perché Acmesky può trovare più offerte compatibili con un interesse
 				//e nel secondo caso basta aggiungere una nuova transazione
 				if (t.acmesky_code == null || t.acmesky_code.isEmpty()) {
-					System.out.println("Associo nome utente a transazione cliente esistente (" + StaticValues.transazioni.size() + ")");
 					t.acmesky_code = code;
 					StaticValues.transazioni.remove(contatore);
 					StaticValues.transazioni.add(contatore, t);
 				} else {
-					System.out.println("Creo nuova transazione cliente");
 					Transazione e = new Transazione(username);
 					e.home_address = t.home_address;
 					e.acmesky_code = code;

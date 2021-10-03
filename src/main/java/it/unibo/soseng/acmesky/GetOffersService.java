@@ -12,6 +12,7 @@ import it.unibo.soseng.acmesky.Json.Offers;
 import it.unibo.soseng.acmesky.Json.Flight;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -57,9 +58,7 @@ public class GetOffersService {
             ArrayList <LMflightFlight> flights = (ArrayList<LMflightFlight>) result.getFlights();
             ArrayList<Flight> voli = new ArrayList<Flight>();
             if(flights != null){
-            	
-            	System.out.println("Sto per aggiungere un volo");
-            	
+            	            	
                 for (LMflightFlight flight : flights) {
                     Flight f = new Flight();
                     f.setDepartureFrom(flight.getDepartureFrom());
@@ -70,24 +69,13 @@ public class GetOffersService {
                     LMflightFlightPrice price = flight.getPrice();
                     f.setPrice(price.getCurrency(), price.getAmount().intValue());
                     voli.add(f);
-                    System.out.println("Ricevuto il volo " + f.getDepartureFrom() + " - " + f.getDestination());
                 }
                 
-                System.out.println("Al momento offers contiene:");
-                for (String company : offers.getOffers().keySet()) {
-                	System.out.println(company);
-                }
                 
         		offers.getOffers().put(result.getCompanyname(), voli);
         		
-        		System.out.println("Ma ora offers contiene:");
-                for (String company : offers.getOffers().keySet()) {
-                	System.out.println(company);
-                }
-        		
-        		System.out.println("Ok, posso salvare i voli su file");
             }
-            //offers.setFlights(voli);
+           
             saveJSON(offers);
         } catch (airline.ApiException e) {
             System.err.println("Exception when calling RisorseApi#getFlights");
@@ -96,7 +84,6 @@ public class GetOffersService {
     }
 
     public static void saveJSON(Offers offers){
-    	System.out.println("Scrivo offers dei voli su file");
         Gson j = new Gson();
 
         try {
@@ -110,7 +97,6 @@ public class GetOffersService {
             writer.close();
 
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -122,7 +108,12 @@ public class GetOffersService {
 		
 		try {
 			if (!file.exists()) {
+				
 				file.createNewFile();
+				FileOutputStream fs = new FileOutputStream(file);
+				fs.write("{ \"offers\": {} }".getBytes());
+				fs.flush(); fs.close();
+
 			}
 				
 			Gson j = new Gson();
@@ -132,7 +123,6 @@ public class GetOffersService {
 			fileReader.close();
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
 		}
@@ -140,7 +130,6 @@ public class GetOffersService {
     	
     }
 
-    //aggiungere funzione che apre il file e restituisce le offers dal json
 
 }
 

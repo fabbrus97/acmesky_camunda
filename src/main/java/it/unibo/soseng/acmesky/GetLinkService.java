@@ -29,7 +29,6 @@ public class GetLinkService {
 	private static String offer_code = "";
 	private static String company_name = "";
 	
-	//public static String service(String code) {
 	public static void service(String code) {
 		
 		offer_code = code;
@@ -67,21 +66,14 @@ public class GetLinkService {
 		
 		Transazione tmp = new Transazione("");
 		
-		System.out.println("ACMESKY: scorro le transazioni prima di aggiungere il link, cerco il codice offerta " + offer_code);
-		for (Transazione t : StaticValues.transazioni) { 
-			
-			System.out.println(t.username + " " + t.paymentLink);
+		for (Transazione t : StaticValues.transazioni) { 	
 			if (t.acmesky_offer_code.contentEquals(offer_code)) {
-				System.out.println("ACMESKY: ho trovato la transazione a cui bisogna aggiungere il link");
 				tmp = t;
 				break;
 			}
 		}
-		if (StaticValues.transazioni.remove(tmp)) {
-			System.out.println("ACMESKY: ho rimosso la transazione da riaggiungere modificata");
-		} else {
-			System.out.println("ACMESKY: NON ho rimosso la transazione da riaggiungere modificata");
-		}
+		
+		StaticValues.transazioni.remove(tmp);
 		tmp.paymentLink = link;
 		StaticValues.transazioni.addFirst(tmp);
 		
@@ -108,16 +100,12 @@ public class GetLinkService {
         LinkBody body = new LinkBody(); // Body1 |
         body.setAirline(company_name); 	
         LinkAmount amount = new LinkAmount();
-        //amount.setCurrency(f.getPrice().getCurrency());
         amount.setCurrency("eur");
         amount.setValue(BigDecimal.valueOf(f.getPrice().getAmount()));
         body.setAmount(amount);
         body.setOfferCode(offer_code); 
         try {
-        	System.out.println("ACMESKY: sto per chiedere il link  (che poi è un codice...?) alla banca");
             ActiveLink result = apiInstance.getLink(body);
-            System.out.println("ACMESKY: Ottenuto link dalla banca");
-            System.out.println(result);
             return result.getLink();
         } catch (ApiException e) {
             System.err.println("ACMESKY: Exception when calling RisorseApi#getLink");
@@ -133,28 +121,6 @@ public class GetLinkService {
 				return transazione.flight;
 			}
 		}
-		
-		/*
-		Codes c = GenerateCodesService.deserialize_file();
-		String flight_code = "";
-		for (Code code : c.getCodes()) {
-			if (code.getCode().equals(user_code)){
-				flight_code = code.getFly_code();
-				break;
-			}
-		}
-		
-		Offers o = GetOffersService.getJSON();
-		
-		for (String company: o.getOffers().keySet()) {
-			for (Flight flight: o.getOffers().get(company)) {
-				if (flight.getOfferCode().equals(flight_code)) {
-					company_name = company;
-					return flight;
-				}
-			}
-			
-		}*/
 		
 		return null;
 	}

@@ -110,9 +110,6 @@ public class SendInterestService {
 	        calendar.setLenient(false);
 	        while(true) {
 	        	try {
-		            /*int rand_day = (int)(Math.random() * day_range) + min_day;
-		            int rand_month = (int)(Math.random() * month_range) + min_month;
-		            calendar.set(year, rand_month, rand_day);*/
 		            firstDate = calendar.getTime();
 		            
 		            int rand_period = (int)(Math.random() * period_range) + min_period;
@@ -130,10 +127,8 @@ public class SendInterestService {
 			//genera un prezzo massimo
 	        //genera prezzi tra 200 e 1000
 			int max_price = (int)(Math.random() * 800)+200;
-			//TODO si può rendere più sofisticato, es aumenta o diminuisci il prezzo in base al numero di giorni o alla destinazione
 	        
 			//prendi due aeroporti a caso
-			//TODO si può rendere più sofisticato, es leggendo gli aeroporti da un file per sapere quali aeroporti sono effettivamente online
 			int first_airport_index = (int)(Math.random()*airports.length), second_airport_index;
 			
 			do {
@@ -167,11 +162,6 @@ public class SendInterestService {
 			
 		}
 	
-		
-		/*System.out.println("CLIENTE: invio interessi: aggiunta transazione, le transazioni ora sono:");
-		for(Transazione trans : StaticValues.transazioni) {
-			System.out.println(trans.username + " " + trans.acmesky_code);
-		}*/
-
+	
 	}
 }

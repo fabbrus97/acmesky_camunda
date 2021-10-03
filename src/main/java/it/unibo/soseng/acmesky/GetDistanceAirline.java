@@ -15,7 +15,6 @@ public class GetDistanceAirline implements JavaDelegate{
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 		
-		System.out.println("ACMESKY: sto per chiedere le distanze per airline");
 		getDistanceService.service(execution, false);
 		
 	}

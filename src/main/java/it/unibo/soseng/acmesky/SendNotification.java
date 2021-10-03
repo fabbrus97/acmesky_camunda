@@ -7,7 +7,6 @@ public class SendNotification implements JavaDelegate{
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		// TODO Auto-generated method stub
 		
 		execution.getProcessEngineServices()
 			.getRuntimeService()

@@ -20,7 +20,6 @@ public class GetLink implements JavaDelegate{
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 		
-		//execution.setVariable("paymentLink", getLinkService.service(execution.getVariable("code2check").toString()));	
 		getLinkService.service(execution.getVariable("code2check").toString());
 		
 	}

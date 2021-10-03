@@ -12,7 +12,6 @@ public class CheckCode implements JavaDelegate{
 	
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		// TODO Auto-generated method stub
 		
 		String code = execution.getVariable("code2check").toString();
 		

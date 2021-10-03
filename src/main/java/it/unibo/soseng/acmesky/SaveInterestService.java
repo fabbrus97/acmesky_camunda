@@ -42,8 +42,6 @@ public class SaveInterestService {
 		 * }
 		*/
 
-		//implementazione alternativa: hashtable
-
 		Clients clients = deserialize_file();
 		if (clients != null) {
 
@@ -56,8 +54,6 @@ public class SaveInterestService {
 
 			interest.setDeparture_time_min(departure_time_min);
 			interest.setDeparture_time_max(departure_time_max);
-
-			//interest.setClientAddress(clientAddress);
 
 			interest.setCost(cost);
 
@@ -76,9 +72,7 @@ public class SaveInterestService {
 
 			//riscriviamo i risultati
 			serialize_json(clients);
-		} else {
-			System.out.println("clients è null, non posso fare niente");
-		}
+		} 
 
 	}
 
@@ -86,7 +80,6 @@ public class SaveInterestService {
 
 		Clients c = null;
 		File file = new File(StaticValues.client_interests_file_path);
-		System.out.println("ACMESKY: debug: StaticValues.client_interests_file_path " + file.getAbsolutePath());
 
 		try {
 			if (!file.exists()) {
@@ -107,7 +100,6 @@ public class SaveInterestService {
 			fileReader.close();
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 
 		}
@@ -115,7 +107,6 @@ public class SaveInterestService {
 	}
 
 	public static void serialize_json(Clients clients) {
-		System.out.println("Scriviamo il json finale...");
 		Gson j = new Gson();
 
 		//prima di scrivere il json, rimuoviamo i voli scaduti
@@ -129,12 +120,10 @@ public class SaveInterestService {
 			j.toJson(clients, Clients.class, jsonWriter);
 
 			jsonWriter.flush();
-			System.out.println("Fatto");
 
 			
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

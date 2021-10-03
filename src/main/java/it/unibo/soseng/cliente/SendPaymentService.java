@@ -37,9 +37,7 @@ public class SendPaymentService {
 		
 		Transazione current_trans = null; 
 		
-		System.out.println("CLIENTE: scorro le transazioni correnti alla ricerca di offerta acmesky (" + StaticValues.transazioni.size() + "): " + code);
 		for (Transazione t: StaticValues.transazioni) {
-			System.out.println(t.username + " " + t.acmesky_code);
 			if (t.acmesky_code != null && t.acmesky_code.contentEquals(code)) {
 				current_trans = t; 
 				break;
@@ -56,7 +54,6 @@ public class SendPaymentService {
 		
 		//if key
 		if (c.payment_token == null || c.payment_token.length() == 0) {
-			System.out.println("Mi registro");
 			c.payment_token = register(c.payment_username, c.payment_password);
 			StaticValues.clienti.put(current_trans.username, c);
 		} 
@@ -95,9 +92,7 @@ public class SendPaymentService {
         body.expiration(expiration);
         
         try {
-            System.out.println("CLIENTE: Provo a pagare al link " + paymentLink);
             apiInstance.postPaymentdata(body);
-            System.out.println("CLIENTE: Pagamento riuscito");
             
         } catch (ApiException e) {
             System.err.println("Exception when calling RisorseApi#postPaymentdata");
@@ -112,11 +107,9 @@ public class SendPaymentService {
         MapsV1Credentials body = new MapsV1Credentials(); // MapsV1Credentials |
         body.setUsername(username);
         body.setPassword(password); 
-        System.out.println("Sto per registrarmi al servizio di pagamento");
         try {
             PaymentRegistration result = apiInstance.postRegistration(body);
             System.out.println(result);
-            System.out.println("Registrazione effettuata");
             return result.getToken() ;
         } catch (ApiException e) {
             System.err.println("Exception when calling RisorseApi#postRegistration");

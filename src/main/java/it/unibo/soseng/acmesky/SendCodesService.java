@@ -3,10 +3,13 @@ package it.unibo.soseng.acmesky;
 import prontogramprovider.*;
 import prontogramprovider.auth.*;
 
+import java.util.ArrayList;
 
 import io.swagger.client.model.*;
 import it.unibo.soseng.acmesky.Json.Code;
 import it.unibo.soseng.acmesky.Json.Codes;
+import it.unibo.soseng.acmesky.Json.Flight;
+import it.unibo.soseng.acmesky.Json.Offers;
 import prontogramprovider.prontogram_client.DefaultApi;
 import prontogramprovider.prontogram_client.RisorseApi;
 
@@ -27,12 +30,9 @@ public class SendCodesService {
 		url = server;
 				
 		if (StaticValues.prontogram_key != "") { 
-			System.out.println("Abbiamo una api key per prontogram, provo a inviare i codici");
-			//TODO cosa succede se abbiamo il token ma è scaduto?
 			sendCodes();
 			
 		} else {
-			System.out.println("Non abbiamo una api key per prontogram, provo a registrarmi");
 			//richiesta per registrarsi 
 			register();
 			//richiesta normale
@@ -59,8 +59,7 @@ public class SendCodesService {
         		if (code.isSent())
         			continue;
         		
-        		System.out.println("ACMESKY: invio codice " + code.getCode());
-        		System.out.println("ACMESKY: invio codiceper utente" + code.getCode() + " " + code.getUser() + " " + code.getFly_code());
+        		System.out.println("ACMESKY: invio codice per utente" + code.getCode() + " " + code.getUser() + " " + code.getFly_code());
         		code.setSent(true);
         		
         		CreatemessageData mi = new CreatemessageData(); 
@@ -68,7 +67,7 @@ public class SendCodesService {
         		
         		OfferMessage offer = new OfferMessage();
         		offer.setCode(code.getCode());
-        		offer.setDescription(code.getFly_code()); //TODO crea descrizione con volo andata, ritorno, costo e data
+        		offer.setDescription(make_description(code.getFly_code())); 
         		mi.setOffer(offer);
         		
         		body.addMessagesItem(mi);
@@ -77,21 +76,14 @@ public class SendCodesService {
         	GenerateCodesService.serialize_json(codes);
 
         	try {
-        		System.out.println(" ACMESKY SendCodeService: provo a inviare dei messaggi; i messaggi sono " + body.getMessages().size());
 				apiInstance.postCreatemessages(body);
-				System.out.println("Invio avvenuto correttamente");
+
 			} catch (ApiException e) {
-				// TODO Auto-generated catch block	
-				//e.printStackTrace();
-				System.out.println("Eccezione mandando codice a prontogram da acmesky");
+				e.printStackTrace();
 			}
         }
 		
-		/*codes.getCodes().forEach(code -> {
-			sendMessage(code.getCode(), code.getUser());
-		});*/
-	
-	}
+		}
 	
 	private static InlineResponse2003 login() {
 		
@@ -111,7 +103,7 @@ public class SendCodesService {
             return result;
         } catch (ApiException e) {
             System.err.println("Exception when calling RisorseApi#postLogin");
-            //e.printStackTrace();
+        
         }
         
         return null;
@@ -135,14 +127,26 @@ public class SendCodesService {
 	        	message.data(data);
 	        	apiInstance.setApiClient(defaultClient);
 	            apiInstance.postCreatemessage(message);
-	            //TODO come capire se il token è scaduto?
+	    
 	        } catch (ApiException e) {
 	            System.err.println("Exception when calling RisorseApi#postAllmessage");
-	            //e.printStackTrace();
+	            e.printStackTrace();
 	        }
-        } else {
-        	System.out.println("Errore di autenticazione col server di prontogram, messaggio non inviato");
-        }
+        } 
+	}
+	
+	private static String make_description(String flight_code) {
+		
+		Offers offers = GetOffersService.getJSON();
+		for (ArrayList<Flight> flist: offers.getOffers().values()) {
+			for (Flight f: flist) {
+				if (f.getOfferCode().contentEquals(flight_code)) {
+					return f.getDepartureFrom() + " - " + f.getDestination() + ", " + f.getTakeoff() + ", " + f.getPrice().getAmount() + f.getPrice().getCurrency() + ", " + flight_code; 
+				}
+			}
+		}
+		
+		return "";
 	}
 	
 	private static void register() {
@@ -159,9 +163,7 @@ public class SendCodesService {
 			defaultInstance.postRegister(body);
 			System.out.println("Richiesta di registrazione per prontogram inviata");
 		} catch (ApiException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Eccezione registrandosi per prontogram");
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 		
 	}

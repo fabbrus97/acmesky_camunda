@@ -13,18 +13,11 @@ public class RemoveCode implements JavaDelegate{
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 			
-		System.out.println("ACMESKY: devo rimuovere il codice");
 		
 		removeCodeService.service(execution);
 		
 		
-		/*String link = StaticValues.transazioni.getFirst().paymentLink; // execution.getVariable("paymLink");
-		if (link != null) {
-			String code = StaticValues.transazioni.getFirst().acmesky_offer_code; //StaticValues.codes2delete.get(link);
-			if (code != null) {
-				removeCodeService.service(execution, code);
-			} 
-		}*/
+		
 	}
 
 }

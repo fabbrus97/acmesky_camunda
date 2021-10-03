@@ -13,9 +13,7 @@ public class SendPaymentLinkService {
 		String link = "";
 		
 		String username = "";
-		
-		System.out.println("ACMESKY: Scorro le transazioni, cerco codcie offerta " + code);
-		
+				
 		for(Transazione t : StaticValues.transazioni) {
 			System.out.println(t.username + " " + t.paymentLink);
 			if (t.acmesky_offer_code.contentEquals(code)) {
@@ -29,8 +27,7 @@ public class SendPaymentLinkService {
 		runtimeService.createMessageCorrelation("PaymentLink")
 		.setVariable("paymentLink", link)
 		.setVariable("code", code)
-		.correlateAll();
-		
+		.correlateAll();		
 		
 	}
 	

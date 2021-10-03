@@ -18,8 +18,6 @@ public class SendCodes implements JavaDelegate{
 	public void execute(DelegateExecution execution) throws Exception {
 
 		if ((boolean)execution.getVariable("matchFound")) {
-				System.out.println("Chiamo servizio 'sendCodeService'");
-				//sendCodeService.service(((ArrayList<String>)execution.getVariable("prontograms")).get(0));
 				sendCodeService.service(StaticValues.prontogramUrl);
 		} 
 		

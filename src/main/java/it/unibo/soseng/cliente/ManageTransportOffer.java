@@ -12,7 +12,6 @@ public class ManageTransportOffer implements JavaDelegate{
 	
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		// TODO Auto-generated method stub
 		
 		//per sapere quale utente/offerta sta ricevendo l'offerta, acmesky ci manda anche il suo codice offerta come identificatore
 		//quindi la variabile "acmesky_code" è settata da acmesky quando ci manda il messaggio

@@ -59,7 +59,6 @@ public class FindMatchService {
 				flightList.forEach(flight -> {
 					System.out.println("Sto creando un match per l'utente " + user);
 					System.out.println("Il volo è " + flight.getDepartureFrom() + " - " + flight.getDestination() + " (" + flight.getOfferCode() + ")");
-				
 					matches.add(new String[] {(String)user, flight.getOfferCode()});
 				});
 				
@@ -74,12 +73,7 @@ public class FindMatchService {
 			if (interests2delete.get(name) != null) {
 				//if (client.getInterests().removeAll(interests2delete.get(name))) {
 				for (Interest i : interests2delete.get(name)) {
-					if (client.getInterests().removeIf( intrs -> intrs.myHashCode().equals(i.myHashCode()))) {
-						System.out.println("ACMESKY: ho cancellato l'interesse dell'utente " + name + " " + i.myHashCode());
-						
-					} else {
-						System.out.println("ACMESKY: non ho cancellato l'interesse dell'utente " + name + " " + i.myHashCode());
-					}
+					client.getInterests().removeIf( intrs -> intrs.myHashCode().equals(i.myHashCode())); 
 				}
 				clients.getClients().put(name, client);
 			}
@@ -103,10 +97,8 @@ public class FindMatchService {
 				
 				if (checkDeparture) { //ottimizzazione
 					if (userFlights.containsKey(name)) {
-						System.out.println("userFlights contiene lo username " + name);
 						
 						if (!((DepRetFlights)userFlights.get(name)).flights.containsKey(interest.myHashCode())) {
-							System.out.println("userFlights !!!! Inserisco nuovo interesse nella hashmap per utente " + name + ": " + interest.getDeparture_airport() + " - " + interest.getArrival_airport());
 							((DepRetFlights)userFlights.get(name)).flights.put(interest.myHashCode(), new ArrayList<Flight>());
 						}
 	
@@ -114,7 +106,6 @@ public class FindMatchService {
 							DepRetFlights dpf = new DepRetFlights();
 							dpf.flights.put(interest.myHashCode(), new ArrayList<Flight>());
 							userFlights.put(name, dpf);
-							System.out.println("userFlights !! Aggiungo nuovo utente " + name);
 					}
 				}
 				
@@ -138,8 +129,7 @@ public class FindMatchService {
 							boolean isArrivalOk = within(departure_min, departure_max, takeoff);
 							
 							if (isArrivalOk && isPriceOk && isDepartureOk && isDestinationOk) {
-								System.out.println("Ho trovato un volo di andata compatibilie per l'utente " + name + " e il volo del " + departure_min + ", " + departure_max + ", " + interest.getCost());
-								System.out.println("Ho aggiunto il volo " + flight.getOfferCode() + " all'interesse " + interest.getDeparture_airport() + " - " + interest.getArrival_airport() + " per l'utente " + name);
+								System.out.println("Ho trovato un volo di andata compatibile per l'utente " + name + " e il volo del " + departure_min + ", " + departure_max + ", " + interest.getCost() + ": " + flight.getOfferCode());
 								((DepRetFlights)userFlights.get(name)).flights.get(interest.myHashCode()).add(flight);
 								
 							}
@@ -165,10 +155,7 @@ public class FindMatchService {
 										
 										if (isReturnHomeOk && isReturnPriceOk && isDepartureOk && isDestinationOk) {
 											
-											System.out.println("Ho trovato un volo di ritorno compatibile per l'utente " + name + " e il volo del " + returnHome_min + ", " + returnHome_max + ", " + interest.getCost());
-											
-											System.out.println("Trovato volo di ritorno (" + flight.getOfferCode() + ")! Infatti partenza volo " + flight.getDepartureFrom() + " ritorno cliente " + interest.getArrival_airport());
-											System.out.println("Arrivo volo " + flight.getDestination() + " andata cliente " + interest.getDeparture_airport());
+											System.out.println("Ho trovato un volo di ritorno compatibile per l'utente " + name + " e il volo del " + returnHome_min + ", " + returnHome_max + ", " + interest.getCost() + ": " + flight.getOfferCode());
 											
 											((DepRetFlights)userFlights.get(name)).flights.get(interest.myHashCode()).add(flight);
 											
@@ -185,17 +172,15 @@ public class FindMatchService {
 		});
 		
 		if (!checkDeparture) { //controllo necessario altrimenti verebbe chiamato 2 volte
-			System.out.println("ACMESKY: inizio la terza passata per eliminare voli andata-ritorno senza ritorno (o che costano troppo)");
 			userFlights.forEach( (username, depRetFlights) -> {
 				depRetFlights.flights.forEach( (hashInteresse, voli) -> {
-					//voli è una lista di voli potenzialmente compatibili con un interesse; qui però abbiamo solo l'ash dell'interesse,
+					//voli è una lista di voli potenzialmente compatibili con un interesse; qui però abbiamo solo l'hash dell'interesse,
 					//che è una stringa, bisogna risalire all'oggetto originale:
 					clients.getClients().get(username).interests.forEach( (interest) -> {
 						if (interest.myHashCode().contentEquals(hashInteresse)) {
 							//ora cerchiamo se l'interesse ha un volo di ritorno (altrimenti tutti i voli qua presenti sono
 							//già compatibili al 100%
 							if (interest.getReturnHome_time_min() != null && !interest.getReturnHome_time_min().isEmpty()) {
-								System.out.println("A questo interesse serve anche un volo di ritorno");
 								ArrayList<Flight> andata = new ArrayList<Flight>();
 								ArrayList<Flight> ritorno = new ArrayList<Flight>();
 								for(Flight voloAndata: voli) {
@@ -208,12 +193,10 @@ public class FindMatchService {
 													//Aggiungiamo il volo di andata alla lista dei voli di andata compatibili con l'interesse
 													if (!andata.contains(voloAndata) && !ritorno.contains(voloAndata)) { //non vogliamo aggiungere lo stesso volo 2 volte, e non vogliamo aggiungere
 														//voli che sono segnati anche come voli di ritorno
-														System.out.println("Aggiungo volo " + voloAndata.getOfferCode() + " ai voli d'andata per l'utente " + username);
 														andata.add(voloAndata);
 													}
 													//Aggiungiamo il volo di ritorno alla lista dei voli di ritorno compatibili con l'interesse
 													if (!ritorno.contains(voloRitorno) && !andata.contains(voloRitorno)) {
-														System.out.println("Aggiungo volo " + voloRitorno.getOfferCode() + " ai voli di ritorno per l'utente " + username);
 														ritorno.add(voloRitorno);
 													}
 													//L'interesse è soddisfatto da almeno un volo, si può rimuovere  												
@@ -224,12 +207,9 @@ public class FindMatchService {
 									}
 								}
 								
-								System.out.println("userFlights libero la lista degli aerei di " + username + " per " + interest.getDeparture_airport() + " - " +interest.getArrival_airport() + " (" + ((DepRetFlights)userFlights.get(username)).flights.get(interest.myHashCode()).size() +  ")");
 								((DepRetFlights)userFlights.get(username)).flights.get(interest.myHashCode()).clear();
 								((DepRetFlights)userFlights.get(username)).flights.get(interest.myHashCode()).addAll(andata);
-								System.out.println("userFlights Dimensione attuale (1/2): " + ((DepRetFlights)userFlights.get(username)).flights.get(interest.myHashCode()).size());
 								((DepRetFlights)userFlights.get(username)).flights.get(interest.myHashCode()).addAll(ritorno);
-								System.out.println("userFlights Dimensione attuale (2/2): " + ((DepRetFlights)userFlights.get(username)).flights.get(interest.myHashCode()).size());
 									
 								if (interests2delete.containsKey(username))
 									interests2delete.get(username).add(interest);
@@ -242,7 +222,6 @@ public class FindMatchService {
 							} else {
 								if (voli.size() > 0) {
 									//possiamo cancellare l'interesse perché sappiamo che se c'è almeno un volo, è sicuramente compatibile
-									System.out.println("ACMESKY: aggiungo l'interesse tra quelli da eliminare");
 									if (interests2delete.containsKey(username))
 										interests2delete.get(username).add(interest);
 									else {
@@ -271,14 +250,10 @@ class DepRetFlights {
 	
 	HashMap<String, ArrayList<Flight>> flights;
 	
-	//ArrayList<Flight> departureFlights;
-	//ArrayList<Flight> finalDepartureFlights;
-	//ArrayList<Flight> returnFlights;
 	
 	public DepRetFlights() {
 		flights = new HashMap<String, ArrayList<Flight>>(); //hashcode interesse, voli
-		//departureFlights = new ArrayList<Flight>();
-		//returnFlights = new ArrayList<Flight>();
+
 	}
 	
 }

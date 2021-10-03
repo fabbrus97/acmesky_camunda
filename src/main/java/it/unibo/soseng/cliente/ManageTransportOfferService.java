@@ -9,7 +9,7 @@ public class ManageTransportOfferService {
 	}
 	
 	public static void service(RuntimeService runtimeService, String acmesky_code) {
-		boolean accept = true; // TODO (int)(Math.random()*10) >= 1; //c'è una probabilità del 10% di rifiutare il trasporto 
+		boolean accept = (int)(Math.random()*10) >= 1; //c'è una probabilità del 10% di rifiutare il trasporto 
 		
 		String tmp = "";
 		for(Transazione t: StaticValues.transazioni) {
@@ -25,8 +25,7 @@ public class ManageTransportOfferService {
 			System.out.println("Cliente: accettiamo il trasporto!");
 			runtimeService.createMessageCorrelation("TransportOfferAnswer")
 			.setVariable("bookTransport", true)
-			.setVariable("acmesky_code", acmesky_code) //TODO non è molto elegante, comunque anche se normalmente dovrebbe mandare solo acmesky_code
-			//facciamo mandare paym_link perché ho impostato getdistanceservice così, però andrebbe sistemato
+			.setVariable("acmesky_code", acmesky_code) 
 			.setVariable("paymLink", paym_link)
 			.correlate();
 		} else {
@@ -37,8 +36,6 @@ public class ManageTransportOfferService {
 			.setVariable("bookTransport", false)
 			.correlate();
 		}
-		
-		//StaticValues.transazioni.removeIf( t -> t.payment_link == paym_link); TODO faceva buggare tutto, ma è necessaria una pulizia qua? 
-		
+				
 	}
 }

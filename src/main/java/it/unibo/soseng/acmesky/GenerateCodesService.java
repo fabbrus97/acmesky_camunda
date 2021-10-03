@@ -108,12 +108,10 @@ public class GenerateCodesService {
 			e.printStackTrace();
 			
 		}
-		System.out.println("ACMESKY: numero dei codici recuperati da file: " + c.getCodes().size());
 		return c; 
 	}
 	
 	protected static void serialize_json(Codes codes) {
-		System.out.println("ACMESKY: provo a salvare " + codes.getCodes().size() + " codici");
 		try {
 			Gson j = new Gson();
 			Writer writer;
@@ -123,7 +121,6 @@ public class GenerateCodesService {
 			j.toJson(codes, Codes.class, jsonWriter);
 			
 			jsonWriter.flush();
-			System.out.println("Fatto");
 			
 		} catch (IOException e) {
 			e.printStackTrace();

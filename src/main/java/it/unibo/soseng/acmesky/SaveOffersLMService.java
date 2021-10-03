@@ -28,7 +28,7 @@ public class SaveOffersLMService {
 		
 		Offers o = GetOffersService.getJSON();
 		
-		System.out.println("ACMESKY: ho ricevuto l'offerta" + lmflight.getFlight().getOfferCode());
+		System.out.println("ACMESKY: ho ricevuto l'offerta LM " + lmflight.getFlight().getOfferCode());
 		
 		ArrayList<Flight> offers; 
 		
@@ -43,25 +43,10 @@ public class SaveOffersLMService {
 		
 		GetOffersService.saveJSON(o);
 	
-		//TODO dovrebbe farlo gian...?
-		/*for (Lmflight lmflight : lmflights) {
-
-		
-			Flight flight = new Flight();
-			LMflightFlight f = lmflight.getFlight();
-			flight.setDepartureFrom(f.getDepartureFrom());
-			flight.setDestination(f.getDestination());
-			flight.setOfferCode(f.getOfferCode());
-			flight.setPrice(f.getPrice().getCurrency(), f.getPrice().getAmount().intValue());
-			flight.setTakeoff(f.getTakeoff());
-			o.getOffers().get(lmflight.getCompanyname()).add(flight);
-		}*/
 	}
 	
 	private static String getCompanyName(String offcode) {
-		
-		System.out.println("ACMESKY: controllo offcode per LM " + offcode);
-		
+				
 		if (offcode.contains("emirates")) {
 			return "emirates";
 		} else if (offcode.contains("rayanair")) {
@@ -71,9 +56,7 @@ public class SaveOffersLMService {
 		} else if (offcode.contains("japanairl")) {
 			return "japanairl";
 		} 
-		
-		System.out.println("ACMESKY: controllo fallito, restituisco null");
-		
+				
 		return null;
 		
 		
