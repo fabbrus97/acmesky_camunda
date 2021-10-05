@@ -61,8 +61,6 @@ public class FindMatchService {
 					System.out.println("Il volo è " + flight.getDepartureFrom() + " - " + flight.getDestination() + " (" + flight.getOfferCode() + ")");
 					matches.add(new String[] {(String)user, flight.getOfferCode()});
 				});
-				
-				
 			});
 			
 			

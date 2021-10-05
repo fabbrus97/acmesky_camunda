@@ -159,17 +159,17 @@ paths:
                       type: number
             examples:
               Esempio:
-                value:
-                  offer_code: ryan253
-                  customer:
-                    name: Mario Rossi
-                    email: mariorossi@gmail.com
-                  amount_payed:
-                    value: 100
-                    currency: €
-                  transaction:
-                    date: '2020-05-22, 13.45PM, CET'
-                    id: 2542
+                offer_code: ryan253
+                customer:
+                  name: Mario Rossi
+                  email: mariorossi@gmail.com
+                amount_payed:
+                  value: 100
+                  currency: €
+                transaction:
+                  date: '2020-05-22, 13.45PM, CET'
+                  id: 2542
+                summary: 'Esempio di richiesta'
         description: ''
       description: È la risorsa che permette al fornitore dei servizi bancari di inviare alla compagnia aerea la quota del pagamento ricevuto dal cliente per l'acquisto dell'offerta.
       tags:
