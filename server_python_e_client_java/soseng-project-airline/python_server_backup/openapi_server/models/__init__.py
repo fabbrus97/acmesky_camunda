@@ -1,0 +1,15 @@
+# coding: utf-8
+
+# flake8: noqa
+from __future__ import absolute_import
+# import models into model package
+from openapi_server.models.inline_object import InlineObject
+from openapi_server.models.inline_response200 import InlineResponse200
+from openapi_server.models.inline_response2001 import InlineResponse2001
+from openapi_server.models.inline_response200_flights import InlineResponse200Flights
+from openapi_server.models.inline_response200_price import InlineResponse200Price
+from openapi_server.models.lmflight import Lmflight
+from openapi_server.models.maps_v1_credentials import MapsV1Credentials
+from openapi_server.models.notifypayment_amount_payed import NotifypaymentAmountPayed
+from openapi_server.models.notifypayment_customer import NotifypaymentCustomer
+from openapi_server.models.notifypayment_transaction import NotifypaymentTransaction

@@ -21,13 +21,13 @@ python3 -m openapi_server
 and open your browser to here:
 
 ```
-http://localhost:8081/mocks/soseng-unibo/soseng-project-documentation/7424067/ui/
+http://localhost:8080/mocks/soseng-unibo/soseng-project-documentation/7424067/ui/
 ```
 
 Your OpenAPI definition lives here:
 
 ```
-http://localhost:8081/mocks/soseng-unibo/soseng-project-documentation/7424067/openapi.json
+http://localhost:8080/mocks/soseng-unibo/soseng-project-documentation/7424067/openapi.json
 ```
 
 To launch the integration tests, use tox:

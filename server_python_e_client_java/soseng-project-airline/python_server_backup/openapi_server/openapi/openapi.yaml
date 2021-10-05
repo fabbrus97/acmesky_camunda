@@ -1,0 +1,312 @@
+openapi: 3.0.0
+info:
+  description: È l'API Restful offerta dalla compagnia aerea che permette di fruire
+    alla capability di restituire le offerte attive e di riceve la quota del pagamento
+    del cliente.
+  title: compagniaAereaAPI
+  version: "1.0"
+servers:
+- description: testing
+  url: https://stoplight.io/mocks/soseng-unibo/soseng-project-documentation/7424067
+paths:
+  /LMflight:
+    description: Endpoint che permette di creare un volo lastminute, specificando
+      tutti i parametri del volo; il server lo inoltrerà poi ad acmesky
+    post:
+      operationId: post_lmflight
+      parameters: []
+      requestBody:
+        $ref: '#/components/requestBodies/lmflight'
+        content:
+          application/json:
+            schema:
+              properties:
+                flight:
+                  $ref: '#/components/schemas/inline_response_200_flights'
+                companyname:
+                  type: string
+              title: lmflight
+              type: object
+      responses:
+        default:
+          description: Default error sample response
+        "200":
+          description: OK
+        "400":
+          description: CLIENT ERROR
+        "500":
+          description: SERVER ERROR
+      security:
+      - companytoken: []
+      summary: crea un volo last minute
+      tags:
+      - Risorse
+      x-openapi-router-controller: openapi_server.controllers.risorse_controller
+    summary: Crea un volo last minute
+  /flights:
+    get:
+      description: È la risorsa che restituisce tutte le offerte di voli attive.
+      operationId: get_flights
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Esempio:
+                  value:
+                    flights:
+                    - departure-from: BLQ
+                      takeoff: 2020-04-27, 10.00AM, CET
+                      destination: BCN
+                      price:
+                        value: 100
+                        currency: €
+                      offer_code: ryan253
+                    companyname: ryanflights
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+          description: OK
+        "500":
+          description: Internal Server Error
+      summary: Restituisci le offerte attive
+      tags:
+      - Risorse
+      x-openapi-router-controller: openapi_server.controllers.risorse_controller
+  /notifypayment:
+    post:
+      description: È la risorsa che permette al fornitore dei servizi bancari di inviare
+        alla compagnia aerea la quota del pagamento ricevuto dal cliente per l'acquisto
+        dell'offerta.
+      operationId: post_notifypayment
+      parameters: []
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object'
+        content:
+          application/json:
+            examples:
+              Esempio:
+                value:
+                  offer_code: ryan253
+                  customer:
+                    name: Mario Rossi
+                    email: mariorossi@gmail.com
+                  amount_payed:
+                    value: 100
+                    currency: €
+                  transaction:
+                    date: 2020-05-22, 13.45PM, CET
+                    id: 2542
+            schema:
+              properties:
+                offer_code:
+                  description: Codice identificativo dell'offerta
+                  type: string
+                customer:
+                  $ref: '#/components/schemas/_notifypayment_customer'
+                amount_payed:
+                  $ref: '#/components/schemas/_notifypayment_amount_payed'
+                transaction:
+                  $ref: '#/components/schemas/_notifypayment_transaction'
+              type: object
+      responses:
+        "200":
+          description: OK
+      security:
+      - companytoken: []
+      summary: Ricevi pagamento
+      tags:
+      - Risorse
+      x-openapi-router-controller: openapi_server.controllers.risorse_controller
+  /registration:
+    post:
+      description: È la risorsa che permette a chi intende interagire con la compagnia
+        aerea di ottenere l'APIKey per poter essere identificato e autorizzato.
+      operationId: post_registration
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Esempio:
+                value:
+                  username: Mario
+                  password: 12a4a54s
+            schema:
+              $ref: '#/components/schemas/Maps.v1_Credentials'
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Esempio:
+                  value:
+                    token: bWFnZ2llOnN1bW1lcnM=
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: Registra un nuovo utente
+      tags:
+      - Risorse
+      x-openapi-router-controller: openapi_server.controllers.risorse_controller
+components:
+  requestBodies:
+    lmflight:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/lmflight'
+    inline_object:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_object'
+  schemas:
+    Maps.v1_Credentials:
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      title: credentials
+      type: object
+    inline_response_200_price:
+      example:
+        amount: 0.8008281904610115
+        currency: currency
+      properties:
+        amount:
+          title: amount
+          type: number
+        currency:
+          title: currency
+          type: string
+      title: inline_response_200_price
+      type: object
+    inline_response_200_flights:
+      example:
+        takeoff: takeoff
+        price:
+          amount: 0.8008281904610115
+          currency: currency
+        destination: destination
+        offer_code: offer_code
+        departure-from: departure-from
+      properties:
+        departure-from:
+          title: departure-from
+          type: string
+        takeoff:
+          title: takeoff
+          type: string
+        destination:
+          title: destination
+          type: string
+        price:
+          $ref: '#/components/schemas/inline_response_200_price'
+        offer_code:
+          description: Codice identificativo dell'offerta
+          title: offer_code
+          type: string
+      title: inline_response_200_flights
+      type: object
+    inline_response_200:
+      example:
+        companyname: companyname
+        flights:
+        - takeoff: takeoff
+          price:
+            amount: 0.8008281904610115
+            currency: currency
+          destination: destination
+          offer_code: offer_code
+          departure-from: departure-from
+        - takeoff: takeoff
+          price:
+            amount: 0.8008281904610115
+            currency: currency
+          destination: destination
+          offer_code: offer_code
+          departure-from: departure-from
+      properties:
+        flights:
+          items:
+            $ref: '#/components/schemas/inline_response_200_flights'
+          title: flights
+          type: array
+          uniqueItems: false
+        companyname:
+          title: companyname
+          type: string
+      title: inline_response_200
+      type: object
+    lmflight:
+      properties:
+        flight:
+          $ref: '#/components/schemas/inline_response_200_flights'
+        companyname:
+          type: string
+      title: lmflight
+      type: object
+    _notifypayment_customer:
+      properties:
+        name:
+          title: name
+          type: string
+        email:
+          title: email
+          type: string
+      title: _notifypayment_customer
+      type: object
+    _notifypayment_amount_payed:
+      properties:
+        value:
+          title: value
+          type: number
+        currency:
+          title: currency
+          type: string
+      title: _notifypayment_amount_payed
+      type: object
+    _notifypayment_transaction:
+      properties:
+        date:
+          title: date
+          type: string
+        id:
+          title: id
+          type: number
+      title: _notifypayment_transaction
+      type: object
+    inline_object:
+      properties:
+        offer_code:
+          description: Codice identificativo dell'offerta
+          type: string
+        customer:
+          $ref: '#/components/schemas/_notifypayment_customer'
+        amount_payed:
+          $ref: '#/components/schemas/_notifypayment_amount_payed'
+        transaction:
+          $ref: '#/components/schemas/_notifypayment_transaction'
+      type: object
+    inline_response_200_1:
+      example:
+        token: token
+      properties:
+        token:
+          title: token
+          type: string
+      title: inline_response_200_1
+      type: object
+  securitySchemes:
+    companytoken:
+      description: Schema di sicurezza per permettere solo ai clienti opportunatamente
+        autenticati di inviare il pagamento.
+      in: header
+      name: abcd12!
+      type: apiKey
+      x-apikeyInfoFunc: openapi_server.controllers.security_controller_.info_from_companytoken
