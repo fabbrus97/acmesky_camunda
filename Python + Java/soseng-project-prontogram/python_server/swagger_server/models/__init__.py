@@ -1,0 +1,26 @@
+# coding: utf-8
+
+# flake8: noqa
+from __future__ import absolute_import
+# import models into model package
+from swagger_server.models.createmessage_data import CreatemessageData
+from swagger_server.models.inline_response200 import InlineResponse200
+from swagger_server.models.inline_response2001 import InlineResponse2001
+from swagger_server.models.inline_response2001_data import InlineResponse2001Data
+from swagger_server.models.inline_response2001_data_links import InlineResponse2001DataLinks
+from swagger_server.models.inline_response2001_data_message import InlineResponse2001DataMessage
+from swagger_server.models.inline_response2001_links import InlineResponse2001Links
+from swagger_server.models.inline_response2002 import InlineResponse2002
+from swagger_server.models.inline_response2002_data import InlineResponse2002Data
+from swagger_server.models.inline_response2002_links import InlineResponse2002Links
+from swagger_server.models.inline_response2003 import InlineResponse2003
+from swagger_server.models.inline_response200_data import InlineResponse200Data
+from swagger_server.models.inline_response200_links import InlineResponse200Links
+from swagger_server.models.inline_response200_links1 import InlineResponse200Links1
+from swagger_server.models.inline_response200_message import InlineResponse200Message
+from swagger_server.models.maps_v1_credentials import MapsV1Credentials
+from swagger_server.models.message import Message
+from swagger_server.models.message_item import MessageItem
+from swagger_server.models.message_list import MessageList
+from swagger_server.models.offer_message import OfferMessage
+from swagger_server.models.register_body import RegisterBody

@@ -1,0 +1,764 @@
+openapi: 3.0.0
+info:
+  title: prontogramAPI
+  description: È l'API Restful offerta dall'applicazione di messaggistica *Prontogram*
+    che vi racchiude la capability di inoltrare i messaggi circa le offerte inviate
+    da ACMESky ai clienti interessati.
+  version: "1.0"
+servers:
+- url: https://soseng-unibo.stoplight.io/mocks/soseng-unibo/soseng-project-documentation/6636887
+  description: testing
+paths:
+  /register:
+    post:
+      summary: Registra un nuovo utente
+      description: Registra un nuovo utente; prende in input solo un nome utente e
+        una password
+      operationId: post_register
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/RegisterBody'
+            examples:
+              Esempio:
+                value:
+                  data:
+                    username: mrossi85
+                    password: 12345678
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "406":
+          description: Not Acceptable
+        "415":
+          description: Unsupported Media Type
+        "500":
+          description: Server Error
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /message:
+    get:
+      tags:
+      - Risorse
+      summary: Restituisci tutti i messaggi
+      description: "È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione\
+        \ vi è un `token` identificativo valido, restituisce tutti i messaggi (in\
+        \ blocchi di cardinalità 20) accessibili al fruitore (utente o ACMESky) identificato\
+        \ da quel token: in dettaglio, l'utente ha accesso solo ai messaggi di cui\
+        \ è destinatario, mentre ACMESky ha accesso a tutti i messaggi che ha inoltrato\
+        \ ai suoi utenti mediante Prontogram (potrebbe richiederli per fini statistici,\
+        \ ad esempio).\n\nl body della risposta HTTP è di tipo `application/vnd.api+json`\
+        \ in quanto l'API prontogramAPI è al livello 3 di modello di maturità di Richardson:\
+        \ con la risposta sono restituiti anche i campi `links` per permettere l'esplorazione\
+        \ dinamica, come richiesto da RMML3."
+      operationId: post_allmessage
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                /message/mariorossi:
+                  value:
+                    links:
+                      self: /message/mariorossi/from/0
+                      next: /message/mariorossi/from/10
+                      prev: /message/mariorossi/from/0
+                    data:
+                    - message:
+                        body: "nuova offerta, codice 1234"
+                        receiver: mariorossi
+                        date: "2020-03-02, 16:06 CET"
+                      links:
+                        self: /message/mariorossi/0
+                        next: /message/mariorossi/1
+                        prev: /message/mariorossi/0
+                    - message:
+                        offer:
+                          description: "Roma - Berlino, Classe Premium"
+                          code: "1234"
+                        receiver: mariorossi
+                        date: "2020-03-05, 12:06 CET"
+                      links:
+                        self: /message/mariorossi/1
+                        next: /message/mariorossi/2
+                        prev: /message/mariorossi/0
+                /message/mariorossi/4:
+                  value:
+                    links:
+                      self: /message/mariorossi/4
+                      next: /message/mariorossi/5
+                      prev: /message/mariorossi/3
+                    data:
+                    - message:
+                        offer:
+                          description: "Roma - Berlino, Classe Premium"
+                          code: "1234"
+                        receiver: mariorossi
+                        date: "2020-03-02, 16:06 CET"
+                      links:
+                        self: /message/mariorossi/4
+                        next: /message/mariorossi/5
+                        prev: /message/mariorossi/3
+        "400":
+          description: Bad Request
+        "406":
+          description: Not Acceptable
+        "415":
+          description: Unsupported Media Type
+      security:
+      - tokenSessione: []
+      x-openapi-router-controller: swagger_server.controllers.risorse_controller
+  /createmessage:
+    post:
+      tags:
+      - Risorse
+      summary: Invia messaggio
+      description: "È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione\
+        \ vi è un `token` identificativo valido, invia un messaggio il cui corpo e\
+        \ destinatario sono quelli specificati nel body della richiesta HTTP."
+      operationId: post_createmessage
+      requestBody:
+        description: Il body della richiesta HTTP è di tipo `application/vnd.api+json`
+          in quanto l'API prontogramAPI è al livello 3 di modello di maturità di Richardson.
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/message'
+            examples:
+              Esempio:
+                value:
+                  data:
+                    receiver: Mario rossi
+                    offer:
+                      description: "Roma - Berlino, Classe Premium"
+                      code: "1234"
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "406":
+          description: Not Acceptable
+        "415":
+          description: Unsupported Media Type
+      security:
+      - tokenSessione: []
+      x-openapi-router-controller: swagger_server.controllers.risorse_controller
+  /createmessages:
+    post:
+      tags:
+      - Risorse
+      summary: Invia messaggi
+      description: "È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione\
+        \ vi è un `token` identificativo valido, invia un messaggio il cui corpo e\
+        \ destinatario sono quelli specificati nel body della richiesta HTTP."
+      operationId: post_createmessages
+      requestBody:
+        description: Il body della richiesta HTTP è di tipo `application/vnd.api+json`
+          in quanto l'API prontogramAPI è al livello 3 di modello di maturità di Richardson.
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/message_list'
+            examples:
+              Esempio:
+                value:
+                  message_list:
+                  - message_item:
+                      receiver: Mario Neri
+                      offer:
+                        description: Roma - Berlino
+                        code: "1234"
+                  - message_item:
+                      receiver: Mario Bianchi
+                      offer:
+                        description: Bologna - Madrid
+                        code: "7890"
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "406":
+          description: Not Acceptable
+        "415":
+          description: Unsupported Media Type
+      security:
+      - tokenSessione: []
+      x-openapi-router-controller: swagger_server.controllers.risorse_controller
+  /message/{username}:
+    get:
+      tags:
+      - Risorse
+      summary: Restituisci i primi 10 messaggi del cliente
+      description: "È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione\
+        \ vi è un `token` identificativo valido, restituisce i primi 20 messaggi inviati\
+        \ al cliente il cui username è pari al parametro di query `username`.\n\n\
+        In caso la richiesta HTTP abbia esito positivo, la risposta è un reindirizzamento\
+        \ alla risorsa `/message/{username}/from/0`"
+      operationId: get_message_username
+      parameters:
+      - name: username
+        in: path
+        description: Username dell'utente
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "308":
+          description: Permanent Redirect (experiemental)
+          headers:
+            Location:
+              description: "/message/{username}/from/0"
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "400":
+          description: Bad Request
+        "406":
+          description: Not Acceptable
+        "415":
+          description: Unsupported Media Type
+      security:
+      - tokenSessione: []
+      x-openapi-router-controller: swagger_server.controllers.risorse_controller
+  /message/{username}/from/{messageid}:
+    get:
+      tags:
+      - Risorse
+      summary: Restituisci 10 messaggi del cliente
+      description: "È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione\
+        \ vi è un `token` identificativo valido, restituisce i 10 messaggi successivi\
+        \ a quello con id pari al parametro di query `messageId` e inviati al cliente\
+        \ il cui username è pari al parametro di query `username`.\n\nIl body della\
+        \ richiesta e della risposta HTTP è di tipo `application/vnd.api+json` in\
+        \ quanto l'API prontogramAPI è al livello 3 di modello di maturità di Richardson:\
+        \ nella risposta sono presenti anche i campi `links` per permettere l'esplorazione\
+        \ dinamica, come richiesto da RMML3."
+      operationId: get_message_username_from_messageid
+      parameters:
+      - name: username
+        in: path
+        description: Username dell'utente
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: messageid
+        in: path
+        description: Id del messaggio
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+              examples:
+                Esempio:
+                  value:
+                    data:
+                      message:
+                      - sender: ACMEsky
+                        offer:
+                          description: "Roma - Berlino, Classe Premium"
+                          code: "1234"
+                        date: "2021-03-04, 21:25 CET"
+                        links:
+                          self: /message/mariorossi/0
+                          next: /message/mariorossi/1
+                          prev: /message/mariorossi/0
+                      - sender: ACMEsky
+                        body:
+                          description: "Roma - Parigi, Classe Base"
+                          code: "5678"
+                        date: "2021-03-04, 21:25 CET"
+                        links:
+                          self: /message/mariorossi/1
+                          next: /message/mariorossi/2
+                          prev: /message/mariorossi/0
+                    links:
+                      self: /message/mariorossi/from/0
+                      next: /message/mariorossi/from/10
+                      prev: /message/mariorossi/from/0
+        "400":
+          description: Bad Request
+        "406":
+          description: Not Acceptable
+        "415":
+          description: Unsupported Media Type
+      security:
+      - tokenSessione: []
+      x-openapi-router-controller: swagger_server.controllers.risorse_controller
+  /message/{username}/{messageid}:
+    get:
+      tags:
+      - Risorse
+      summary: Restituisci il messaggio del cliente
+      description: "È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione\
+        \ vi è un `token` identificativo valido, restituisce il messaggio con id pari\
+        \ al parametro di query `messageid` inviato al cliente il cui username è pari\
+        \ al parametro di query `username`.\n\nIl body della richiesta e della risposta\
+        \ HTTP è di tipo `application/vnd.api+json` in quanto l'API prontogramAPI\
+        \ è al livello 3 di modello di maturità di Richardson: nella risposta sono\
+        \ presenti anche i campi `links` per permettere l'esplorazione dinamica, come\
+        \ richiesto da RMML3."
+      operationId: get_message_username_messageid
+      parameters:
+      - name: username
+        in: path
+        description: Username dell'utente
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: messageid
+        in: path
+        description: Id del messaggio
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_2'
+              examples:
+                Esempio:
+                  value:
+                    data:
+                      sender: ACMEsky
+                      offer:
+                        description: "Roma - Berlino, Classe Premium"
+                        code: "1234"
+                      date: "2021-03-04, 21:25 CET"
+                    links:
+                      self: /message/mariorossi/1
+                      next: /message/mariorossi/2
+                      prev: /message/mariorossi/0
+                    meta:
+                      id: 1234
+        "400":
+          description: Bad Request
+        "406":
+          description: Not Acceptable
+      security:
+      - tokenSessione: []
+      x-openapi-router-controller: swagger_server.controllers.risorse_controller
+  /login:
+    post:
+      tags:
+      - Risorse
+      summary: Autentica un cliente
+      description: È la risorsa che permette al cliente o ad ACMESky di ottenere il
+        token temporaneo tramite cui potranno essere identificati e autorizzati da
+        Prontogram.
+      operationId: post_login
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_3'
+              examples:
+                Esempio:
+                  value:
+                    token: bWFnZ2llOnN1bW1lcnM=
+                    expiration_date: "2020-03-02, 16:06 CET"
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      security:
+      - basicAuth: []
+      x-openapi-router-controller: swagger_server.controllers.risorse_controller
+components:
+  schemas:
+    offerMessage:
+      title: offerMessage
+      type: object
+      properties:
+        code:
+          type: string
+          description: Codice identificativo della coppia cliente destinatario - offerta
+        description:
+          type: string
+          description: Breve descrizione dell'offerta
+      description: Parte del messaggio relativa all'offerta.
+      example:
+        code: code
+        description: description
+    Maps.v1_Credentials:
+      title: credentials
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    RegisterBody:
+      title: RegisterBody
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      description: Body della richiesta di registrazione
+    inline_response_200:
+      type: object
+      properties:
+        links:
+          $ref: '#/components/schemas/inline_response_200_links'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/inline_response_200_data'
+      example:
+        data:
+        - links:
+            next: next
+            prev: prev
+            self: self
+          message:
+            offer:
+              code: code
+              description: description
+            date: date
+            receiver: receiver
+            id: 0
+        - links:
+            next: next
+            prev: prev
+            self: self
+          message:
+            offer:
+              code: code
+              description: description
+            date: date
+            receiver: receiver
+            id: 0
+        links:
+          next: next
+          prev: prev
+          self: self
+    createmessage_data:
+      type: object
+      properties:
+        receiver:
+          type: string
+        offer:
+          $ref: '#/components/schemas/offerMessage'
+    message:
+      title: message
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/createmessage_data'
+    message_item:
+      title: message_item
+      type: object
+      properties:
+        receiver:
+          type: string
+        offer:
+          $ref: '#/components/schemas/offerMessage'
+    message_list:
+      title: message_list
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/message_item'
+    inline_response_200_1:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/inline_response_200_1_data'
+        links:
+          $ref: '#/components/schemas/inline_response_200_1_links'
+      example:
+        data:
+          message:
+          - offer:
+              code: code
+              description: description
+            date: date
+            links:
+              next: next
+              prev: prev
+              self: self
+            id: 0
+          - offer:
+              code: code
+              description: description
+            date: date
+            links:
+              next: next
+              prev: prev
+              self: self
+            id: 0
+        links:
+          next: next
+          prev: prev
+          self: self
+    inline_response_200_2:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/inline_response_200_2_data'
+        links:
+          $ref: '#/components/schemas/inline_response_200_2_links'
+      example:
+        data:
+          offer:
+            code: code
+            description: description
+          date: date
+          id: 0
+        links:
+          next: next
+          prev: prev
+          self: self
+    inline_response_200_3:
+      type: object
+      properties:
+        token:
+          type: string
+        expiration_date:
+          type: string
+      example:
+        expiration_date: expiration_date
+        token: token
+    inline_response_200_links:
+      type: object
+      properties:
+        self:
+          type: string
+          description: Link al blocco corrente
+        next:
+          type: string
+          description: Link al blocco successivo in senso temporale
+        prev:
+          type: string
+          description: Link al blocco precedente in senso temporale
+      description: Link a livello dei blocchi di messaggi
+      example:
+        next: next
+        prev: prev
+        self: self
+    inline_response_200_message:
+      type: object
+      properties:
+        offer:
+          $ref: '#/components/schemas/offerMessage'
+        receiver:
+          type: string
+        date:
+          type: string
+        id:
+          type: integer
+      example:
+        offer:
+          code: code
+          description: description
+        date: date
+        receiver: receiver
+        id: 0
+    inline_response_200_links_1:
+      type: object
+      properties:
+        self:
+          type: string
+          description: Link al messaggio corrente
+        next:
+          type: string
+          description: Link a messaggio successivo in senso temporale
+        prev:
+          type: string
+          description: Link al messaggio precedente in senso temporale
+      description: Link a livello dei singoli messaggiLink a livello dei singoli messaggi
+      example:
+        next: next
+        prev: prev
+        self: self
+    inline_response_200_data:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/inline_response_200_message'
+        links:
+          $ref: '#/components/schemas/inline_response_200_links_1'
+      example:
+        links:
+          next: next
+          prev: prev
+          self: self
+        message:
+          offer:
+            code: code
+            description: description
+          date: date
+          receiver: receiver
+          id: 0
+    inline_response_200_1_data_links:
+      type: object
+      properties:
+        self:
+          type: string
+          description: Link a messaggio corrente
+        next:
+          type: string
+          description: Link a messaggio successivo in senso temporale
+        prev:
+          type: string
+          description: Link a messaggio precedente in senso temporale
+      description: Link a livello dei singoli messaggi
+      example:
+        next: next
+        prev: prev
+        self: self
+    inline_response_200_1_data_message:
+      type: object
+      properties:
+        offer:
+          $ref: '#/components/schemas/offerMessage'
+        date:
+          type: string
+        links:
+          $ref: '#/components/schemas/inline_response_200_1_data_links'
+        id:
+          type: integer
+      example:
+        offer:
+          code: code
+          description: description
+        date: date
+        links:
+          next: next
+          prev: prev
+          self: self
+        id: 0
+    inline_response_200_1_data:
+      type: object
+      properties:
+        message:
+          type: array
+          items:
+            $ref: '#/components/schemas/inline_response_200_1_data_message'
+      example:
+        message:
+        - offer:
+            code: code
+            description: description
+          date: date
+          links:
+            next: next
+            prev: prev
+            self: self
+          id: 0
+        - offer:
+            code: code
+            description: description
+          date: date
+          links:
+            next: next
+            prev: prev
+            self: self
+          id: 0
+    inline_response_200_1_links:
+      type: object
+      properties:
+        self:
+          type: string
+          description: Link al blocco corrente in senso temporale
+        next:
+          type: string
+          description: Link al blocco successivo in senso temporale
+        prev:
+          type: string
+          description: Link al blocco precedente in senso temporale
+      description: Link a livello dei blocchi di messaggi
+      example:
+        next: next
+        prev: prev
+        self: self
+    inline_response_200_2_data:
+      type: object
+      properties:
+        offer:
+          $ref: '#/components/schemas/offerMessage'
+        date:
+          type: string
+        id:
+          type: integer
+      example:
+        offer:
+          code: code
+          description: description
+        date: date
+        id: 0
+    inline_response_200_2_links:
+      type: object
+      properties:
+        self:
+          type: string
+          description: Link al messaggio corrente
+        next:
+          type: string
+          description: Link a messaggio successivo in senso temporale
+        prev:
+          type: string
+          description: Link a messaggio precedente in senso temporale
+      example:
+        next: next
+        prev: prev
+        self: self
+  parameters:
+    AuthorizationOauth2:
+      name: AuthorizationOauth2
+      in: header
+      description: "Il valore deve essere il token che il cliente ha ricevuto durante\
+        \ la registrazione, preceduto da `Bearer`"
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+  securitySchemes:
+    tokenSessione:
+      type: http
+      scheme: bearer
+      x-bearerInfoFunc: swagger_server.controllers.authorization_controller.check_tokenSessione
+    basicAuth:
+      type: http
+      scheme: basic
+      x-basicInfoFunc: swagger_server.controllers.authorization_controller.check_basicAuth
+
