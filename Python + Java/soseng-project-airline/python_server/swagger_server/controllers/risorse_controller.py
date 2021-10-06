@@ -6,13 +6,13 @@ import string
 import datetime
 import json
 
-from swagger_server.models.inline_object import InlineObject  # noqa: E501
+from swagger_server.models.notifypayment_body import NotifypaymentBody  # noqa: E501
 from swagger_server.models.inline_response200 import InlineResponse200  # noqa: E501
 from swagger_server.models.inline_response2001 import InlineResponse2001  # noqa: E501
 from swagger_server.models.maps_v1_credentials import MapsV1Credentials  # noqa: E501
 
-from swagger_server.models.inline_response200_price import InlineResponse200Price
-from swagger_server.models.inline_response200_flights import InlineResponse200Flights
+from swagger_server.models.l_mflight_flight_price import LMflightFlightPrice
+from swagger_server.models.l_mflight_flight import LMflightFlight
 
 from swagger_server.models.lmflight import Lmflight
 
@@ -40,10 +40,10 @@ def add_flight():
 
     filew = open("voli.txt", "a")
 
-    src = sources[random.randint(0, 16)]
-    dst = sources[random.randint(0,16)]
+    src = sources[random.randint(0, len(sources))]
+    dst = sources[random.randint(0,len(sources))]
     while src == dst:
-        dst = sources[random.randint(0,16)]
+        dst = sources[random.randint(0,len(sources))]
 
     now +=datetime.timedelta(weeks=random.randint(0, 5),days=random.randint(0, 20),hours=random.randint(0,24),minutes=random.randint(0, 60),seconds=random.randint(0, 5))
     #aggiungo un delta alla data
@@ -137,9 +137,9 @@ def get_flights():  # noqa: E501
     flights=[]
     for line in selected:
         l=line.split()
-        price = InlineResponse200Price(amount=l[5],currency="€")
+        price = LMflightFlightPrice(amount=l[5],currency="€")
         tkoff = l[2]+", "+ l[3]+l[4]+", CET"
-        flight= InlineResponse200Flights(departure_from=l[0],takeoff=tkoff,destination=l[1],price=price,offer_code=l[7])
+        flight= LMflightFlight(departure_from=l[0],takeoff=tkoff,destination=l[1],price=price,offer_code=l[7])
         flights.append(flight)
     
     return InlineResponse200(flights=flights,companyname=company)
@@ -208,7 +208,7 @@ def post_notifypayment(inline_object=None):  # noqa: E501
     print("INVIO NOTIFICA PAGAMENTO")
 
     if connexion.request.is_json:
-        inline_object = InlineObject.from_dict(connexion.request.get_json())  # noqa: E501
+        inline_object = NotifypaymentBody.from_dict(connexion.request.get_json())  # noqa: E501
         print(inline_object)
         simpleCamundaRESTPost.sendMessage("getTicket", variables={
 		"username": {"value": inline_object.customer.name, "type": "String"}, 

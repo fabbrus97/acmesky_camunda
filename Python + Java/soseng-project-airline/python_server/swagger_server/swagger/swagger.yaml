@@ -30,7 +30,7 @@ paths:
                   value:
                     flights:
                     - departure-from: BLQ
-                      takeoff: "2020-04-27, 10.00AM, CET"
+                      takeoff: "27/04/2020, 10:00AM, CET"
                       destination: BCN
                       price:
                         value: 100
@@ -58,16 +58,15 @@ paths:
             examples:
               Esempio:
                 value:
-                  lmflight:
-                    flight:
-                      departure-from: BLQ
-                      takeoff: "2020-04-27, 10.00AM, CET"
-                      destination: BGY
-                      price:
-                        amount: 100
-                        currency: €
-                      offer_code: ryan102
-                    companyname: ryanair
+                  flight:
+                    departure-from: BLQ
+                    takeoff: "27/04/2020, 10:00AM, CET"
+                    destination: BGY
+                    price:
+                      amount: 100
+                      currency: €
+                    offer_code: ryan102
+                  companyname: ryanair
       responses:
         default:
           description: Default error sample response
@@ -106,7 +105,7 @@ paths:
                     value: 100
                     currency: €
                   transaction:
-                    date: "2020-05-22, 13.45PM, CET"
+                    date: "27/04/2020, 10:00AM, CET"
                     id: 2542
       responses:
         "200":
