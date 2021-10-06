@@ -10,7 +10,7 @@ public class AskClientTransportService {
 
 	public static void service(DelegateExecution execution) {
 		
-		System.out.println("ACMESKY: chiedo al cliente se vuole la navetta");
+		
 		
 		String code = "";
 		
@@ -19,6 +19,8 @@ public class AskClientTransportService {
 				code = t.acmesky_offer_code;
 			}
 		}
+
+		System.out.println("ACMESKY: chiedo al cliente se vuole la navetta per l'offerta " + code);
 		
 		execution.getProcessEngine()
 			.getRuntimeService()

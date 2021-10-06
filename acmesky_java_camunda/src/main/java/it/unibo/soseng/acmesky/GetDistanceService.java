@@ -1,14 +1,8 @@
 package it.unibo.soseng.acmesky;
 
 //import io.swagger.airline.Configuration;
-import io.swagger.client.ApiException;
-import io.swagger.client.api.RisorseApi;
-import io.swagger.client.auth.HttpBasicAuth;
 import io.swagger.client.model.*;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
-
-import airline.ApiClient;
-import airline.Configuration;
 
 import java.util.ArrayList;
 
@@ -24,7 +18,7 @@ public class GetDistanceService {
     	//oppure sapere qual è la compagina dei trasporti più vicina all'utente. Nel primo caso la variabile
     	//findNearestTransport sarà false, nel secondo true. 
         
-        RisorseApi apiInstance = new RisorseApi();
+        geoprovider.geo_client.RisorseApi apiInstance = new geoprovider.geo_client.RisorseApi();
     	
     	apiInstance.getApiClient().setBasePath(StaticValues.geoproviderUrl); 
     	apiInstance.getApiClient().setUsername(StaticValues.distance_username); 
@@ -40,7 +34,7 @@ public class GetDistanceService {
                 RegisterMaps result = apiInstance.postRegistration(body);
                 StaticValues.distance_token = result.getToken();
                 System.out.println(result);
-            } catch (ApiException e) {
+            } catch (Exception e) {
                 System.err.println("Exception when calling RisorseApi#postRegistration");
                 e.printStackTrace();
             }
@@ -114,7 +108,7 @@ public class GetDistanceService {
             	execution.setVariable("transportCompanyUrl", StaticValues.transports.get(least_distant)[0]);
             }
             
-        } catch (ApiException e) {
+        } catch (Exception e) {
             System.err.println("Exception when calling RisorseApi#postDistance");
             e.printStackTrace();
         }

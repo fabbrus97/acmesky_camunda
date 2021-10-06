@@ -3,17 +3,11 @@ package it.unibo.soseng.acmesky;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import io.swagger.client.model.ActiveLink;
-import io.swagger.client.model.Body;
-import io.swagger.client.model.LinkAmount;
-import io.swagger.client.model.LinkBody;
-import io.swagger.client.model.MapsV1Credentials;
-import io.swagger.client.model.PaymentRegistration;
-import paymentprovider.ApiClient;
-import paymentprovider.ApiException;
-import paymentprovider.Configuration;
-import paymentprovider.auth.ApiKeyAuth; 
+import paymentprovider.*;
+import paymentprovider.auth.*;
+import io.swagger.client.model.*;
 import paymentprovider.payment_client.RisorseApi;
+
 import it.unibo.soseng.acmesky.StaticValues;
 import it.unibo.soseng.acmesky.Json.Code;
 import it.unibo.soseng.acmesky.Json.Codes;
@@ -105,7 +99,7 @@ public class GetLinkService {
         body.setAmount(amount);
         body.setOfferCode(offer_code); 
         try {
-            ActiveLink result = apiInstance.getLink(body);
+            Activelink result = apiInstance.getLink(body);
             return result.getLink();
         } catch (ApiException e) {
             System.err.println("ACMESKY: Exception when calling RisorseApi#getLink");

@@ -11,7 +11,7 @@ compagnie = {
         "japanairl": "",
         "emirates": ""
     }
-airports = ["BLQ","BGY","CTA","MXP","VRN","FCO","TYO","PEK","JFK","LGW","FRA","BCN","LIS","BOG","AUH","MOW","ORY"]
+airports = ["BLQ", "BGY", "CTA", "MXP", "VRN", "FCO", "LGW", "FRA", "BCN", "LIS", "AUH", "SVO", "ORY"]
 
 auth_header = {"abcd12!": "token_hc_test"}
 

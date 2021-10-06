@@ -4,7 +4,6 @@ package it.unibo.soseng.cliente;
 import java.util.Calendar;
 
 import io.swagger.client.*;
-import io.swagger.client.model.Body;
 import io.swagger.client.model.InlineResponse2001;
 import io.swagger.client.model.MapsV1Credentials;
 import io.swagger.client.model.PaymentDataBody;
@@ -98,7 +97,7 @@ public class SendPaymentService {
             System.err.println("Exception when calling RisorseApi#postPaymentdata");
             e.printStackTrace();
         }
-					
+					 
 	}
 	
 	private static String register(String username, String password) {
@@ -107,7 +106,7 @@ public class SendPaymentService {
         MapsV1Credentials body = new MapsV1Credentials(); // MapsV1Credentials |
         body.setUsername(username);
         body.setPassword(password); 
-        try {
+        try { 
             PaymentRegistration result = apiInstance.postRegistration(body);
             System.out.println(result);
             return result.getToken() ;

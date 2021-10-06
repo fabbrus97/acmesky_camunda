@@ -13,7 +13,7 @@ public class ManageTransportOfferService {
 		
 		String tmp = "";
 		for(Transazione t: StaticValues.transazioni) {
-			if (t.acmesky_code.contentEquals(acmesky_code)) {
+			if (t.acmesky_code != null && t.acmesky_code.contentEquals(acmesky_code)) {
 				tmp = t.payment_link;
 				break;
 			}

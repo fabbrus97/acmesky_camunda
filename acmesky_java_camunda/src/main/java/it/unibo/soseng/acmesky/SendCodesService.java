@@ -62,7 +62,7 @@ public class SendCodesService {
         		System.out.println("ACMESKY: invio codice per utente" + code.getCode() + " " + code.getUser() + " " + code.getFly_code());
         		code.setSent(true);
         		
-        		CreatemessageData mi = new CreatemessageData(); 
+        		MessageItem mi = new MessageItem(); 
         		mi.setReceiver(code.getUser());
         		
         		OfferMessage offer = new OfferMessage();
@@ -163,7 +163,7 @@ public class SendCodesService {
 			defaultInstance.postRegister(body);
 			System.out.println("Richiesta di registrazione per prontogram inviata");
 		} catch (ApiException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 	}
