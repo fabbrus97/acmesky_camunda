@@ -509,7 +509,7 @@ public class RisorseApi {
 
     /**
      * Restituisci tutti i messaggi
-     * È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, restituisce tutti i messaggi (in blocchi di cardinalità 20) accessibili al fruitore (utente o ACMESky) identificato da quel token: in dettaglio, l&#x27;utente ha accesso solo ai messaggi di cui è destinatario, mentre ACMESky ha accesso a tutti i messaggi che ha inoltrato ai suoi utenti mediante Prontogram (potrebbe richiederli per fini statistici, ad esempio).  l body della risposta HTTP è di tipo &#x60;application/vnd.api+json&#x60; in quanto l&#x27;API prontogramAPI è al livello 3 di modello di maturità di Richardson: con la risposta sono restituiti anche i campi &#x60;links&#x60; per permettere l&#x27;esplorazione dinamica, come richiesto da RMML3.
+     * È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, restituisce tutti i messaggi (in blocchi di cardinalità 20) accessibili al fruitore (utente o ACMESky) identificato da quel token: in dettaglio, l&#x27;utente ha accesso solo ai messaggi di cui è destinatario, mentre ACMESky ha accesso a tutti i messaggi che ha inoltrato ai suoi utenti mediante Prontogram (potrebbe richiederli per fini statistici, ad esempio).  Il body della risposta HTTP è di tipo &#x60;application/vnd.api+json&#x60; in quanto l&#x27;API prontogramAPI è al livello 3 di modello di maturità di Richardson: con la risposta sono restituiti anche i campi &#x60;links&#x60; per permettere l&#x27;esplorazione dinamica, come richiesto da RMML3.
      * @return InlineResponse200
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -520,7 +520,7 @@ public class RisorseApi {
 
     /**
      * Restituisci tutti i messaggi
-     * È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, restituisce tutti i messaggi (in blocchi di cardinalità 20) accessibili al fruitore (utente o ACMESky) identificato da quel token: in dettaglio, l&#x27;utente ha accesso solo ai messaggi di cui è destinatario, mentre ACMESky ha accesso a tutti i messaggi che ha inoltrato ai suoi utenti mediante Prontogram (potrebbe richiederli per fini statistici, ad esempio).  l body della risposta HTTP è di tipo &#x60;application/vnd.api+json&#x60; in quanto l&#x27;API prontogramAPI è al livello 3 di modello di maturità di Richardson: con la risposta sono restituiti anche i campi &#x60;links&#x60; per permettere l&#x27;esplorazione dinamica, come richiesto da RMML3.
+     * È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, restituisce tutti i messaggi (in blocchi di cardinalità 20) accessibili al fruitore (utente o ACMESky) identificato da quel token: in dettaglio, l&#x27;utente ha accesso solo ai messaggi di cui è destinatario, mentre ACMESky ha accesso a tutti i messaggi che ha inoltrato ai suoi utenti mediante Prontogram (potrebbe richiederli per fini statistici, ad esempio).  Il body della risposta HTTP è di tipo &#x60;application/vnd.api+json&#x60; in quanto l&#x27;API prontogramAPI è al livello 3 di modello di maturità di Richardson: con la risposta sono restituiti anche i campi &#x60;links&#x60; per permettere l&#x27;esplorazione dinamica, come richiesto da RMML3.
      * @return ApiResponse&lt;InlineResponse200&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -532,7 +532,7 @@ public class RisorseApi {
 
     /**
      * Restituisci tutti i messaggi (asynchronously)
-     * È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, restituisce tutti i messaggi (in blocchi di cardinalità 20) accessibili al fruitore (utente o ACMESky) identificato da quel token: in dettaglio, l&#x27;utente ha accesso solo ai messaggi di cui è destinatario, mentre ACMESky ha accesso a tutti i messaggi che ha inoltrato ai suoi utenti mediante Prontogram (potrebbe richiederli per fini statistici, ad esempio).  l body della risposta HTTP è di tipo &#x60;application/vnd.api+json&#x60; in quanto l&#x27;API prontogramAPI è al livello 3 di modello di maturità di Richardson: con la risposta sono restituiti anche i campi &#x60;links&#x60; per permettere l&#x27;esplorazione dinamica, come richiesto da RMML3.
+     * È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, restituisce tutti i messaggi (in blocchi di cardinalità 20) accessibili al fruitore (utente o ACMESky) identificato da quel token: in dettaglio, l&#x27;utente ha accesso solo ai messaggi di cui è destinatario, mentre ACMESky ha accesso a tutti i messaggi che ha inoltrato ai suoi utenti mediante Prontogram (potrebbe richiederli per fini statistici, ad esempio).  Il body della risposta HTTP è di tipo &#x60;application/vnd.api+json&#x60; in quanto l&#x27;API prontogramAPI è al livello 3 di modello di maturità di Richardson: con la risposta sono restituiti anche i campi &#x60;links&#x60; per permettere l&#x27;esplorazione dinamica, come richiesto da RMML3.
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -742,7 +742,7 @@ public class RisorseApi {
 
     /**
      * Invia messaggi
-     * È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, invia un messaggio il cui corpo e destinatario sono quelli specificati nel body della richiesta HTTP.
+     * È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, invia un messaggio il cui corpo e destinatario sono quelli specificati nel body della richiesta HTTP. A differenza di /createmessage, questo endpoint supporta l&#x27;invio di più messaggi alla volta
      * @param body Il body della richiesta HTTP è di tipo &#x60;application/vnd.api+json&#x60; in quanto l&#x27;API prontogramAPI è al livello 3 di modello di maturità di Richardson. (optional)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -752,7 +752,7 @@ public class RisorseApi {
 
     /**
      * Invia messaggi
-     * È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, invia un messaggio il cui corpo e destinatario sono quelli specificati nel body della richiesta HTTP.
+     * È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, invia un messaggio il cui corpo e destinatario sono quelli specificati nel body della richiesta HTTP. A differenza di /createmessage, questo endpoint supporta l&#x27;invio di più messaggi alla volta
      * @param body Il body della richiesta HTTP è di tipo &#x60;application/vnd.api+json&#x60; in quanto l&#x27;API prontogramAPI è al livello 3 di modello di maturità di Richardson. (optional)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -764,7 +764,7 @@ public class RisorseApi {
 
     /**
      * Invia messaggi (asynchronously)
-     * È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, invia un messaggio il cui corpo e destinatario sono quelli specificati nel body della richiesta HTTP.
+     * È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, invia un messaggio il cui corpo e destinatario sono quelli specificati nel body della richiesta HTTP. A differenza di /createmessage, questo endpoint supporta l&#x27;invio di più messaggi alla volta
      * @param body Il body della richiesta HTTP è di tipo &#x60;application/vnd.api+json&#x60; in quanto l&#x27;API prontogramAPI è al livello 3 di modello di maturità di Richardson. (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call

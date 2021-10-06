@@ -10,11 +10,11 @@ Method | HTTP request | Description
 
 <a name="getLink"></a>
 # **getLink**
-> ActiveLink getLink(body)
+> InlineResponse200 getLink(body)
 
 Genera link di pagamento
 
-È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, restituisce un link di pagamento relativo all&#x27;offerta specificata.
+È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, restituisce un codice di pagamento relativo all&#x27;offerta specificata.
 
 ### Example
 ```java
@@ -36,7 +36,7 @@ apikey.setApiKey("YOUR API KEY");
 RisorseApi apiInstance = new RisorseApi();
 LinkBody body = new LinkBody(); // LinkBody | 
 try {
-    ActiveLink result = apiInstance.getLink(body);
+    InlineResponse200 result = apiInstance.getLink(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling RisorseApi#getLink");
@@ -52,7 +52,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ActiveLink**](ActiveLink.md)
+[**InlineResponse200**](InlineResponse200.md)
 
 ### Authorization
 
@@ -89,7 +89,7 @@ apikey.setApiKey("YOUR API KEY");
 //apikey.setApiKeyPrefix("Token");
 
 RisorseApi apiInstance = new RisorseApi();
-PaymentDataBody body = new PaymentDataBody(); // PaymentDataBody | 
+PaymentaDataBody body = new PaymentaDataBody(); // PaymentaDataBody | 
 try {
     apiInstance.postPaymentdata(body);
 } catch (ApiException e) {
@@ -102,7 +102,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**PaymentDataBody**](PaymentDataBody.md)|  | [optional]
+ **body** | [**PaymentaDataBody**](PaymentaDataBody.md)|  | [optional]
 
 ### Return type
 
@@ -119,7 +119,7 @@ null (empty response body)
 
 <a name="postRegistration"></a>
 # **postRegistration**
-> PaymentRegistration postRegistration(body)
+> InlineResponse2001 postRegistration(body)
 
 Registra un nuovo utente
 
@@ -135,7 +135,7 @@ Registra un nuovo utente
 RisorseApi apiInstance = new RisorseApi();
 MapsV1Credentials body = new MapsV1Credentials(); // MapsV1Credentials | 
 try {
-    PaymentRegistration result = apiInstance.postRegistration(body);
+    InlineResponse2001 result = apiInstance.postRegistration(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling RisorseApi#postRegistration");
@@ -151,7 +151,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PaymentRegistration**](PaymentRegistration.md)
+[**InlineResponse2001**](InlineResponse2001.md)
 
 ### Authorization
 

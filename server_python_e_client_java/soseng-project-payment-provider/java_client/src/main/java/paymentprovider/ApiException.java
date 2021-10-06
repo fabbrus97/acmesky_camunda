@@ -1,6 +1,6 @@
 /*
  * serviziBancariAPI
- * È l'API Restful offerta dal *fornitore dei servizi bancari* che rende accessibile la capability di generazione di un link di pagamento con certi parametri e di ricevere dati relativi al pagamento di un cliente.
+ * È l'API Restful offerta dal *fornitore dei servizi bancari* che rende accessibile la capability di generazione di un codice di pagamento con certi parametri e di ricevere dati relativi al pagamento di un cliente.
  *
  * OpenAPI spec version: 1.0
  * 
@@ -15,7 +15,7 @@ package paymentprovider;
 import java.util.Map;
 import java.util.List;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2021-08-22T16:27:55.181+02:00[Europe/Rome]")public class ApiException extends Exception {
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2021-10-06T12:11:16.553+02:00[Europe/Rome]")public class ApiException extends Exception {
     private int code = 0;
     private Map<String, List<String>> responseHeaders = null;
     private String responseBody = null;

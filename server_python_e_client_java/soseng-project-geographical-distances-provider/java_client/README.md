@@ -2,7 +2,7 @@
 
 fornitoreDistanzeAPI
 - API version: 1.0
-  - Build date: 2021-07-22T12:18:12.930+02:00[Europe/Rome]
+  - Build date: 2021-10-06T12:12:43.665+02:00[Europe/Rome]
 
 È l'API RESTful offerta dal *Fornitore delle distanze geografiche* che, come suggerisce il nome, vi racchiude la capability di calcolare la distanza tra due posizioni geografiche.
 
@@ -71,10 +71,10 @@ Then manually install the following JARs:
 Please follow the [installation](#installation) instruction and execute the following Java code:
 
 ```java
-import io.swagger.client.*;
-import io.swagger.client.auth.*;
+import geoprovider.*;
+import geoprovider.auth.*;
 import io.swagger.client.model.*;
-import io.swagger.client.api.RisorseApi;
+import geoprovider.geo_client.RisorseApi;
 
 import java.io.File;
 import java.util.*;
@@ -99,10 +99,10 @@ public class RisorseApiExample {
         }
     }
 }
-import io.swagger.client.*;
-import io.swagger.client.auth.*;
+import geoprovider.*;
+import geoprovider.auth.*;
 import io.swagger.client.model.*;
-import io.swagger.client.api.RisorseApi;
+import geoprovider.geo_client.RisorseApi;
 
 import java.io.File;
 import java.util.*;

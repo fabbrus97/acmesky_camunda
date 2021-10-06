@@ -1,6 +1,6 @@
 /*
  * compagniaAereaAPI
- * È l'API Restful offerta dalla compagnia aerea che permette di fruire alla capability di restituire le offerte attive e di riceve la quota del pagamento del cliente.
+ * È l'API Restful offerta dalla compagnia aerea che permette di restituire le offerte attive, creare voli last minute e di ricevere la quota del pagamento del cliente.
  *
  * OpenAPI spec version: 1.0
  * 
@@ -12,7 +12,7 @@
 
 package airline;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2021-07-26T11:31:13.722+02:00[Europe/Rome]")public class Configuration {
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2021-10-06T11:44:12.432+02:00[Europe/Rome]")public class Configuration {
     private static ApiClient defaultApiClient = new ApiClient();
 
     /**

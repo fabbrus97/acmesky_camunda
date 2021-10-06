@@ -18,11 +18,11 @@ Calcola distanza geografica
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.RisorseApi;
+//import geoprovider.ApiClient;
+//import geoprovider.ApiException;
+//import geoprovider.Configuration;
+//import geoprovider.auth.*;
+//import geoprovider.geo_client.RisorseApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 // Configure HTTP basic authorization: authorization
@@ -71,8 +71,8 @@ Registra un nuovo utente
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
-//import io.swagger.client.api.RisorseApi;
+//import geoprovider.ApiException;
+//import geoprovider.geo_client.RisorseApi;
 
 
 RisorseApi apiInstance = new RisorseApi();

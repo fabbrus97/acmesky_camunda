@@ -1,6 +1,6 @@
 /*
  * serviziBancariAPI
- * È l'API Restful offerta dal *fornitore dei servizi bancari* che rende accessibile la capability di generazione di un link di pagamento con certi parametri e di ricevere dati relativi al pagamento di un cliente.
+ * È l'API Restful offerta dal *fornitore dei servizi bancari* che rende accessibile la capability di generazione di un codice di pagamento con certi parametri e di ricevere dati relativi al pagamento di un cliente.
  *
  * OpenAPI spec version: 1.0
  * 
@@ -26,11 +26,11 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
-import io.swagger.client.model.ActiveLink;
+import io.swagger.client.model.InlineResponse200;
+import io.swagger.client.model.InlineResponse2001;
 import io.swagger.client.model.LinkBody;
 import io.swagger.client.model.MapsV1Credentials;
-import io.swagger.client.model.PaymentDataBody;
-import io.swagger.client.model.PaymentRegistration;
+import io.swagger.client.model.PaymentaDataBody;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -120,38 +120,38 @@ public class RisorseApi {
 
     /**
      * Genera link di pagamento
-     * È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, restituisce un link di pagamento relativo all&#x27;offerta specificata.
+     * È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, restituisce un codice di pagamento relativo all&#x27;offerta specificata.
      * @param body  (optional)
-     * @return ActiveLink
+     * @return InlineResponse200
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ActiveLink getLink(LinkBody body) throws ApiException {
-        ApiResponse<ActiveLink> resp = getLinkWithHttpInfo(body);
+    public InlineResponse200 getLink(LinkBody body) throws ApiException {
+        ApiResponse<InlineResponse200> resp = getLinkWithHttpInfo(body);
         return resp.getData();
     }
 
     /**
      * Genera link di pagamento
-     * È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, restituisce un link di pagamento relativo all&#x27;offerta specificata.
+     * È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, restituisce un codice di pagamento relativo all&#x27;offerta specificata.
      * @param body  (optional)
-     * @return ApiResponse&lt;ActiveLink&gt;
+     * @return ApiResponse&lt;InlineResponse200&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<ActiveLink> getLinkWithHttpInfo(LinkBody body) throws ApiException {
+    public ApiResponse<InlineResponse200> getLinkWithHttpInfo(LinkBody body) throws ApiException {
         com.squareup.okhttp.Call call = getLinkValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<ActiveLink>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse200>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
      * Genera link di pagamento (asynchronously)
-     * È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, restituisce un link di pagamento relativo all&#x27;offerta specificata.
+     * È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, restituisce un codice di pagamento relativo all&#x27;offerta specificata.
      * @param body  (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getLinkAsync(LinkBody body, final ApiCallback<ActiveLink> callback) throws ApiException {
+    public com.squareup.okhttp.Call getLinkAsync(LinkBody body, final ApiCallback<InlineResponse200> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -173,7 +173,7 @@ public class RisorseApi {
         }
 
         com.squareup.okhttp.Call call = getLinkValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<ActiveLink>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse200>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -185,7 +185,7 @@ public class RisorseApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call postPaymentdataCall(PaymentDataBody body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call postPaymentdataCall(PaymentaDataBody body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
         
         // create path and map variables
@@ -227,7 +227,7 @@ public class RisorseApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call postPaymentdataValidateBeforeCall(PaymentDataBody body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call postPaymentdataValidateBeforeCall(PaymentaDataBody body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = postPaymentdataCall(body, progressListener, progressRequestListener);
         return call;
@@ -244,7 +244,7 @@ public class RisorseApi {
      * @param body  (optional)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void postPaymentdata(PaymentDataBody body) throws ApiException {
+    public void postPaymentdata(PaymentaDataBody body) throws ApiException {
         postPaymentdataWithHttpInfo(body);
     }
 
@@ -255,7 +255,7 @@ public class RisorseApi {
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Void> postPaymentdataWithHttpInfo(PaymentDataBody body) throws ApiException {
+    public ApiResponse<Void> postPaymentdataWithHttpInfo(PaymentaDataBody body) throws ApiException {
         com.squareup.okhttp.Call call = postPaymentdataValidateBeforeCall(body, null, null);
         return apiClient.execute(call);
     }
@@ -268,7 +268,7 @@ public class RisorseApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call postPaymentdataAsync(PaymentDataBody body, final ApiCallback<Void> callback) throws ApiException {
+    public com.squareup.okhttp.Call postPaymentdataAsync(PaymentaDataBody body, final ApiCallback<Void> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -358,11 +358,11 @@ public class RisorseApi {
      * Registra un nuovo utente
      * È la risorsa che permette a chi intende interagire con il fornitore dei servizi bancari di ottenere l&#x27;APIKey per poter essere identificato e autorizzato.
      * @param body  (optional)
-     * @return PaymentRegistration
+     * @return InlineResponse2001
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public PaymentRegistration postRegistration(MapsV1Credentials body) throws ApiException {
-        ApiResponse<PaymentRegistration> resp = postRegistrationWithHttpInfo(body);
+    public InlineResponse2001 postRegistration(MapsV1Credentials body) throws ApiException {
+        ApiResponse<InlineResponse2001> resp = postRegistrationWithHttpInfo(body);
         return resp.getData();
     }
 
@@ -370,12 +370,12 @@ public class RisorseApi {
      * Registra un nuovo utente
      * È la risorsa che permette a chi intende interagire con il fornitore dei servizi bancari di ottenere l&#x27;APIKey per poter essere identificato e autorizzato.
      * @param body  (optional)
-     * @return ApiResponse&lt;PaymentRegistration&gt;
+     * @return ApiResponse&lt;InlineResponse2001&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<PaymentRegistration> postRegistrationWithHttpInfo(MapsV1Credentials body) throws ApiException {
+    public ApiResponse<InlineResponse2001> postRegistrationWithHttpInfo(MapsV1Credentials body) throws ApiException {
         com.squareup.okhttp.Call call = postRegistrationValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<PaymentRegistration>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2001>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -387,7 +387,7 @@ public class RisorseApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call postRegistrationAsync(MapsV1Credentials body, final ApiCallback<PaymentRegistration> callback) throws ApiException {
+    public com.squareup.okhttp.Call postRegistrationAsync(MapsV1Credentials body, final ApiCallback<InlineResponse2001> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -409,7 +409,7 @@ public class RisorseApi {
         }
 
         com.squareup.okhttp.Call call = postRegistrationValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<PaymentRegistration>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2001>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

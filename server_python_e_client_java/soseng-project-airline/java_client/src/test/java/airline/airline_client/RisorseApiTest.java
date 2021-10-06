@@ -1,6 +1,6 @@
 /*
  * compagniaAereaAPI
- * È l'API Restful offerta dalla compagnia aerea che permette di fruire alla capability di restituire le offerte attive e di riceve la quota del pagamento del cliente.
+ * È l'API Restful offerta dalla compagnia aerea che permette di restituire le offerte attive, creare voli last minute e di ricevere la quota del pagamento del cliente.
  *
  * OpenAPI spec version: 1.0
  * 
@@ -13,11 +13,11 @@
 package airline.airline_client;
 
 import airline.ApiException;
-import io.swagger.client.model.Body;
 import io.swagger.client.model.InlineResponse200;
 import io.swagger.client.model.InlineResponse2001;
 import io.swagger.client.model.Lmflight;
 import io.swagger.client.model.MapsV1Credentials;
+import io.swagger.client.model.NotifypaymentBody;
 import org.junit.Test;
 import org.junit.Ignore;
 
@@ -37,7 +37,7 @@ public class RisorseApiTest {
     /**
      * Restituisci le offerte attive
      *
-     * È la risorsa che restituisce tutte le offerte di voli attive.
+     * È la risorsa che restituisce tutte le offerte di voli attive, compresi i voli last minute.
      *
      * @throws ApiException
      *          if the Api call fails
@@ -49,9 +49,9 @@ public class RisorseApiTest {
         // TODO: test validations
     }
     /**
-     * crea un volo last minute
+     * Crea un volo last minute
      *
-     * 
+     * Endpoint che permette di creare un volo lastminute, specificando tutti i parametri del volo; il server lo inoltrerà poi ad acmesky
      *
      * @throws ApiException
      *          if the Api call fails
@@ -73,7 +73,7 @@ public class RisorseApiTest {
      */
     @Test
     public void postNotifypaymentTest() throws ApiException {
-        Body body = null;
+        NotifypaymentBody body = null;
         api.postNotifypayment(body);
 
         // TODO: test validations

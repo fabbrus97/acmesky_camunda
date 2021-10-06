@@ -5,7 +5,7 @@ All URIs are relative to *https://stoplight.io/mocks/soseng-unibo/soseng-project
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getFlights**](RisorseApi.md#getFlights) | **GET** /flights | Restituisci le offerte attive
-[**postLmflight**](RisorseApi.md#postLmflight) | **POST** /LMflight | crea un volo last minute
+[**postLmflight**](RisorseApi.md#postLmflight) | **POST** /LMflight | Crea un volo last minute
 [**postNotifypayment**](RisorseApi.md#postNotifypayment) | **POST** /notifypayment | Ricevi pagamento
 [**postRegistration**](RisorseApi.md#postRegistration) | **POST** /registration | Registra un nuovo utente
 
@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 Restituisci le offerte attive
 
-È la risorsa che restituisce tutte le offerte di voli attive.
+È la risorsa che restituisce tutte le offerte di voli attive, compresi i voli last minute.
 
 ### Example
 ```java
@@ -54,7 +54,9 @@ No authorization required
 # **postLmflight**
 > postLmflight(body)
 
-crea un volo last minute
+Crea un volo last minute
+
+Endpoint che permette di creare un volo lastminute, specificando tutti i parametri del volo; il server lo inoltrerà poi ad acmesky
 
 ### Example
 ```java
@@ -128,7 +130,7 @@ companytoken.setApiKey("YOUR API KEY");
 //companytoken.setApiKeyPrefix("Token");
 
 RisorseApi apiInstance = new RisorseApi();
-Body body = new Body(); // Body | 
+NotifypaymentBody body = new NotifypaymentBody(); // NotifypaymentBody | 
 try {
     apiInstance.postNotifypayment(body);
 } catch (ApiException e) {
@@ -141,7 +143,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body**](Body.md)|  | [optional]
+ **body** | [**NotifypaymentBody**](NotifypaymentBody.md)|  | [optional]
 
 ### Return type
 

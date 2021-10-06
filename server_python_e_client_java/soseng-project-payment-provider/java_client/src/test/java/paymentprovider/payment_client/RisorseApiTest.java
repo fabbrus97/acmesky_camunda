@@ -1,6 +1,6 @@
 /*
  * serviziBancariAPI
- * È l'API Restful offerta dal *fornitore dei servizi bancari* che rende accessibile la capability di generazione di un link di pagamento con certi parametri e di ricevere dati relativi al pagamento di un cliente.
+ * È l'API Restful offerta dal *fornitore dei servizi bancari* che rende accessibile la capability di generazione di un codice di pagamento con certi parametri e di ricevere dati relativi al pagamento di un cliente.
  *
  * OpenAPI spec version: 1.0
  * 
@@ -13,11 +13,11 @@
 package paymentprovider.payment_client;
 
 import paymentprovider.ApiException;
-import io.swagger.client.model.ActiveLink;
+import io.swagger.client.model.InlineResponse200;
+import io.swagger.client.model.InlineResponse2001;
 import io.swagger.client.model.LinkBody;
 import io.swagger.client.model.MapsV1Credentials;
-import io.swagger.client.model.PaymentDataBody;
-import io.swagger.client.model.PaymentRegistration;
+import io.swagger.client.model.PaymentaDataBody;
 import org.junit.Test;
 import org.junit.Ignore;
 
@@ -37,7 +37,7 @@ public class RisorseApiTest {
     /**
      * Genera link di pagamento
      *
-     * È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, restituisce un link di pagamento relativo all&#x27;offerta specificata.
+     * È la risorsa che, a fronte di una richiesta HTTP nella cui intestazione vi è un &#x60;token&#x60; identificativo valido, restituisce un codice di pagamento relativo all&#x27;offerta specificata.
      *
      * @throws ApiException
      *          if the Api call fails
@@ -45,7 +45,7 @@ public class RisorseApiTest {
     @Test
     public void getLinkTest() throws ApiException {
         LinkBody body = null;
-        ActiveLink response = api.getLink(body);
+        InlineResponse200 response = api.getLink(body);
 
         // TODO: test validations
     }
@@ -59,7 +59,7 @@ public class RisorseApiTest {
      */
     @Test
     public void postPaymentdataTest() throws ApiException {
-        PaymentDataBody body = null;
+        PaymentaDataBody body = null;
         api.postPaymentdata(body);
 
         // TODO: test validations
@@ -75,7 +75,7 @@ public class RisorseApiTest {
     @Test
     public void postRegistrationTest() throws ApiException {
         MapsV1Credentials body = null;
-        PaymentRegistration response = api.postRegistration(body);
+        InlineResponse2001 response = api.postRegistration(body);
 
         // TODO: test validations
     }

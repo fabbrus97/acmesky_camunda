@@ -2,7 +2,7 @@ import requests, json
 
 def _startMessage(messageName, processInstance, variables=None):
 	#invia un messaggio
-	post_url = "http://localhost:8080/engine-rest/message"
+	post_url = "http://arianna.cs.unibo.it:8080/engine-rest/message"
 	#myobj = { "processInstanceId": id, "messageName": "Message_0fnc6rd"}
 	myobj = { "processInstanceId": processInstance, "messageName": messageName}
 	if variables != None:
@@ -35,7 +35,7 @@ def sendMessage(messageName, variables=None):
 
 	#cerca il processo che si chiama "acmesky"
 
-	get_url = "http://localhost:8080/engine-rest/deployment"
+	get_url = "http://arianna.cs.unibo.it:8080/engine-rest/deployment"
 
 	response = requests.request("GET", get_url)
 
@@ -47,7 +47,7 @@ def sendMessage(messageName, variables=None):
 		if element["name"] == "camunda-test":
 			id = element["id"]
 
-	get_url = "http://localhost:8080/engine-rest/process-instance?deploymentId={}".format(id)
+	get_url = "http://arianna.cs.unibo.it:8080/engine-rest/process-instance?deploymentId={}".format(id)
 	response = requests.request("GET", get_url)
 	response_j = json.loads(response.text)
 

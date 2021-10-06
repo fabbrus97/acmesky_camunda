@@ -1,6 +1,6 @@
 /*
  * compagniaAereaAPI
- * È l'API Restful offerta dalla compagnia aerea che permette di fruire alla capability di restituire le offerte attive e di riceve la quota del pagamento del cliente.
+ * È l'API Restful offerta dalla compagnia aerea che permette di restituire le offerte attive, creare voli last minute e di ricevere la quota del pagamento del cliente.
  *
  * OpenAPI spec version: 1.0
  * 

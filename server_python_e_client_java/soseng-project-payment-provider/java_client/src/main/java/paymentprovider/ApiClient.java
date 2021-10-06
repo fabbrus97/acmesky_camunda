@@ -1,6 +1,6 @@
 /*
  * serviziBancariAPI
- * È l'API Restful offerta dal *fornitore dei servizi bancari* che rende accessibile la capability di generazione di un link di pagamento con certi parametri e di ricevere dati relativi al pagamento di un cliente.
+ * È l'API Restful offerta dal *fornitore dei servizi bancari* che rende accessibile la capability di generazione di un codice di pagamento con certi parametri e di ricevere dati relativi al pagamento di un cliente.
  *
  * OpenAPI spec version: 1.0
  * 
@@ -90,7 +90,7 @@ public class ApiClient {
 
         // Setup authentications (key: authentication name, value: authentication).
         authentications = new HashMap<String, Authentication>();
-        authentications.put("apikey", new ApiKeyAuth("header", "abcd12!"));
+        authentications.put("apikey", new ApiKeyAuth("header", "apikey"));
         // Prevent the authentications from being modified.
         authentications = Collections.unmodifiableMap(authentications);
     }

@@ -19,7 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.swagger.client.model.CreatemessageData;
+import io.swagger.client.model.MessageItem;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,19 +28,19 @@ import java.util.List;
  * MessageList
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2021-09-17T11:29:46.465+02:00[Europe/Rome]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2021-10-06T11:54:26.074+02:00[Europe/Rome]")
 public class MessageList {
   @SerializedName("messages")
-  private List<CreatemessageData> messages = null;
+  private List<MessageItem> messages = null;
 
-  public MessageList messages(List<CreatemessageData> messages) {
+  public MessageList messages(List<MessageItem> messages) {
     this.messages = messages;
     return this;
   }
 
-  public MessageList addMessagesItem(CreatemessageData messagesItem) {
+  public MessageList addMessagesItem(MessageItem messagesItem) {
     if (this.messages == null) {
-      this.messages = new ArrayList<CreatemessageData>();
+      this.messages = new ArrayList<MessageItem>();
     }
     this.messages.add(messagesItem);
     return this;
@@ -51,11 +51,11 @@ public class MessageList {
    * @return messages
   **/
   @Schema(description = "")
-  public List<CreatemessageData> getMessages() {
+  public List<MessageItem> getMessages() {
     return messages;
   }
 
-  public void setMessages(List<CreatemessageData> messages) {
+  public void setMessages(List<MessageItem> messages) {
     this.messages = messages;
   }
 

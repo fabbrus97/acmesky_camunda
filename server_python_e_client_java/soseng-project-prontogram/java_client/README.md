@@ -2,7 +2,7 @@
 
 prontogramAPI
 - API version: 1.0
-  - Build date: 2021-09-17T11:29:46.465+02:00[Europe/Rome]
+  - Build date: 2021-10-06T11:54:26.074+02:00[Europe/Rome]
 
 È l'API Restful offerta dall'applicazione di messaggistica *Prontogram* che vi racchiude la capability di inoltrare i messaggi circa le offerte inviate da ACMESky ai clienti interessati.
 
@@ -129,6 +129,7 @@ Class | Method | HTTP request | Description
  - [InlineResponse200Message](docs/InlineResponse200Message.md)
  - [MapsV1Credentials](docs/MapsV1Credentials.md)
  - [Message](docs/Message.md)
+ - [MessageItem](docs/MessageItem.md)
  - [MessageList](docs/MessageList.md)
  - [OfferMessage](docs/OfferMessage.md)
  - [RegisterBody](docs/RegisterBody.md)

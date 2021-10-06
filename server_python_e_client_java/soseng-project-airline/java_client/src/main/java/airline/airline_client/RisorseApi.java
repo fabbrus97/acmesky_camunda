@@ -1,6 +1,6 @@
 /*
  * compagniaAereaAPI
- * È l'API Restful offerta dalla compagnia aerea che permette di fruire alla capability di restituire le offerte attive e di riceve la quota del pagamento del cliente.
+ * È l'API Restful offerta dalla compagnia aerea che permette di restituire le offerte attive, creare voli last minute e di ricevere la quota del pagamento del cliente.
  *
  * OpenAPI spec version: 1.0
  * 
@@ -26,11 +26,11 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
-import io.swagger.client.model.Body;
 import io.swagger.client.model.InlineResponse200;
 import io.swagger.client.model.InlineResponse2001;
 import io.swagger.client.model.Lmflight;
 import io.swagger.client.model.MapsV1Credentials;
+import io.swagger.client.model.NotifypaymentBody;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -119,7 +119,7 @@ public class RisorseApi {
 
     /**
      * Restituisci le offerte attive
-     * È la risorsa che restituisce tutte le offerte di voli attive.
+     * È la risorsa che restituisce tutte le offerte di voli attive, compresi i voli last minute.
      * @return InlineResponse200
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -130,7 +130,7 @@ public class RisorseApi {
 
     /**
      * Restituisci le offerte attive
-     * È la risorsa che restituisce tutte le offerte di voli attive.
+     * È la risorsa che restituisce tutte le offerte di voli attive, compresi i voli last minute.
      * @return ApiResponse&lt;InlineResponse200&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -142,7 +142,7 @@ public class RisorseApi {
 
     /**
      * Restituisci le offerte attive (asynchronously)
-     * È la risorsa che restituisce tutte le offerte di voli attive.
+     * È la risorsa che restituisce tutte le offerte di voli attive, compresi i voli last minute.
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -235,8 +235,8 @@ public class RisorseApi {
     }
 
     /**
-     * crea un volo last minute
-     * 
+     * Crea un volo last minute
+     * Endpoint che permette di creare un volo lastminute, specificando tutti i parametri del volo; il server lo inoltrerà poi ad acmesky
      * @param body  (optional)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -245,8 +245,8 @@ public class RisorseApi {
     }
 
     /**
-     * crea un volo last minute
-     * 
+     * Crea un volo last minute
+     * Endpoint che permette di creare un volo lastminute, specificando tutti i parametri del volo; il server lo inoltrerà poi ad acmesky
      * @param body  (optional)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -257,8 +257,8 @@ public class RisorseApi {
     }
 
     /**
-     * crea un volo last minute (asynchronously)
-     * 
+     * Crea un volo last minute (asynchronously)
+     * Endpoint che permette di creare un volo lastminute, specificando tutti i parametri del volo; il server lo inoltrerà poi ad acmesky
      * @param body  (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
@@ -297,7 +297,7 @@ public class RisorseApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call postNotifypaymentCall(Body body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call postNotifypaymentCall(NotifypaymentBody body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
         
         // create path and map variables
@@ -339,7 +339,7 @@ public class RisorseApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call postNotifypaymentValidateBeforeCall(Body body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call postNotifypaymentValidateBeforeCall(NotifypaymentBody body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = postNotifypaymentCall(body, progressListener, progressRequestListener);
         return call;
@@ -356,7 +356,7 @@ public class RisorseApi {
      * @param body  (optional)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void postNotifypayment(Body body) throws ApiException {
+    public void postNotifypayment(NotifypaymentBody body) throws ApiException {
         postNotifypaymentWithHttpInfo(body);
     }
 
@@ -367,7 +367,7 @@ public class RisorseApi {
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Void> postNotifypaymentWithHttpInfo(Body body) throws ApiException {
+    public ApiResponse<Void> postNotifypaymentWithHttpInfo(NotifypaymentBody body) throws ApiException {
         com.squareup.okhttp.Call call = postNotifypaymentValidateBeforeCall(body, null, null);
         return apiClient.execute(call);
     }
@@ -380,7 +380,7 @@ public class RisorseApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call postNotifypaymentAsync(Body body, final ApiCallback<Void> callback) throws ApiException {
+    public com.squareup.okhttp.Call postNotifypaymentAsync(NotifypaymentBody body, final ApiCallback<Void> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;

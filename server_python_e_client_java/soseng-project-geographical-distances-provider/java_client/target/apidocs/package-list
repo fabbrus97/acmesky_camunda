@@ -1,4 +1,4 @@
-io.swagger.client
-io.swagger.client.api
-io.swagger.client.auth
+geoprovider
+geoprovider.auth
+geoprovider.geo_client
 io.swagger.client.model
