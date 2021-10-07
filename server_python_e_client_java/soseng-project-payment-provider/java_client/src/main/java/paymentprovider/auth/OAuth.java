@@ -17,7 +17,7 @@ import paymentprovider.Pair;
 import java.util.Map;
 import java.util.List;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2021-10-06T12:11:16.553+02:00[Europe/Rome]")public class OAuth implements Authentication {
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2021-10-07T00:10:42.524+02:00[Europe/Rome]")public class OAuth implements Authentication {
   private String accessToken;
 
   public String getAccessToken() {

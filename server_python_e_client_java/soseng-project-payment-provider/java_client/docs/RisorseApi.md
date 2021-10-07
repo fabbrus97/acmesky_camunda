@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 <a name="getLink"></a>
 # **getLink**
-> InlineResponse200 getLink(body)
+> Activelink getLink(body)
 
 Genera link di pagamento
 
@@ -36,7 +36,7 @@ apikey.setApiKey("YOUR API KEY");
 RisorseApi apiInstance = new RisorseApi();
 LinkBody body = new LinkBody(); // LinkBody | 
 try {
-    InlineResponse200 result = apiInstance.getLink(body);
+    Activelink result = apiInstance.getLink(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling RisorseApi#getLink");
@@ -52,7 +52,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**Activelink**](Activelink.md)
 
 ### Authorization
 
@@ -89,7 +89,7 @@ apikey.setApiKey("YOUR API KEY");
 //apikey.setApiKeyPrefix("Token");
 
 RisorseApi apiInstance = new RisorseApi();
-PaymentaDataBody body = new PaymentaDataBody(); // PaymentaDataBody | 
+PaymentDataBody body = new PaymentDataBody(); // PaymentDataBody | 
 try {
     apiInstance.postPaymentdata(body);
 } catch (ApiException e) {
@@ -102,7 +102,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**PaymentaDataBody**](PaymentaDataBody.md)|  | [optional]
+ **body** | [**PaymentDataBody**](PaymentDataBody.md)|  | [optional]
 
 ### Return type
 
@@ -119,7 +119,7 @@ null (empty response body)
 
 <a name="postRegistration"></a>
 # **postRegistration**
-> InlineResponse2001 postRegistration(body)
+> PaymentRegistration postRegistration(body)
 
 Registra un nuovo utente
 
@@ -135,7 +135,7 @@ Registra un nuovo utente
 RisorseApi apiInstance = new RisorseApi();
 MapsV1Credentials body = new MapsV1Credentials(); // MapsV1Credentials | 
 try {
-    InlineResponse2001 result = apiInstance.postRegistration(body);
+    PaymentRegistration result = apiInstance.postRegistration(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling RisorseApi#postRegistration");
@@ -151,7 +151,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**PaymentRegistration**](PaymentRegistration.md)
 
 ### Authorization
 

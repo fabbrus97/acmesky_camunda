@@ -2,7 +2,7 @@
 
 serviziBancariAPI
 - API version: 1.0
-  - Build date: 2021-10-06T12:11:16.553+02:00[Europe/Rome]
+  - Build date: 2021-10-07T00:10:42.524+02:00[Europe/Rome]
 
 È l'API Restful offerta dal *fornitore dei servizi bancari* che rende accessibile la capability di generazione di un codice di pagamento con certi parametri e di ricevere dati relativi al pagamento di un cliente.
 
@@ -93,7 +93,7 @@ public class RisorseApiExample {
         RisorseApi apiInstance = new RisorseApi();
         LinkBody body = new LinkBody(); // LinkBody | 
         try {
-            InlineResponse200 result = apiInstance.getLink(body);
+            Activelink result = apiInstance.getLink(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling RisorseApi#getLink");
@@ -121,7 +121,7 @@ public class RisorseApiExample {
         //apikey.setApiKeyPrefix("Token");
 
         RisorseApi apiInstance = new RisorseApi();
-        PaymentaDataBody body = new PaymentaDataBody(); // PaymentaDataBody | 
+        PaymentDataBody body = new PaymentDataBody(); // PaymentDataBody | 
         try {
             apiInstance.postPaymentdata(body);
         } catch (ApiException e) {
@@ -145,7 +145,7 @@ public class RisorseApiExample {
         RisorseApi apiInstance = new RisorseApi();
         MapsV1Credentials body = new MapsV1Credentials(); // MapsV1Credentials | 
         try {
-            InlineResponse2001 result = apiInstance.postRegistration(body);
+            PaymentRegistration result = apiInstance.postRegistration(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling RisorseApi#postRegistration");
@@ -167,12 +167,12 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
- - [InlineResponse200](docs/InlineResponse200.md)
- - [InlineResponse2001](docs/InlineResponse2001.md)
+ - [Activelink](docs/Activelink.md)
  - [LinkAmount](docs/LinkAmount.md)
  - [LinkBody](docs/LinkBody.md)
  - [MapsV1Credentials](docs/MapsV1Credentials.md)
- - [PaymentaDataBody](docs/PaymentaDataBody.md)
+ - [PaymentDataBody](docs/PaymentDataBody.md)
+ - [PaymentRegistration](docs/PaymentRegistration.md)
  - [PaymentdataExpiration](docs/PaymentdataExpiration.md)
  - [PaymentdataTransaction](docs/PaymentdataTransaction.md)
 

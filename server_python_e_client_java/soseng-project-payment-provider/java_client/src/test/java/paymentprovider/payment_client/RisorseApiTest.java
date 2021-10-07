@@ -13,11 +13,11 @@
 package paymentprovider.payment_client;
 
 import paymentprovider.ApiException;
-import io.swagger.client.model.InlineResponse200;
-import io.swagger.client.model.InlineResponse2001;
+import io.swagger.client.model.Activelink;
 import io.swagger.client.model.LinkBody;
 import io.swagger.client.model.MapsV1Credentials;
-import io.swagger.client.model.PaymentaDataBody;
+import io.swagger.client.model.PaymentDataBody;
+import io.swagger.client.model.PaymentRegistration;
 import org.junit.Test;
 import org.junit.Ignore;
 
@@ -45,7 +45,7 @@ public class RisorseApiTest {
     @Test
     public void getLinkTest() throws ApiException {
         LinkBody body = null;
-        InlineResponse200 response = api.getLink(body);
+        Activelink response = api.getLink(body);
 
         // TODO: test validations
     }
@@ -59,7 +59,7 @@ public class RisorseApiTest {
      */
     @Test
     public void postPaymentdataTest() throws ApiException {
-        PaymentaDataBody body = null;
+        PaymentDataBody body = null;
         api.postPaymentdata(body);
 
         // TODO: test validations
@@ -75,7 +75,7 @@ public class RisorseApiTest {
     @Test
     public void postRegistrationTest() throws ApiException {
         MapsV1Credentials body = null;
-        InlineResponse2001 response = api.postRegistration(body);
+        PaymentRegistration response = api.postRegistration(body);
 
         // TODO: test validations
     }
