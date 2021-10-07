@@ -13,15 +13,13 @@ compagnie = {
     }
 airports = ["BLQ", "BGY", "CTA", "MXP", "VRN", "FCO", "LGW", "FRA", "BCN", "LIS", "AUH", "SVO", "ORY"]
 
-auth_header = {"abcd12!": "token_hc_test"}
+auth_header = {"authtoken": "token_hc_test"}
 
 def inizializza_compagnie():
     f = open("airline.list", "r")
     for x in f:
-
+        x = x.replace("\n", "")
         r = requests.get(x+"/flights")
-
-        print("emirates" in r.text)
 
         if "rayanair" in r.text:
             compagnie["rayanair"] = x
@@ -31,6 +29,7 @@ def inizializza_compagnie():
             compagnie["japanairl"] = x
         if "emirates" in r.text:
             compagnie["emirates"] = x
+
 
 def insert_data():
 
@@ -90,9 +89,9 @@ if __name__ == '__main__':
         if c == "1":
             while True:
                 valid = ""
-                for key in compagnie:
+                for key in compagnie.keys():
                     if compagnie[key] != "":
-                        valid += key
+                        valid += key + " "
                 if valid != "":
                     print("Ecco le compagnie disponibili:")
                     for nome in valid.split():
